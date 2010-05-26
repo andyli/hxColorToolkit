@@ -1,0 +1,5 @@
+-main Test
+-swf bin/Test.swf
+-swf-version 10
+
+-cmd open bin/Test.swf
