@@ -27,64 +27,64 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-	import hxColorToolkit.ColorUtil;
-	import hxColorToolkit.spaces.HSB;
-	import hxColorToolkit.spaces.IColor;
-	
-	class Complementary<C:IColor> extends ColorWheelScheme<C> {
-		
-		
-		
-		public function new(primaryColor:C)
-		{
-			super(primaryColor);
-		}
-		
-		override function generate():Void
-		{
-			
-			var _primaryHSB:HSB = new HSB();
-			_primaryHSB.color=_primaryColor.color;
-			
-			var contrasting: HSB = new HSB();
-			contrasting.color=_primaryColor.color;
-			if(_primaryHSB.brightness > 40) {
-				contrasting.brightness=10 + _primaryHSB.brightness * 0.25;
-			} else {
-				contrasting.brightness=100 - _primaryHSB.brightness * 0.25;
-			}
-			_colors.addColor(mutateFromPrimary(contrasting.color));
-			
-			var supporting: HSB = new HSB();
-			supporting.color=_primaryColor.color;
-			
-			supporting.brightness=30 + _primaryHSB.brightness;
-			supporting.saturation=10 + _primaryHSB.saturation * 0.3;
-			_colors.addColor(mutateFromPrimary(supporting.color));
-			
-			//complement
-			var complement:HSB = new HSB();
-			
-			complement.color=ColorUtil.rybRotate(_primaryColor.color, 180);
-			_colors.addColor(mutateFromPrimary(complement.color));
-			
-			var contrastingComplement:HSB = new HSB();
-			contrastingComplement.color=complement.color;
-					
-			if(complement.brightness > 30) {
-				contrastingComplement.brightness=10 + complement.brightness * 0.25;
-			} else {
-				contrastingComplement.brightness=100 - complement.brightness * 0.25;
-			}
-			_colors.addColor(mutateFromPrimary(contrastingComplement.color));
-			
-			var supportingComplement:HSB = new HSB();
-			supportingComplement.color=complement.color;
-			
-			supportingComplement.brightness=30 + complement.brightness;
-			supportingComplement.saturation=10 + complement.saturation * 0.3;
-			_colors.addColor(mutateFromPrimary(supportingComplement.color));
-			
-		}
+import hxColorToolkit.ColorUtil;
+import hxColorToolkit.spaces.HSB;
+import hxColorToolkit.spaces.IColor;
 
+class Complementary<C:IColor> extends ColorWheelScheme<C> {
+	
+	
+	
+	public function new(primaryColor:C)
+	{
+		super(primaryColor);
 	}
+	
+	override function generate():Void
+	{
+		
+		var _primaryHSB:HSB = new HSB();
+		_primaryHSB.color=_primaryColor.color;
+		
+		var contrasting: HSB = new HSB();
+		contrasting.color=_primaryColor.color;
+		if(_primaryHSB.brightness > 40) {
+			contrasting.brightness=10 + _primaryHSB.brightness * 0.25;
+		} else {
+			contrasting.brightness=100 - _primaryHSB.brightness * 0.25;
+		}
+		_colors.addColor(mutateFromPrimary(contrasting.color));
+		
+		var supporting: HSB = new HSB();
+		supporting.color=_primaryColor.color;
+		
+		supporting.brightness=30 + _primaryHSB.brightness;
+		supporting.saturation=10 + _primaryHSB.saturation * 0.3;
+		_colors.addColor(mutateFromPrimary(supporting.color));
+		
+		//complement
+		var complement:HSB = new HSB();
+		
+		complement.color=ColorUtil.rybRotate(_primaryColor.color, 180);
+		_colors.addColor(mutateFromPrimary(complement.color));
+		
+		var contrastingComplement:HSB = new HSB();
+		contrastingComplement.color=complement.color;
+				
+		if(complement.brightness > 30) {
+			contrastingComplement.brightness=10 + complement.brightness * 0.25;
+		} else {
+			contrastingComplement.brightness=100 - complement.brightness * 0.25;
+		}
+		_colors.addColor(mutateFromPrimary(contrastingComplement.color));
+		
+		var supportingComplement:HSB = new HSB();
+		supportingComplement.color=complement.color;
+		
+		supportingComplement.brightness=30 + complement.brightness;
+		supportingComplement.saturation=10 + complement.saturation * 0.3;
+		_colors.addColor(mutateFromPrimary(supportingComplement.color));
+		
+	}
+
+}

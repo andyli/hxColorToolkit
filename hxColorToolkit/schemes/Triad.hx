@@ -27,42 +27,42 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-	import hxColorToolkit.ColorUtil;
-	import hxColorToolkit.spaces.HSB;
-	import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.ColorUtil;
+import hxColorToolkit.spaces.HSB;
+import hxColorToolkit.spaces.IColor;
+
+class Triad<C:IColor> extends ColorWheelScheme<C> {
 	
-	class Triad<C:IColor> extends ColorWheelScheme<C> {
-		
-		public var angle(getAngle, setAngle) : Float;
-		var _angle:Float;
-		
-		public function getAngle():Float{ return _angle; }
-		public function setAngle(value:Float):Float{
-			_colors = new ColorList<C>();
-			_angle=value;
-			generate();	
-			return value;
-		}
-		
-		public function new(primaryColor:C, ?angle:Float=120)
-		{
-			_angle=angle;
-			super(primaryColor);
-		}
-		
-		override function generate():Void
-		{
-			var c1:HSB = new HSB();
-			c1.color = ColorUtil.rybRotate(_primaryColor.color, _angle);
-
-			c1.brightness+=10;
-			_colors.addColor(mutateFromPrimary(c1.color));	
-
-			var c2:HSB = new HSB();
-			c2.color = ColorUtil.rybRotate(_primaryColor.color, -_angle);
-			
-			c2.brightness+=10;
-			_colors.addColor(mutateFromPrimary(c2.color));	
-		}
-
+	public var angle(getAngle, setAngle) : Float;
+	var _angle:Float;
+	
+	public function getAngle():Float{ return _angle; }
+	public function setAngle(value:Float):Float{
+		_colors = new ColorList<C>();
+		_angle=value;
+		generate();	
+		return value;
 	}
+	
+	public function new(primaryColor:C, ?angle:Float=120)
+	{
+		_angle=angle;
+		super(primaryColor);
+	}
+	
+	override function generate():Void
+	{
+		var c1:HSB = new HSB();
+		c1.color = ColorUtil.rybRotate(_primaryColor.color, _angle);
+
+		c1.brightness+=10;
+		_colors.addColor(mutateFromPrimary(c1.color));	
+
+		var c2:HSB = new HSB();
+		c2.color = ColorUtil.rybRotate(_primaryColor.color, -_angle);
+		
+		c2.brightness+=10;
+		_colors.addColor(mutateFromPrimary(c2.color));	
+	}
+
+}

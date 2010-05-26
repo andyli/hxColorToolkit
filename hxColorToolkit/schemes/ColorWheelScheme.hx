@@ -29,40 +29,40 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.IColor;
 
-	class ColorWheelScheme<C:IColor> extends ColorScheme<C> {
+class ColorWheelScheme<C:IColor> extends ColorScheme<C> {
+	
+	public var primaryColor(getPrimaryColor, setPrimaryColor) : C;
+	var _primaryColor:C;
+	
+	private function getPrimaryColor():C{ return _primaryColor; }
+	private function setPrimaryColor(value:C):C{
+		_colors.empty();
+		_primaryColor=value;
+		_colors.addColor(_primaryColor);
+		generate();	
+		return value;
 		
-		public var primaryColor(getPrimaryColor, setPrimaryColor) : C;
-		var _primaryColor:C;
-		
-		private function getPrimaryColor():C{ return _primaryColor; }
-		private function setPrimaryColor(value:C):C{
-			_colors.empty();
-			_primaryColor=value;
-			_colors.addColor(_primaryColor);
-			generate();	
-			return value;
-			
-		}
-		
-		public function new(primaryColor:C)
-		{
-			super();
-			this.primaryColor=primaryColor;
-		}
-		
-		function generate():Void
-		{
-			throw 'Method must be called by child class';
-		}
-		
-		inline private function wrap(x : Float, min : Float,threshold : Float, plus : Float) : Float {
-			return ( x - min < threshold) ? x + plus : x - min;
-		}
-
-		private function mutateFromPrimary(newColor:Int):C {
-			var r:C = untyped primaryColor.clone();
-			r.color = newColor;
-			return r;
-		}
-
 	}
+	
+	public function new(primaryColor:C)
+	{
+		super();
+		this.primaryColor=primaryColor;
+	}
+	
+	function generate():Void
+	{
+		throw 'Method must be called by child class';
+	}
+	
+	inline private function wrap(x : Float, min : Float,threshold : Float, plus : Float) : Float {
+		return ( x - min < threshold) ? x + plus : x - min;
+	}
+
+	private function mutateFromPrimary(newColor:Int):C {
+		var r:C = untyped primaryColor.clone();
+		r.color = newColor;
+		return r;
+	}
+
+}

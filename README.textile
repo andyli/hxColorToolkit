@@ -1,3 +1,3 @@
-colortoolkit is a haXe library for color conversion and color scheme generation. Heavily based on "colortoolkit":http://code.google.com/p/colortoolkit/ with lots of bug fixs and changes.
+*hxColorToolkit* is a haXe library for color conversion and color scheme generation. Heavily based on "colortoolkit":http://code.google.com/p/colortoolkit/ with lots of bug fixs and changes.
 
 You're most likely only need to use the classes @Color@ and @ColorUtil@ unless you want to extend the library.

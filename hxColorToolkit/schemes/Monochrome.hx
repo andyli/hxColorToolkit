@@ -27,43 +27,43 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-	import hxColorToolkit.spaces.HSB;
-	import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.HSB;
+import hxColorToolkit.spaces.IColor;
+
+class Monochrome<C:IColor> extends ColorWheelScheme<C> {
 	
-	class Monochrome<C:IColor> extends ColorWheelScheme<C> {
-		
-		public function new(primaryColor:C)
-		{
-			super(primaryColor);
-		}
-		
-		override function generate():Void
-		{
-			
-			var _primaryHSB:HSB = new HSB();
-			_primaryHSB.color=_primaryColor.color;
-			
-			var c1:HSB = new HSB();
-			c1.color = _primaryColor.color;
-			c1.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
-			c1.saturation=wrap(_primaryHSB.saturation, 30, 10, 20);
-			_colors.addColor(mutateFromPrimary(c1.color));
-			
-			var c2:HSB = new HSB();
-			c2.color = _primaryColor.color;
-			c2.brightness=wrap(_primaryHSB.brightness, 20, 20, 60);
-			_colors.addColor(mutateFromPrimary(c2.color));
-
-			var c3:HSB = new HSB();
-			c3.color = _primaryColor.color;
-			c3.brightness=Math.max(20, _primaryHSB.brightness + (100 - _primaryHSB.brightness ) * 0.2);
-			c3.saturation=wrap(_primaryHSB.saturation, 30, 10, 30);
-			_colors.addColor(mutateFromPrimary(c3.color));
-
-			var c4:HSB = new HSB();
-			c4.color = _primaryColor.color;
-			c4.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
-			_colors.addColor(mutateFromPrimary(c4.color));
-		}
-
+	public function new(primaryColor:C)
+	{
+		super(primaryColor);
 	}
+	
+	override function generate():Void
+	{
+		
+		var _primaryHSB:HSB = new HSB();
+		_primaryHSB.color=_primaryColor.color;
+		
+		var c1:HSB = new HSB();
+		c1.color = _primaryColor.color;
+		c1.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
+		c1.saturation=wrap(_primaryHSB.saturation, 30, 10, 20);
+		_colors.addColor(mutateFromPrimary(c1.color));
+		
+		var c2:HSB = new HSB();
+		c2.color = _primaryColor.color;
+		c2.brightness=wrap(_primaryHSB.brightness, 20, 20, 60);
+		_colors.addColor(mutateFromPrimary(c2.color));
+
+		var c3:HSB = new HSB();
+		c3.color = _primaryColor.color;
+		c3.brightness=Math.max(20, _primaryHSB.brightness + (100 - _primaryHSB.brightness ) * 0.2);
+		c3.saturation=wrap(_primaryHSB.saturation, 30, 10, 30);
+		_colors.addColor(mutateFromPrimary(c3.color));
+
+		var c4:HSB = new HSB();
+		c4.color = _primaryColor.color;
+		c4.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
+		_colors.addColor(mutateFromPrimary(c4.color));
+	}
+
+}
