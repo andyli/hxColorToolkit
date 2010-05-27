@@ -52,7 +52,6 @@ class Monochrome<C:IColor> extends ColorWheelScheme<C> {
 			_primaryHSB = new HSB();
 			_primaryHSB.setColor(primaryColor.getColor());
 		}
-		var _primary = _primaryColor.getColor();
 		
 		var c1:HSB = untyped _primaryHSB.clone();
 		c1.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);

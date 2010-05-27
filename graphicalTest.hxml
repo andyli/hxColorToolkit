@@ -1,7 +1,8 @@
 -main GraphicalTest
 -swf bin/GraphicalTest.swf
 -swf-version 10
--swf-header 640:480:25:112233
+-swf-header 640:480:25:000000
 -lib arctic
+-lib feffects
 
 -cmd open bin/GraphicalTest.swf

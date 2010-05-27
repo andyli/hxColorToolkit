@@ -197,7 +197,7 @@ class ColorToolkit {
 		return hsb.getColor();
 	}
 
-	static public function getIntArray(colors:IColorScheme<Dynamic>):Array<Int> {
+	static public function intArray(colors:IColorScheme<Dynamic>):Array<Int> {
 		var a = [];
 		for (c in colors) {
 			a.push(c.getColor());
