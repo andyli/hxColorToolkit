@@ -32,26 +32,34 @@ import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 
 class SplitComplementary<C:IColor> extends ColorWheelScheme<C> {
+
+	override public function clone():IColorScheme<C> {
+		return new SplitComplementary<C>(primaryColor);
+	}
 	
 	public function new(primaryColor:C)
 	{
 		super(primaryColor);
+		generate();
 	}
 	
 	override function generate():Void
 	{
-		
+		_colors = [primaryColor];
+		var _primary = _primaryColor.getColor();
 		var c1:HSB = new HSB();
 		var c2:HSB = new HSB();
 		
-		c1.color = ColorUtil.rybRotate(_primaryColor.color, 150);
-		c2.color = ColorUtil.rybRotate(_primaryColor.color, 210);
+		c1.setColor(ColorToolkit.rybRotate(_primary, 150));
+		c2.setColor(ColorToolkit.rybRotate(_primary, 210));
 		
 		c1.brightness+=10;
 		c2.brightness+=10;
 		
-		_colors.addColor(mutateFromPrimary(c1.color));
-		_colors.addColor(mutateFromPrimary(c2.color));
+		_colors.push(mutateFromPrimary(c1));
+		_colors.push(mutateFromPrimary(c2));
+
+		numOfColors = _colors.length;
 	}
 
 }

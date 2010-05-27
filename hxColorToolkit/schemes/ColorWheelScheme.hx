@@ -30,19 +30,41 @@ package hxColorToolkit.schemes;
 import hxColorToolkit.spaces.IColor;
 
 class ColorWheelScheme<C:IColor> implements IColorScheme<C> {
-	public var primaryColor:C;
+	public function clone():IColorScheme<C> {
+		return new ColorWheelScheme<C>(primaryColor);
+	}
+
+	public var numOfColors(default,null):Int;
+	
+	public function getColor(index:Int):C {
+		return _colors[index];
+	}
+	
+	public function iterator():Iterator<C> {
+		return _colors.iterator();
+	}
+
+	public var primaryColor(getPrimaryColor,setPrimaryColor):C;
+
+	private var _primaryColor:C;
+	private function getPrimaryColor():C {
+		return _primaryColor;
+	}
+	private function setPrimaryColor(val:C):C {
+		_primaryColor = val;
+		generate();
+		return primaryColor;
+	}
 	
 	public function new(primaryColor:C) {
-		_colors = new ColorList<C>();
-		this.primaryColor=primaryColor;
+		_colors = [];
+		_primaryColor = primaryColor;
+		numOfColors = 1;
 	}
 
-	public function getColors():ColorList<C> {
-		generate();
-		return _colors;
-	}
-
-	private var _colors:ColorList<C>;
+	private var _colors:Array<C>;
+	private var _class:Class<C>;
+	
 	private function generate():Void {
 		throw 'Method must be called by child class';
 	}
@@ -51,10 +73,14 @@ class ColorWheelScheme<C:IColor> implements IColorScheme<C> {
 		return ( x - min < threshold) ? x + plus : x - min;
 	}
 
-	private function mutateFromPrimary(newColor:Int):C {
-		var r:C = untyped primaryColor.clone();
-		r.color = newColor;
-		return r;
+	private function mutateFromPrimary(newColor:IColor):C {
+		if (Std.is(newColor,_class)) {
+			return untyped newColor.clone();
+		} else {
+			var r:C = untyped primaryColor.clone();
+			r.setColor(newColor.getColor());
+			return r;
+		}
 	}
 
 }

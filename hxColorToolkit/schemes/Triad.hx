@@ -32,37 +32,48 @@ import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 
 class Triad<C:IColor> extends ColorWheelScheme<C> {
+
+	override public function clone():IColorScheme<C> {
+		return new Triad<C>(primaryColor,angle);
+	}
 	
 	public var angle(getAngle, setAngle) : Float;
 	var _angle:Float;
 	
-	public function getAngle():Float{ return _angle; }
+	public function getAngle():Float{
+		return _angle;
+	}
 	public function setAngle(value:Float):Float{
-		_colors = new ColorList<C>();
 		_angle=value;
 		generate();	
-		return value;
+		return angle;
 	}
 	
 	public function new(primaryColor:C, ?angle:Float=120)
 	{
-		_angle=angle;
 		super(primaryColor);
+		_angle=angle;
+		generate();
 	}
 	
 	override function generate():Void
 	{
+		_colors = [primaryColor];
+		var _primary = _primaryColor.getColor();
+		
 		var c1:HSB = new HSB();
-		c1.color = ColorUtil.rybRotate(_primaryColor.color, _angle);
+		c1.setColor(ColorToolkit.rybRotate(_primary, _angle));
 
 		c1.brightness+=10;
-		_colors.addColor(mutateFromPrimary(c1.color));	
+		_colors.push(mutateFromPrimary(c1));	
 
 		var c2:HSB = new HSB();
-		c2.color = ColorUtil.rybRotate(_primaryColor.color, -_angle);
+		c2.setColor(ColorToolkit.rybRotate(_primary, -_angle));
 		
 		c2.brightness+=10;
-		_colors.addColor(mutateFromPrimary(c2.color));	
+		_colors.push(mutateFromPrimary(c2));	
+
+		numOfColors = _colors.length;
 	}
 
 }

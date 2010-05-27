@@ -1,35 +1,12 @@
- /*
+/*
 Author: Andy Li (andy@onthewings.net)
 Based on colortoolkit (http://code.google.com/p/colortoolkit/)
- 
-The MIT License
-
-Copyright (c) 2009 P.J. Onori (pj@somerandomdude.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
 */
 
 package hxColorToolkit;
 
-/*
+import hxColorToolkit.schemes.IColorScheme;
 import hxColorToolkit.schemes.Analogous;
-import hxColorToolkit.schemes.ColorList;
 import hxColorToolkit.schemes.Complementary;
 import hxColorToolkit.schemes.Compound;
 import hxColorToolkit.schemes.FlippedCompound;
@@ -37,11 +14,11 @@ import hxColorToolkit.schemes.Monochrome;
 import hxColorToolkit.schemes.SplitComplementary;
 import hxColorToolkit.schemes.Tetrad;
 import hxColorToolkit.schemes.Triad;
-*/
 
 import hxColorToolkit.spaces.IColor;
 import hxColorToolkit.spaces.CMYK;
 import hxColorToolkit.spaces.Gray;
+import hxColorToolkit.spaces.Hex;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.HSL;
 import hxColorToolkit.spaces.Lab;
@@ -143,40 +120,40 @@ class ColorToolkit {
 		yuv.setColor(color);
 		return yuv;
 	}
-/*
-	inline static public function getAnalogousScheme(color:Int, ?angle:Float=10, ?contrast:Float=25):Array<Int> {
-		return new Analogous<Color>(new Color(color),angle,contrast).getColors().toIntArray();
+
+	inline static public function getAnalogousScheme(color:Int, ?angle:Float=10, ?contrast:Float=25):Analogous<Hex> {
+		return new Analogous<Hex>(new Hex(color),angle,contrast);
 	}
 
-	inline static public function getComplementaryScheme(color:Int):Array<Int> {
-		return new Complementary<Color>(new Color(color)).getColors().toIntArray();
+	inline static public function getComplementaryScheme(color:Int):Complementary<Hex> {
+		return new Complementary<Hex>(new Hex(color));
 	}
 
-	inline static public function getCompoundScheme(color:Int):Array<Int> {
-		return new Compound<Color>(new Color(color)).getColors().toIntArray();
+	inline static public function getCompoundScheme(color:Int):Compound<Hex> {
+		return new Compound<Hex>(new Hex(color));
 	}
 
-	inline static public function getFlippedCompoundScheme(color:Int):Array<Int> {
-		return new FlippedCompound<Color>(new Color(color)).getColors().toIntArray();
+	inline static public function getFlippedCompoundScheme(color:Int):FlippedCompound<Hex> {
+		return new FlippedCompound<Hex>(new Hex(color));
 	}
 
-	inline static public function getMonochromeScheme(color:Int):Array<Int> {
-		return new Monochrome<Color>(new Color(color)).getColors().toIntArray();
+	inline static public function getMonochromeScheme(color:Int):Monochrome<Hex> {
+		return new Monochrome<Hex>(new Hex(color));
 	}
 
-	inline static public function getSplitComplementaryScheme(color:Int):Array<Int> {
-		return new SplitComplementary<Color>(new Color(color)).getColors().toIntArray();
+	inline static public function getSplitComplementaryScheme(color:Int):SplitComplementary<Hex> {
+		return new SplitComplementary<Hex>(new Hex(color));
 	}
 
-	inline static public function getTetradScheme(color:Int, ?angle:Float=90):Array<Int> {
-		return new Tetrad<Color>(new Color(color),angle).getColors().toIntArray();
+	inline static public function getTetradScheme(color:Int, ?angle:Float=90, ?alt:Bool = false):Tetrad<Hex> {
+		return new Tetrad<Hex>(new Hex(color),angle,alt);
 	}
 
-	inline static public function getTriadScheme(color:Int, ?angle:Float=120):Array<Int> {
-		return new Triad<Color>(new Color(color),angle).getColors().toIntArray();
+	inline static public function getTriadScheme(color:Int, ?angle:Float=120):Triad<Hex> {
+		return new Triad<Hex>(new Hex(color),angle);
 	}
 	
-	*/
+	
 	public static function rybRotate(color:Int, angle:Float):Int 
 	{			
 		var hsb:HSB = new HSB();
@@ -218,5 +195,13 @@ class ColorToolkit {
 		hsb.hue=newHue;
 		
 		return hsb.getColor();
-	}	
+	}
+
+	static public function getIntArray(colors:IColorScheme<Dynamic>):Array<Int> {
+		var a = [];
+		for (c in colors) {
+			a.push(c.getColor());
+		}
+		return a;
+	}
 }

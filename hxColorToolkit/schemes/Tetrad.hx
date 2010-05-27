@@ -32,68 +32,92 @@ import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 
 class Tetrad<C:IColor> extends ColorWheelScheme<C> {
+
+	override public function clone():IColorScheme<C> {
+		return new Tetrad<C>(primaryColor,angle,alt);
+	}
 	
 	public var angle(getAngle, setAngle) : Float;
-	var _angle:Float;
-	
-	public function getAngle():Float{ return _angle; }
-	public function setAngle(value:Float):Float{
-		_colors = new ColorList<C>();
+	private var _angle:Float;
+	private function getAngle():Float{
+		return _angle;
+	}
+	private function setAngle(value:Float):Float{
 		_angle=value;
 		generate();	
 		return value;
 	}
 	
-	public var alt:Bool;
+	public var alt(getAlt,setAlt):Bool;
+	private var _alt:Bool;
+	private function getAlt():Bool {
+		return _alt;
+	}
+	private function setAlt(val:Bool):Bool {
+		_alt = val;
+		generate();
+		return alt;
+	}
 	
-	public function new(primaryColor:C, ?angle:Float=90)
+	public function new(primaryColor:C, ?angle:Float = 90, ?alt:Bool = false)
 	{
-		_angle=angle;
 		super(primaryColor);
+		_angle = angle;
+		_alt = alt;
+		generate();
 	}
 	
 	override function generate():Void
 	{
-		var _primaryCol:Color = new Color(_primaryColor.color);
+		_colors = [primaryColor];
+		var _primaryHSB:HSB;
+		if (Std.is(primaryColor,HSB)){
+			_primaryHSB = untyped primaryColor;
+		} else {
+			_primaryHSB = new HSB();
+			_primaryHSB.setColor(primaryColor.getColor());
+		}
+		var _primary = _primaryColor.getColor();
 		
 		var c1:HSB = new HSB();
-		c1.color = ColorUtil.rybRotate(_primaryColor.color, _angle);
+		c1.setColor(ColorToolkit.rybRotate(_primary, _angle));
 		var multiplier;
-		var primaryHSB = _primaryCol.toHSB();
 		if(!alt)
 		{
-			if(primaryHSB.brightness < 50) {
+			if(_primaryHSB.brightness < 50) {
 			c1.brightness+=20;
 			} else {
 				c1.brightness-=20;
 			}
 		} else {
-			multiplier = (50-primaryHSB.brightness)/50;
+			multiplier = (50-_primaryHSB.brightness)/50;
 			c1.brightness=c1.brightness+Math.min(20, Math.max(-20,20*multiplier));
 		}
 						   
-		_colors.addColor(mutateFromPrimary(c1.color));
+		_colors.push(mutateFromPrimary(c1));
 		
 		var c2:HSB = new HSB();
-		c2.color = ColorUtil.rybRotate(_primaryColor.color, _angle * 2);
+		c2.setColor(ColorToolkit.rybRotate(_primary, _angle * 2));
 		if(!alt)
 		{
-			if(primaryHSB.brightness > 50) {
+			if(_primaryHSB.brightness > 50) {
 			c2.brightness+=10;
 			} else {
 				c2.brightness-=10;
 			}
 		} else {
-			multiplier = (50-primaryHSB.brightness)/50;
+			multiplier = (50-_primaryHSB.brightness)/50;
 			c2.brightness=c2.brightness+Math.min(10, Math.max(-10,10*multiplier));
 		}
 		
-		_colors.addColor(mutateFromPrimary(c2.color));
+		_colors.push(mutateFromPrimary(c2));
 		
 		var c3:HSB = new HSB();
-		c3.color = ColorUtil.rybRotate(_primaryColor.color, _angle * 3);
+		c3.setColor(ColorToolkit.rybRotate(_primary, _angle * 3));
 		c3.brightness+=10;
-		_colors.addColor(mutateFromPrimary(c3.color));
+		_colors.push(mutateFromPrimary(c3));
+
+		numOfColors = _colors.length;
 	}
 
 }

@@ -31,27 +31,59 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 
 class Analogous<C:hxColorToolkit.spaces.IColor> extends ColorWheelScheme<C> {
-	public var angle: Float;	
-	public var contrast: Float;
+
+	override public function clone():IColorScheme<C> {
+		return new Analogous<C>(primaryColor, angle, contrast);
+	}
+
+	inline public var angle(getAngle,setAngle): Float;	
+	inline public var contrast(getContrast,setContrast): Float;
+
+	private var _angle:Float;
+	private function getAngle():Float {
+		return _angle;
+	}
+	private function setAngle(val:Float):Float {
+		_angle = val;
+		generate();
+		return angle;
+	}
+
+	private var _contrast:Float;
+	private function getContrast():Float {
+		return _contrast;
+	}
+	private function setContrast(val:Float):Float {
+		_contrast = val;
+		generate();
+		return _contrast;
+	}
 	
 	public function new(primaryColor:C, ?angle:Float=10, ?contrast:Float=25)
 	{
-		this.angle=angle;
-		this.contrast=contrast;
 		super(primaryColor);
+		_angle=angle;
+		_contrast=contrast;
+		generate();
 	}
 	
 	override function generate():Void
 	{
-		var _primaryHSB:HSB = new HSB();
-		_primaryHSB.color=primaryColor.color;
+		_colors = [primaryColor];
+		var _primaryHSB:HSB;
+		if (Std.is(primaryColor,HSB)){
+			_primaryHSB = untyped primaryColor;
+		} else {
+			_primaryHSB = new HSB();
+			_primaryHSB.setColor(primaryColor.getColor());
+		}
 		var newHSB:HSB = new HSB();
 		var array: Array<Array<Float>> = [[1.0, 2.2], [2.0, 1.0], [-1.0, -0.5], [-2.0, 1.0]];
 		for (i in 0...array.length) {
 			var one = array[i][0];
 			var two = array[i][1];
 			
-			newHSB.color = ColorUtil.rybRotate(_primaryHSB.color, angle * one);
+			newHSB.setColor(ColorToolkit.rybRotate(_primaryHSB.getColor(), angle * one));
 			var t: Float = 0.44 - two * 0.1;
 			if(_primaryHSB.brightness - contrast * two < t) {
 				newHSB.brightness=t * 100;
@@ -59,7 +91,8 @@ class Analogous<C:hxColorToolkit.spaces.IColor> extends ColorWheelScheme<C> {
 				newHSB.brightness=_primaryHSB.brightness - contrast * two;
 			}
 			newHSB.saturation= newHSB.saturation - 5;
-			_colors.addColor(mutateFromPrimary(newHSB.color));
+			_colors.push(mutateFromPrimary(newHSB));
 		}
+		numOfColors = _colors.length;
 	}
 }

@@ -32,59 +32,64 @@ import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 
 class Complementary<C:IColor> extends ColorWheelScheme<C> {
-	
-	
+
+	override public function clone():IColorScheme<C> {
+		return new Complementary<C>(primaryColor);
+	}
 	
 	public function new(primaryColor:C)
 	{
 		super(primaryColor);
+		generate();
 	}
 	
 	override function generate():Void
 	{
+		_colors = [primaryColor];
+		var _primaryHSB:HSB;
+		if (Std.is(primaryColor,HSB)){
+			_primaryHSB = untyped primaryColor;
+		} else {
+			_primaryHSB = new HSB();
+			_primaryHSB.setColor(primaryColor.getColor());
+		}
 		
-		var _primaryHSB:HSB = new HSB();
-		_primaryHSB.color=_primaryColor.color;
+		var contrasting: HSB = untyped _primaryHSB.clone();
 		
-		var contrasting: HSB = new HSB();
-		contrasting.color=_primaryColor.color;
 		if(_primaryHSB.brightness > 40) {
 			contrasting.brightness=10 + _primaryHSB.brightness * 0.25;
 		} else {
 			contrasting.brightness=100 - _primaryHSB.brightness * 0.25;
 		}
-		_colors.addColor(mutateFromPrimary(contrasting.color));
+		_colors.push(mutateFromPrimary(contrasting));
 		
-		var supporting: HSB = new HSB();
-		supporting.color=_primaryColor.color;
+		var supporting: HSB = untyped _primaryHSB.clone();
 		
 		supporting.brightness=30 + _primaryHSB.brightness;
 		supporting.saturation=10 + _primaryHSB.saturation * 0.3;
-		_colors.addColor(mutateFromPrimary(supporting.color));
+		_colors.push(mutateFromPrimary(supporting));
 		
 		//complement
 		var complement:HSB = new HSB();
+		complement.setColor(ColorToolkit.rybRotate(_primaryColor.getColor(), 180));
+		_colors.push(mutateFromPrimary(complement));
 		
-		complement.color=ColorUtil.rybRotate(_primaryColor.color, 180);
-		_colors.addColor(mutateFromPrimary(complement.color));
-		
-		var contrastingComplement:HSB = new HSB();
-		contrastingComplement.color=complement.color;
+		var contrastingComplement:HSB = untyped complement.clone();
 				
 		if(complement.brightness > 30) {
 			contrastingComplement.brightness=10 + complement.brightness * 0.25;
 		} else {
 			contrastingComplement.brightness=100 - complement.brightness * 0.25;
 		}
-		_colors.addColor(mutateFromPrimary(contrastingComplement.color));
+		_colors.push(mutateFromPrimary(contrastingComplement));
 		
-		var supportingComplement:HSB = new HSB();
-		supportingComplement.color=complement.color;
+		var supportingComplement:HSB = untyped complement.clone();
 		
 		supportingComplement.brightness=30 + complement.brightness;
 		supportingComplement.saturation=10 + complement.saturation * 0.3;
-		_colors.addColor(mutateFromPrimary(supportingComplement.color));
+		_colors.push(mutateFromPrimary(supportingComplement));
 		
+		numOfColors = _colors.length;
 	}
 
 }

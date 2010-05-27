@@ -30,5 +30,11 @@ package hxColorToolkit.schemes;
 import hxColorToolkit.spaces.IColor;
 
 interface IColorScheme<C:IColor> {
-	public function getColors():ColorList<C>;
+	#if !php
+	public function clone():IColorScheme<C>;
+	#end
+
+	public var numOfColors(default,null):Int;
+	public function getColor(index:Int):C;
+	public function iterator():Iterator<C>;
 }

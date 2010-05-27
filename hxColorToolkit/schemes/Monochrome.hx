@@ -31,39 +31,48 @@ import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 
 class Monochrome<C:IColor> extends ColorWheelScheme<C> {
+
+	override public function clone():IColorScheme<C> {
+		return new Monochrome<C>(primaryColor);
+	}
 	
 	public function new(primaryColor:C)
 	{
 		super(primaryColor);
+		generate();
 	}
 	
 	override function generate():Void
 	{
+		_colors = [primaryColor];
+		var _primaryHSB:HSB;
+		if (Std.is(primaryColor,HSB)){
+			_primaryHSB = untyped primaryColor;
+		} else {
+			_primaryHSB = new HSB();
+			_primaryHSB.setColor(primaryColor.getColor());
+		}
+		var _primary = _primaryColor.getColor();
 		
-		var _primaryHSB:HSB = new HSB();
-		_primaryHSB.color=_primaryColor.color;
-		
-		var c1:HSB = new HSB();
-		c1.color = _primaryColor.color;
+		var c1:HSB = untyped _primaryHSB.clone();
 		c1.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
 		c1.saturation=wrap(_primaryHSB.saturation, 30, 10, 20);
-		_colors.addColor(mutateFromPrimary(c1.color));
+		_colors.push(mutateFromPrimary(c1));
 		
-		var c2:HSB = new HSB();
-		c2.color = _primaryColor.color;
+		var c2:HSB = untyped _primaryHSB.clone();
 		c2.brightness=wrap(_primaryHSB.brightness, 20, 20, 60);
-		_colors.addColor(mutateFromPrimary(c2.color));
+		_colors.push(mutateFromPrimary(c2));
 
-		var c3:HSB = new HSB();
-		c3.color = _primaryColor.color;
+		var c3:HSB = untyped _primaryHSB.clone();
 		c3.brightness=Math.max(20, _primaryHSB.brightness + (100 - _primaryHSB.brightness ) * 0.2);
 		c3.saturation=wrap(_primaryHSB.saturation, 30, 10, 30);
-		_colors.addColor(mutateFromPrimary(c3.color));
+		_colors.push(mutateFromPrimary(c3));
 
-		var c4:HSB = new HSB();
-		c4.color = _primaryColor.color;
+		var c4:HSB = untyped _primaryHSB.clone();
 		c4.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
-		_colors.addColor(mutateFromPrimary(c4.color));
+		_colors.push(mutateFromPrimary(c4));
+
+		numOfColors = _colors.length;
 	}
 
 }
