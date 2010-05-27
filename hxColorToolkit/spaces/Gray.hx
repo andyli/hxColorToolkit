@@ -27,89 +27,71 @@ THE SOFTWARE.
  
 package hxColorToolkit.spaces;
 
+class Gray implements IColor {
 	
-	
-	class Gray implements IColor {
-		
-		public var color(getColor, setColor) : Int ;
-		public var gray(getGray, setGray) : Float;
-		
-		/* @private */
-		var _gray:Float;
-		var _grayscale:Int;
-		
-		/**
-		 * Single gray channel value (not the hexidecimal color)
-		 * @return Number (between 0 and 255)
-		 * 
-		 */	
-		private function getGray():Float{ return this._gray; }
-		
-		/**
-		 * Single gray channel value (not the hexidecimal color)
-		 * @param value Number between 0 and 255);
-		 * 
-		 */		
-		private function setGray(value:Float):Float{
-			value=Math.min(255, Math.max(value, 0));
-			this._gray=value;
-			this._grayscale=this.convertGrayValuetoHex(this._gray);
-			return value;
-		}
-		
-		/**
-		 * Grayscale color value
-		 * @return Hexidecimal grayscale color
-		 * 
-		 */	
-		private function getColor():Int { return this._grayscale; }
+	public var numOfChannels(default,null):Int;
 
-		private function setColor(c:Int):Int {
-			this.gray = convertHexToGrayscale(c);
-			return this.color;
-		}
-		
-		/**
-		 * Single gray channel value (not the hexidecimal color)
-		 * @param value Number between 0 and 255);
-		 * 
-		 */	
-		public function new(?gray:Float=0){
-			
-			this.gray=gray;
-			this._grayscale=this.convertGrayValuetoHex(gray);
-		}
-		
-		public function clone():IColor { return new Gray(_gray); }
-		
-		/**
-		 * Single gray channel value (not the hexidecimal color)
-		 * @param value Hexidecimal color value to be converted to grayscale;
-		 * @return Hexidecimal grayscale color
-		 * 
-		 */	
-		public function convertHexToGrayscale(color:Int):Float
-		{
-			var r:Int;
-			var g:Int;
-			var b:Int;
-			
-			r= color >> 16 & 0xFF;
-			g = color >> 8 & 0xFF;
-			b = color & 0xFF; 	
-			
-			var gray = Std.int(0.3*r + 0.59*g + 0.11*b);
-			this._gray=gray;
-			this._grayscale=(gray << 16 ^ gray << 8 ^ gray);
-			
-			return (gray << 16 ^ gray << 8 ^ gray);
-		}
-		
-		/* @private */
-		function convertGrayValuetoHex(gray:Float):Int
-		{
-			var g = Std.int(gray);
-			return ( g << 16 ^ g << 8 ^ g);
-		}
-		
+	public function getValue(channel:Int):Float {
+		return data[channel];
 	}
+	public function setValue(channel:Int,val:Float):Float {
+		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
+		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+		return data[channel];
+	}
+
+	inline public function minValue(channel:Int):Float {
+		return 0;
+	}
+	inline public function maxValue(channel:Int):Float {
+		return 255;
+	}
+
+	/**
+	 * Single gray channel value (not the hexidecimal color)
+	 * @return Number (between 0 and 255)
+	 * 
+	 */	
+	inline public var gray(getGray, setGray) : Float;
+	
+	private function getGray():Float{ 
+		return getValue(0);
+	}
+	
+	private function setGray(value:Float):Float{
+		return setValue(0,value);
+	}
+	
+	/**
+	 * Grayscale color value
+	 * @return Hexidecimal grayscale color
+	 * 
+	 */	
+	public function getColor():Int {
+		var g = Math.round(gray);
+		return ( g << 16 ^ g << 8 ^ g);
+	}
+
+	public function setColor(color:Int):Int {
+		var r = color >> 16 & 0xFF;
+		var g = color >> 8 & 0xFF;
+		var b = color & 0xFF;
+		this.gray = 0.3*r + 0.59*g + 0.11*b;
+		return getColor();
+	}
+	
+	/**
+	 * Single gray channel value (not the hexidecimal color)
+	 * @param value Number between 0 and 255);
+	 * 
+	 */	
+	public function new(?gray:Float=0):Void {
+		numOfChannels = 1;
+		data = [];
+		this.gray=gray;
+	}
+	
+	public function clone():IColor { return new Gray(gray); }
+
+	private var data:Array<Float>;
+}

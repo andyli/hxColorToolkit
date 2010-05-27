@@ -27,116 +27,134 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-	
-	
-	class HSB implements IColor {
-		
-		public var brightness(getBrightness, setBrightness) : Float;
-		private var _color:Int;
-		public var color(getColor, setColor) : Int;
-		public var hue(getHue, setHue) : Float;
-		public var saturation(getSaturation, setSaturation) : Float;
-		
-		/* @private */
-		var _hue:Float;
-		var _saturation:Float;
-		var _brightness:Float;
-		
-		/**
-		 * Hue color value
-		 * @return Number (between 0 and 360)
-		 * 
-		 */	
-		private function getHue():Float{ return this._hue; }
-		
-		/**
-		 * Hue color value
-		 * @param value Number (between 0 and 360)
-		 * 
-		 */
-		private function setHue(value:Float):Float{
-			this._hue=Math.min(360, Math.max(value, 0));
-			this._color=this.generateColorFromHSB(_hue, _saturation, _brightness);
-			return value;
-		}
-		
-		/**
-		 * Saturation color value
-		 * @return Number (between 0 and 100)
-		 * 
-		 */	
-		private function getSaturation():Float{ return this._saturation; }
-		
-		/**
-		 * Saturation color value
-		 * @param value Number (between 0 and 100)
-		 * 
-		 */
-		private function setSaturation(value:Float):Float{
-			this._saturation=Math.min(100, Math.max(value, 0));
-			this._color=this.generateColorFromHSB(_hue, _saturation, _brightness);
-			return value;
-		}
-		
-		/**
-		 * Black color value
-		 * @return Number (between 0 and 100)
-		 * 
-		 */	
-		private function getBrightness():Float{ return this._brightness; }
-		
-		/**
-		 * Black color value
-		 * @param value Number (between 0 and 100)
-		 * 
-		 */	
-		private function setBrightness(value:Float):Float{
-			this._brightness=Math.min(100, Math.max(value, 0));
-			this._color=this.generateColorFromHSB(_hue, _saturation, _brightness);
-			return value;
-		}
-		
-		/**
-		 * Hexidecimal RGB translation of HSB color
-		 * @return Hexidecimal color value
-		 * 
-		 */	
-		private function getColor():Int{ return this._color; }
-		
-		/**
-		 * Hexidecimal RGB translation of HSB color
-		 * @param value Hexidecimal color value
-		 * 
-		 */		
-		private function setColor(value:Int):Int{
-			this._color= value;
-			var hsb:HSB = this.generateColorFromHex(value);
-			this._hue=hsb.hue;
-			this._saturation=hsb.saturation;
-			this._brightness=hsb.brightness;
-			return value;
-		}
-		
-		/**
-		 * 
-		 * @param hue (between 0 and 360)
-		 * @param saturation (between 0 and 100)
-		 * @param black (between 0 and 100)
-		 * 
-		 */		
-		public function new(?hue:Float=0, ?saturation:Float=0, ?brightness:Float=0)
-		{
-			
-			this._hue=Math.min(360, Math.max(hue, 0));
-			this._saturation=Math.min(100, Math.max(saturation, 0));
-			this._brightness=Math.min(100, Math.max(brightness, 0));
-			this._color = this.generateColorFromHSB(_hue, _saturation, _brightness);
-		}
+class HSB implements IColor {
 
-		public function clone():IColor { return new HSB(_hue, _saturation, _brightness); }
-		
-		/* @private */
-		function generateColorFromHex(color:Int):HSB
+	public var numOfChannels(default,null):Int;
+
+	public function getValue(channel:Int):Float {
+		return data[channel];
+	}
+	public function setValue(channel:Int,val:Float):Float {
+		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
+		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+		return data[channel];
+	}
+
+	inline public function minValue(channel:Int):Float {
+		return 0;
+	}
+	inline public function maxValue(channel:Int):Float {
+		return channel == 0 ? 360 : 100;
+	}
+
+	/**
+	 * Hue color value
+	 * @return Number (between 0 and 360)
+	 */	
+	inline public var hue(getHue, setHue) : Float;
+
+	/**
+	 * Saturation color value
+	 * @return Number (between 0 and 100)
+	 */	
+	inline public var saturation(getSaturation, setSaturation) : Float;
+
+	/**
+	 * Black color value
+	 * @param value Number (between 0 and 100)
+	 */	
+	inline public var brightness(getBrightness, setBrightness) : Float;
+	
+	
+	private function getHue():Float{
+		return getValue(0);
+	}
+
+	private function setHue(value:Float):Float{
+		return setValue(0,value);
+	}
+	
+	private function getSaturation():Float{
+		return getValue(1);
+	}
+	
+	private function setSaturation(value:Float):Float{
+		return setValue(1,value);
+	}
+	
+	private function getBrightness():Float{
+		return getValue(2);
+	}
+	
+	private function setBrightness(value:Float):Float{
+		return setValue(2,value);
+	}
+	
+	/**
+	 * Hexidecimal RGB translation of HSB color
+	 * @return Hexidecimal color value
+	 * 
+	 */	
+	public function getColor():Int {
+		var hue = hue; 
+		var saturation = saturation;
+		var brightness = brightness;
+		var r:Float = 0, g:Float = 0, b:Float = 0, i:Float, f:Float, p:Float, q:Float, t:Float;
+		hue%=360;
+		if(brightness==0) 
+		{
+			return 0;
+		}
+		saturation/=100;
+		brightness/=100;
+		hue/=60;
+		i = Math.floor(hue);
+		f = hue-i;
+		p = brightness*(1-saturation);
+		q = brightness*(1-(saturation*f));
+		t = brightness*(1-(saturation*(1-f)));
+		if (i==0) {r=brightness; g=t; b=p;}
+		else if (i==1) {r=q; g=brightness; b=p;}
+		else if (i==2) {r=p; g=brightness; b=t;}
+		else if (i==3) {r=p; g=q; b=brightness;}
+		else if (i==4) {r=t; g=p; b=brightness;}
+		else if (i==5) {r=brightness; g=p; b=q;}
+
+		return (Math.round(r*255) << 16 ^ Math.round(g*255) << 8 ^ Math.round(b*255));
+	}
+	
+	/**
+	 * Hexidecimal RGB translation of HSB color
+	 * @param value Hexidecimal color value
+	 * 
+	 */		
+	public function setColor(color:Int):Int{
+		var tmp = generateColorFromHex(color);
+		this.hue = tmp.hue;
+		this.saturation = tmp.saturation;
+		this.brightness = tmp.brightness;
+		return getColor();
+	}
+	
+	/**
+	 * @param hue (between 0 and 360)
+	 * @param saturation (between 0 and 100)
+	 * @param black (between 0 and 100)
+	 */		
+	public function new(?hue:Float=0, ?saturation:Float=0, ?brightness:Float=0):Void {
+		numOfChannels = 3;
+		data = [];
+		this.hue = hue;
+		this.saturation = saturation;
+		this.brightness = brightness;
+	}
+
+	public function clone():IColor { return new HSB(hue, saturation, brightness); }
+
+	private var data:Array<Float>;
+
+
+	private function generateColorFromHex(color:Int):HSB
 		{
 			var r:Float = color >> 16 & 0xFF;
 			var g:Float = color >> 8 & 0xFF;
@@ -166,8 +184,10 @@ package hxColorToolkit.spaces;
 				return new HSB(h, s, v);
 			}
 
-			if(delta == 0) return new HSB(-1, s, v);
-			
+			if(delta == 0) {
+				return new HSB(0, s, v);
+			}
+
 			if( r == max )
 			{
 				h = ( g - b ) / delta;
@@ -182,32 +202,5 @@ package hxColorToolkit.spaces;
 			
 			
 			return new HSB(h, s, v);
-		}	
-		
-		/* @private */
-		function generateColorFromHSB(hue:Float, saturation:Float, brightness:Float):Int
-		{
-			var r:Float = 0, g:Float = 0, b:Float = 0, i:Float, f:Float, p:Float, q:Float, t:Float;
-			hue%=360;
-			if(brightness==0) 
-			{
-				return 0;
-			}
-			saturation/=100;
-			brightness/=100;
-			hue/=60;
-			i = Math.floor(hue);
-			f = hue-i;
-			p = brightness*(1-saturation);
-			q = brightness*(1-(saturation*f));
-			t = brightness*(1-(saturation*(1-f)));
-			if (i==0) {r=brightness; g=t; b=p;}
-			else if (i==1) {r=q; g=brightness; b=p;}
-			else if (i==2) {r=p; g=brightness; b=t;}
-			else if (i==3) {r=p; g=q; b=brightness;}
-			else if (i==4) {r=t; g=p; b=brightness;}
-			else if (i==5) {r=brightness; g=p; b=q;}
-
-			return (Math.round(r*255) << 16 ^ Math.round(g*255) << 8 ^ Math.round(b*255));
 		}
-	}
+}

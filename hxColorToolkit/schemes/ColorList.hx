@@ -31,7 +31,7 @@ package hxColorToolkit.schemes;
 import haxe.FastList;
 #end
 
-import hxColorToolkit.Color;
+import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.IColor;
 import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.HSB;
@@ -40,7 +40,7 @@ import hxColorToolkit.spaces.Lab;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.HSL;
 
-using hxColorToolkit.ColorUtil;
+using hxColorToolkit.ColorToolkit;
 
 class ColorList<C:IColor> {
 	#if !cpp
@@ -119,16 +119,6 @@ class ColorList<C:IColor> {
 		{
 			rgb.color = i.color;
 			list.addColor(rgb.color.toCMYK());
-		}
-		return list;
-	}
-	
-	public function toColor():ColorList<Color>
-	{
-		var list = new ColorList<Color>();
-		for(i in data)
-		{
-			list.addColor(new Color(i.color));
 		}
 		return list;
 	}

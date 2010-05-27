@@ -1,5 +1,4 @@
-import hxColorToolkit.Color;
-import hxColorToolkit.ColorUtil;
+import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.CMYK;
 import hxColorToolkit.spaces.Gray;
 import hxColorToolkit.spaces.HSB;
@@ -11,113 +10,106 @@ import hxColorToolkit.spaces.YUV;
 
 class Test extends haxe.unit.TestCase{
 	public function testCMYK():Void {
-		var c = new Color(0xFFCC33);
-		var cmyk = c.toCMYK();
+		var cmyk = ColorToolkit.toCMYK(0xFFCC33);
 		this.assertEquals(0, Math.round(cmyk.cyan));
 		this.assertEquals(20, Math.round(cmyk.magenta));
 		this.assertEquals(80, Math.round(cmyk.yellow));
 		this.assertEquals(0, Math.round(cmyk.black));
-		this.assertEquals(0xFFCC33,cmyk.color);
+		this.assertEquals(0xFFCC33,cmyk.getColor());
 		
 		cmyk = new CMYK(0,20,80,0);
-		this.assertEquals(0xFFCC33,cmyk.color);
+		this.assertEquals(0xFFCC33,cmyk.getColor());
 	}
 
 	public function testGray():Void {
-		var c = new Color(0xFFCC33);
-		var g = c.toGray();
-		this.assertEquals(0.0,new Color(g.color).toHSB().saturation);
-		c = new Color(0x333333);
-		g = c.toGray();
-		this.assertEquals(0x33,cast g.gray);
-		this.assertEquals(0x333333,new Gray(0x33).color);
+		var g = ColorToolkit.toGray(0xFFCC33);
+		this.assertEquals(0.0,ColorToolkit.toHSB(g.getColor()).saturation);
+		
+		g = ColorToolkit.toGray(0x333333);
+		this.assertEquals(0x33,Std.int(g.gray));
+		this.assertEquals(0x333333,new Gray(0x33).getColor());
 	}
 
 	public function testHSB():Void {
-		var c = new Color(0xFFCC33);
-		var hsb = c.toHSB();
+		var hsb = ColorToolkit.toHSB(0xFFCC33);
 		this.assertEquals(45,Math.round(hsb.hue));
 		this.assertEquals(80,Math.round(hsb.saturation));
 		this.assertEquals(100,Math.round(hsb.brightness));
-		this.assertEquals(0xFFCC33,hsb.color);
+		this.assertEquals(0xFFCC33,hsb.getColor());
 
 		hsb = new HSB(45,80,100);
-		this.assertEquals(0xFFCC33,hsb.color);
+		this.assertEquals(0xFFCC33,hsb.getColor());
 	}
 
 	public function testHSL():Void {
-		var c = new Color(0xFFCC33);
-		var hsl = c.toHSL();
+		var hsl = ColorToolkit.toHSL(0xFFCC33);
 		this.assertEquals(45,cast hsl.hue);
 		this.assertEquals(100,cast hsl.saturation);
 		this.assertEquals(60,cast hsl.lightness);
-		this.assertEquals(0xFFCC33,hsl.color);
+		this.assertEquals(0xFFCC33,hsl.getColor());
 
 		hsl = new HSL(45,100,60);
-		this.assertEquals(0xFFCC33,hsl.color);
+		this.assertEquals(0xFFCC33,hsl.getColor());
 	}
 
 	public function testLab():Void {
-		var c = new Color(0xFFCC33);
-		var lab = c.toLab();
+		var lab = ColorToolkit.toLab(0xFFCC33);
 		this.assertEquals(84,Math.round(lab.lightness));
 		this.assertEquals(5,Math.round(lab.a));
 		this.assertEquals(76,Math.round(lab.b));
-		this.assertEquals(0xFFCC33,lab.color);
+		this.assertEquals(0xFFCC33,lab.getColor());
 
 		lab = new Lab(lab.lightness,lab.a,lab.b);
-		this.assertEquals(0xFFCC33,lab.color);
+		this.assertEquals(0xFFCC33,lab.getColor());
 	}
 
 	public function testXYZ():Void {
-		var c = new Color(0xFFCC33);
-		var xyz = c.toXYZ();
-		this.assertEquals(0xFFCC33,xyz.color);
+		var xyz = ColorToolkit.toXYZ(0xFFCC33);
+		this.assertEquals(0xFFCC33,xyz.getColor());
 
 		//should test its x,y,z values but I cannot find reference...
 
 		xyz = new XYZ(xyz.x,xyz.y,xyz.z);
-		this.assertEquals(0xFFCC33,xyz.color);
+		this.assertEquals(0xFFCC33,xyz.getColor());
 	}
 
 	public function testRGB():Void {
-		var c = new Color(0xFFCC33);
-		var rgb = c.toRGB();
+		var rgb = ColorToolkit.toRGB(0xFFCC33);
 		this.assertEquals(0xFF,cast rgb.red);
 		this.assertEquals(0xCC,cast rgb.green);
 		this.assertEquals(0x33,cast rgb.blue);
-		this.assertEquals(0xFFCC33,rgb.color);
+		this.assertEquals(0xFFCC33,rgb.getColor());
 
 		rgb = new RGB(0x11,0x22,0x33);
 		this.assertEquals(0x11,cast rgb.red);
 		this.assertEquals(0x22,cast rgb.green);
 		this.assertEquals(0x33,cast rgb.blue);
-		this.assertEquals(0x112233,rgb.color);
+		this.assertEquals(0x112233,rgb.getColor());
 	}
 
 	public function testYUV():Void {
-		var c = new Color(0xFFCC33);
-		var yuv = c.toYUV();
-		this.assertEquals(0xFFCC33,yuv.color);
+		var yuv = ColorToolkit.toYUV(0xFFCC33);
+		this.assertEquals(0xFFCC33,yuv.getColor());
 
 		//should test its y,u,v values but I cannot find reference...
 
 		yuv = new YUV(yuv.y,yuv.u,yuv.v);
-		this.assertEquals(0xFFCC33,yuv.color);
+		this.assertEquals(0xFFCC33,yuv.getColor());
 	}
 
 	public function testUtil():Void {
-		var c = 0x11DD33;
-		this.assertEquals(c,ColorUtil.toCMYK(c).color);
-		this.assertEquals(ColorUtil.desaturate(c),ColorUtil.toGray(c).color);
-		this.assertEquals(c,ColorUtil.toHSB(c).color);
-		this.assertEquals(c,ColorUtil.toHSL(c).color);
-		this.assertEquals(c,ColorUtil.toLab(c).color);
-		this.assertEquals(c,ColorUtil.toRGB(c).color);
-		this.assertEquals(c,ColorUtil.toXYZ(c).color);
-		this.assertEquals(c,ColorUtil.toYUV(c).color);
+		var c = 0xFFCC33;
+		
+		this.assertEquals(c,ColorToolkit.toCMYK(c).getColor());
+		this.assertEquals(ColorToolkit.desaturate(c),ColorToolkit.toGray(c).getColor());
+		this.assertEquals(c,ColorToolkit.toHSB(c).getColor());
+		this.assertEquals(c,ColorToolkit.toHSL(c).getColor());
+		this.assertEquals(c,ColorToolkit.toLab(c).getColor());
+		this.assertEquals(c,ColorToolkit.toRGB(c).getColor());
+		this.assertEquals(c,ColorToolkit.toXYZ(c).getColor());
+		this.assertEquals(c,ColorToolkit.toYUV(c).getColor());
 
-		this.assertEquals(0xFF112233,ColorUtil.setColorOpaque(0x112233));
+		this.assertEquals(0xFF112233,ColorToolkit.setColorOpaque(0x112233));
 	}
 
 	static function main():Void {

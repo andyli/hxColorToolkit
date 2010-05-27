@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit;
 
-
+/*
 import hxColorToolkit.schemes.Analogous;
 import hxColorToolkit.schemes.ColorList;
 import hxColorToolkit.schemes.Complementary;
@@ -37,6 +37,7 @@ import hxColorToolkit.schemes.Monochrome;
 import hxColorToolkit.schemes.SplitComplementary;
 import hxColorToolkit.schemes.Tetrad;
 import hxColorToolkit.schemes.Triad;
+*/
 
 import hxColorToolkit.spaces.IColor;
 import hxColorToolkit.spaces.CMYK;
@@ -48,91 +49,138 @@ import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
 
-class ColorUtil {	
+class ColorToolkit {	
 	static private var rybWheel: Array<Array<Int>> = [[0, 0], [15, 8], [30, 17], [45, 26], [60, 34], [75, 41], [90, 48], [105, 54], [120, 60], [135, 81], [150, 103], [165, 123], [180, 138], [195, 155], [210, 171], [225, 187], [240, 204], [255, 219], [270, 234], [285, 251], [300, 267], [315, 282], [330, 298], [345, 329], [360, 0]];
 	
 	inline public static function setColorOpaque(color:Int):Int { return 0xff000000 | (color & 0xffffff); }
 	
-	inline public static function desaturate(color:Int):Int { return toGray(color).color; }
+	inline public static function desaturate(color:Int):Int { return toGray(color).getColor(); }
 
 	inline public static function getComplement(color:Int):Int { return rybRotate(color, 180); }
 	
 	public static function shiftBrighteness(color:Int, degree:Float):Int 
 	{
 		var col:HSB = new HSB();
-		col.color=color;
+		col.setColor(color);
 		
 		col.brightness+=degree;
 		
-		return col.color;
+		return col.getColor();
 	}
 	
 	public static function shiftSaturation(color:Int, degree:Float):Int
 	{
 		var col:HSB = new HSB();
-		col.color=color;
+		col.setColor(color);
 		
 		col.saturation+=degree;
 		
-		return col.color;
+		return col.getColor();
 	}
 	
 	public static function shiftHue(color:Int, degree:Float):Int
 	{
 		var col:HSB = new HSB();
-		col.color=color;
+		col.setColor(color);
 		
 		col.hue+=degree;
 		
-		return col.color;
+		return col.getColor();
 	}
 	
-	inline public static function toRGB(color:Int):RGB { return new Color(color).toRGB(); }
-	inline public static function toCMYK(color:Int):CMYK { return new Color(color).toCMYK(); }
-	inline public static function toHSB(color:Int):HSB { return new Color(color).toHSB(); }
-	inline public static function toHSL(color:Int):HSL { return new Color(color).toHSL(); }
-	inline public static function toGray(color:Int):Gray { return new Color(color).toGray(); }
-	inline public static function toLab(color:Int):Lab { return new Color(color).toLab(); }
-	inline public static function toXYZ(color:Int):XYZ { return new Color(color).toXYZ(); }
-	inline public static function toYUV(color:Int):YUV { return new Color(color).toYUV(); }
-
-	inline public function getAnalogousScheme(color:Int, ?angle:Float=10, ?contrast:Float=25):Array<Int> {
-		return new Analogous<Color>(new Color(color),angle,contrast).colors.toIntArray();
-	}
-
-	inline public function getComplementaryScheme(color:Int):Array<Int> {
-		return new Complementary<Color>(new Color(color)).colors.toIntArray();
-	}
-
-	inline public function getCompoundScheme(color:Int):Array<Int> {
-		return new Compound<Color>(new Color(color)).colors.toIntArray();
-	}
-
-	inline public function getFlippedCompoundScheme(color:Int):Array<Int> {
-		return new FlippedCompound<Color>(new Color(color)).colors.toIntArray();
-	}
-
-	inline public function getMonochromeScheme(color:Int):Array<Int> {
-		return new Monochrome<Color>(new Color(color)).colors.toIntArray();
-	}
-
-	inline public function getSplitComplementaryScheme(color:Int):Array<Int> {
-		return new SplitComplementary<Color>(new Color(color)).colors.toIntArray();
-	}
-
-	inline public function getTetradScheme(color:Int, ?angle:Float=90):Array<Int> {
-		return new Tetrad<Color>(new Color(color),angle).colors.toIntArray();
-	}
-
-	inline public function getTriadScheme(color:Int, ?angle:Float=120):Array<Int> {
-		return new Triad<Color>(new Color(color),angle).colors.toIntArray();
+	inline static public function toLab(color:Int):Lab
+	{
+		var lab:Lab = new Lab();
+		lab.setColor(color);
+		return lab;
 	}
 	
+	inline static public function toGray(color:Int):Gray
+	{
+		var g:Gray = new Gray();
+		g.setColor(color);
+		return g;
+	}
 	
+	inline static public function toRGB(color:Int):RGB
+	{
+		var rgb:RGB = new RGB();
+		rgb.setColor(color);
+		return rgb;
+	}
+	
+	inline static public function toHSB(color:Int):HSB
+	{
+		var hsb:HSB = new HSB();
+		hsb.setColor(color);
+		return hsb;
+	}
+	
+	inline static public function toHSL(color:Int):HSL
+	{
+		var h:HSL = new HSL();
+		h.setColor(color);
+		return h;
+	}
+	
+	inline static public function toCMYK(color:Int):CMYK
+	{
+		var cmyk:CMYK = new CMYK();
+		cmyk.setColor(color);
+		return cmyk;
+	}
+	
+	inline static public function toXYZ(color:Int):XYZ
+	{
+		var xyz:XYZ = new XYZ();
+		xyz.setColor(color);
+		return xyz;
+	}
+	
+	inline static public function toYUV(color:Int):YUV
+	{
+		var yuv:YUV = new YUV();
+		yuv.setColor(color);
+		return yuv;
+	}
+/*
+	inline static public function getAnalogousScheme(color:Int, ?angle:Float=10, ?contrast:Float=25):Array<Int> {
+		return new Analogous<Color>(new Color(color),angle,contrast).getColors().toIntArray();
+	}
+
+	inline static public function getComplementaryScheme(color:Int):Array<Int> {
+		return new Complementary<Color>(new Color(color)).getColors().toIntArray();
+	}
+
+	inline static public function getCompoundScheme(color:Int):Array<Int> {
+		return new Compound<Color>(new Color(color)).getColors().toIntArray();
+	}
+
+	inline static public function getFlippedCompoundScheme(color:Int):Array<Int> {
+		return new FlippedCompound<Color>(new Color(color)).getColors().toIntArray();
+	}
+
+	inline static public function getMonochromeScheme(color:Int):Array<Int> {
+		return new Monochrome<Color>(new Color(color)).getColors().toIntArray();
+	}
+
+	inline static public function getSplitComplementaryScheme(color:Int):Array<Int> {
+		return new SplitComplementary<Color>(new Color(color)).getColors().toIntArray();
+	}
+
+	inline static public function getTetradScheme(color:Int, ?angle:Float=90):Array<Int> {
+		return new Tetrad<Color>(new Color(color),angle).getColors().toIntArray();
+	}
+
+	inline static public function getTriadScheme(color:Int, ?angle:Float=120):Array<Int> {
+		return new Triad<Color>(new Color(color),angle).getColors().toIntArray();
+	}
+	
+	*/
 	public static function rybRotate(color:Int, angle:Float):Int 
 	{			
 		var hsb:HSB = new HSB();
-		hsb.color=color;
+		hsb.setColor(color);
 		
 		var a: Float = 0;
 		for (i in 0...rybWheel.length) {
@@ -169,6 +217,6 @@ class ColorUtil {
 		newHue = newHue % 360;
 		hsb.hue=newHue;
 		
-		return hsb.color;
+		return hsb.getColor();
 	}	
 }

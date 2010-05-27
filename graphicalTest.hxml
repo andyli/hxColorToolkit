@@ -1,0 +1,7 @@
+-main GraphicalTest
+-swf bin/GraphicalTest.swf
+-swf-version 10
+-swf-header 640:480:25:FFFFFF
+-lib arctic
+
+-cmd open bin/GraphicalTest.swf

@@ -25,83 +25,90 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+//http://en.wikipedia.org/wiki/YUV
+//http://www.fourcc.org/fccyvrgb.php
+
 package hxColorToolkit.spaces;
 
-	//http://en.wikipedia.org/wiki/YUV
-	//http://www.fourcc.org/fccyvrgb.php
-	
-	
-	
-	class YUV implements IColor {
-		
-		private var _color:Int;
-		public var color(getColor, setColor) : Int;
-		public var u(getU, setU) : Float;
-		public var v(getV, setV) : Float;
-		public var y(getY, setY) : Float;
-		var _y:Float;
-		var _u:Float;
-		var _v:Float;
-		
-		private function getColor():Int{ return this._color; }
-		private function setColor(value:Int):Int{
-			this._color=value;
-			var yuv:YUV = this.generateYUVFromColor(value);
-			this._y=yuv.y;
-			this._u=yuv.u;
-			this._v=yuv.v;
-			return value;
-		}
-		
-		private function getY():Float{ return this._y; }
-		private function setY(value:Float):Float{
-			this._y=value;
-			this._color=this.generateColorFromYUV(this._y, this._u, this._v);
-			return value;
-		}
-		
-		private function getU():Float{ return this._u; }
-		private function setU(value:Float):Float{
-			this._u=value;
-			this._color=this.generateColorFromYUV(this._y, this._u, this._v);
-			return value;
-		}
-		
-		private function getV():Float{ return this._v; }
-		private function setV(value:Float):Float{
-			this._v=value;
-			this._color=this.generateColorFromYUV(this._y, this._u, this._v);
-			return value;
-		}
-		
-		public function new(?y:Float=0, ?u:Float=0, ?v:Float=0)
-		{
-			
-			_y=y;
-			_u=u;
-			_v=v;
-			_color=generateColorFromYUV(y,u,v);
-		}
-		
-		public function clone():IColor { return new YUV(_y, _u, _v); }
-		
-		/* @private */
-		function generateColorFromYUV(y:Float, u:Float, v:Float):Int
-		{
-			var r = Math.max(0, Math.min(y+1.402*(v-128), 255));
-			var g = Math.max(0, Math.min(y-0.344*(u-128)-0.714*(v-128), 255));
-			var b = Math.max(0, Math.min(y+1.772*(u-128), 255));
-			
-			return Math.round(r) << 16 | Math.round(g) << 8 | Math.round(b);
-		}
-		
-		/* @private */
-		function generateYUVFromColor(color:Int):YUV
-		{
-			var r:Float = (color >> 16 & 0xFF);
-			var g:Float = (color >> 8 & 0xFF);
-			var b:Float = (color & 0xFF);
-			return new YUV(0.299*r + 0.587*g + 0.114*b, r*-0.169 + g*-0.331 + b*0.499 + 128, r*0.499 + g*-0.418 + b*-0.0813 + 128);
-		}
+class YUV implements IColor {
 
+	public var numOfChannels(default,null):Int;
+
+	public function getValue(channel:Int):Float {
+		return data[channel];
 	}
+	public function setValue(channel:Int,val:Float):Float {
+		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
+		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+		return data[channel];
+	}
+
+	inline public function minValue(channel:Int):Float {
+		return 0;
+	}
+	inline public function maxValue(channel:Int):Float {
+		return 255;
+	}
+	
+	public var u(getU, setU) : Float;
+	public var v(getV, setV) : Float;
+	public var y(getY, setY) : Float;
+
+	private function getY():Float{
+		return getValue(0);
+	}
+
+	private function setY(value:Float):Float{
+		return setValue(0,value);
+	}
+	
+	private function getU():Float{
+		return getValue(1);
+	}
+	
+	private function setU(value:Float):Float{
+		return setValue(1,value);
+	}
+	
+	private function getV():Float{
+		return getValue(2);
+	}
+	
+	private function setV(value:Float):Float{
+		return setValue(2,value);
+	}
+	
+	public function getColor():Int{
+		var r = Math.max(0, Math.min(y+1.402*(v-128), 255));
+		var g = Math.max(0, Math.min(y-0.344*(u-128)-0.714*(v-128), 255));
+		var b = Math.max(0, Math.min(y+1.772*(u-128), 255));
+		
+		return Math.round(r) << 16 | Math.round(g) << 8 | Math.round(b);
+	}
+	
+	public function setColor(color:Int):Int{
+		var r:Float = (color >> 16 & 0xFF);
+		var g:Float = (color >> 8 & 0xFF);
+		var b:Float = (color & 0xFF);
+		this.y = 0.299*r + 0.587*g + 0.114*b;
+		this.u = r*-0.169 + g*-0.331 + b*0.499 + 128;
+		this.v = r*0.499 + g*-0.418 + b*-0.0813 + 128;
+		
+		return getColor();
+	}
+	
+	
+	public function new(?y:Float=0, ?u:Float=0, ?v:Float=0)
+	{
+		numOfChannels = 3;
+		data = [];
+		this.y=y;
+		this.u=u;
+		this.v=v;
+	}
+	
+	public function clone():IColor { return new YUV(y, u, v); }
+
+	private var data:Array<Float>;
+
+}

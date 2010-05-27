@@ -29,12 +29,6 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.IColor;
 
-class ColorScheme<C:IColor> {
-	private var _colors:ColorList<C>;
-	public var colors(getColors, null) : ColorList<C>;
-	private function getColors():ColorList<C> { return _colors; }
-	
-	public function new():Void {
-		_colors = new ColorList<C>();
-	}
+interface IColorScheme<C:IColor> {
+	public function getColors():ColorList<C>;
 }

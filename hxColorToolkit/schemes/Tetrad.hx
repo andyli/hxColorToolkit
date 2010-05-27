@@ -27,8 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-import hxColorToolkit.Color;
-import hxColorToolkit.ColorUtil;
+import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.IColor;
 

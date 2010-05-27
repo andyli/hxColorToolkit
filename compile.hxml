@@ -1,6 +1,4 @@
--main GraphicalTest
--swf bin/GraphicalTest.swf
--swf-version 10
--swf-header 640:480:25:FFFFFF
+-main Test
+-neko bin/Test.n
 
--cmd open bin/GraphicalTest.swf
+-cmd neko bin/Test.n

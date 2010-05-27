@@ -29,29 +29,21 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.IColor;
 
-class ColorWheelScheme<C:IColor> extends ColorScheme<C> {
+class ColorWheelScheme<C:IColor> implements IColorScheme<C> {
+	public var primaryColor:C;
 	
-	public var primaryColor(getPrimaryColor, setPrimaryColor) : C;
-	var _primaryColor:C;
-	
-	private function getPrimaryColor():C{ return _primaryColor; }
-	private function setPrimaryColor(value:C):C{
-		_colors.empty();
-		_primaryColor=value;
-		_colors.addColor(_primaryColor);
-		generate();	
-		return value;
-		
-	}
-	
-	public function new(primaryColor:C)
-	{
-		super();
+	public function new(primaryColor:C) {
+		_colors = new ColorList<C>();
 		this.primaryColor=primaryColor;
 	}
-	
-	function generate():Void
-	{
+
+	public function getColors():ColorList<C> {
+		generate();
+		return _colors;
+	}
+
+	private var _colors:ColorList<C>;
+	private function generate():Void {
 		throw 'Method must be called by child class';
 	}
 	
