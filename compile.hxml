@@ -1,4 +1,1 @@
--main Test
--neko bin/Test.n
-
--cmd neko bin/Test.n
+graphicalTest.hxml
