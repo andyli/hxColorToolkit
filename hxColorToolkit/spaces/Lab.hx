@@ -40,7 +40,7 @@ public var numOfChannels(default,null):Int;
 	public function setValue(channel:Int,val:Float):Float {
 		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
-		return data[channel];
+		return val;
 	}
 
 	inline public function minValue(channel:Int):Float {

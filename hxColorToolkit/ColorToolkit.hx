@@ -29,7 +29,7 @@ import hxColorToolkit.spaces.YUV;
 class ColorToolkit {	
 	static private var rybWheel: Array<Array<Int>> = [[0, 0], [15, 8], [30, 17], [45, 26], [60, 34], [75, 41], [90, 48], [105, 54], [120, 60], [135, 81], [150, 103], [165, 123], [180, 138], [195, 155], [210, 171], [225, 187], [240, 204], [255, 219], [270, 234], [285, 251], [300, 267], [315, 282], [330, 298], [345, 329], [360, 0]];
 	
-	inline public static function setColorOpaque(color:Int):Int { return 0xff000000 | (color & 0xffffff); }
+	inline public static function setColorOpaque(color:Int, ?opaqueValue:Int = 0xff):Int { return (opaqueValue << 24) | (color & 0xffffff); }
 	
 	inline public static function desaturate(color:Int):Int { return toGray(color).getColor(); }
 

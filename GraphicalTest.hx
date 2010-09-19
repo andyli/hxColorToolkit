@@ -46,7 +46,7 @@ class GraphicalTest extends Sprite{
 
 	public function new():Void {
 		super();
-
+		
 		if (stage == null) {
 			addEventListener(Event.ADDED_TO_STAGE,init,false,0,true);
 		} else {

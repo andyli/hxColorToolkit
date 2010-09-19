@@ -25,6 +25,6 @@
 
 --next
 -main Test
--js /Library/WebServer/Documents/TestJS/Test.js
+-js D:\repo\jeash
 
 -cmd open http://localhost/TestJS
