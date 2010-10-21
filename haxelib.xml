@@ -1,0 +1,7 @@
+<project name="hxColorToolkit" url="http://github.com/andyli/hxColorToolkit" license="BSD">
+    <user name="andyli"/>
+    <tag v="cross"/>
+    <tag v="graphics"/>
+    <description>Color conversion and color scheme generation.</description>
+    <version name="1.0">First release.</version>
+</project>
