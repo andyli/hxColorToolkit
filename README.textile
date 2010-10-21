@@ -1,10 +1,10 @@
-h1.hxColorToolkit
+h1. hxColorToolkit
 
 A haXe library for color conversion and color scheme generation. 
 
 It is based on "colortoolkit":http://code.google.com/p/colortoolkit/ with lots of bug fixs and enhancements.
 
-h2.Usage
+h2. Usage
 
 Install it from haxelib: @haxelib install hxColorToolkit@
 
