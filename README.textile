@@ -1,3 +1,12 @@
-*hxColorToolkit* is a haXe library for color conversion and color scheme generation. 
+h1.hxColorToolkit
+
+A haXe library for color conversion and color scheme generation. 
 
 It is based on "colortoolkit":http://code.google.com/p/colortoolkit/ with lots of bug fixs and enhancements.
+
+h2.Usage
+
+Install it from haxelib: @haxelib install hxColorToolkit@
+
+Most of the time you need to use the @ColorToolkit@ class only, so look at there first.
+You can use it with @using hxColorToolkit.ColorToolkit;@, and then code something like @var rgb = 0x112233.toRGB();@.
