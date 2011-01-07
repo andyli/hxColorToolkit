@@ -54,7 +54,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 			_primaryHSB.setColor(primaryColor.getColor());
 		}
 		
-		var contrasting: HSB = untyped _primaryHSB.clone();
+		var contrasting: HSB = _primaryHSB.clone();
 		
 		if(_primaryHSB.brightness > 40) {
 			contrasting.brightness=10 + _primaryHSB.brightness * 0.25;
@@ -63,7 +63,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 		}
 		_colors.push(mutateFromPrimary(contrasting));
 		
-		var supporting: HSB = untyped _primaryHSB.clone();
+		var supporting: HSB = _primaryHSB.clone();
 		
 		supporting.brightness=30 + _primaryHSB.brightness;
 		supporting.saturation=10 + _primaryHSB.saturation * 0.3;
@@ -74,7 +74,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 		complement.setColor(ColorToolkit.rybRotate(_primaryColor.getColor(), 180));
 		_colors.push(mutateFromPrimary(complement));
 		
-		var contrastingComplement:HSB = untyped complement.clone();
+		var contrastingComplement:HSB = complement.clone();
 				
 		if(complement.brightness > 30) {
 			contrastingComplement.brightness=10 + complement.brightness * 0.25;
@@ -83,7 +83,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 		}
 		_colors.push(mutateFromPrimary(contrastingComplement));
 		
-		var supportingComplement:HSB = untyped complement.clone();
+		var supportingComplement:HSB = complement.clone();
 		
 		supportingComplement.brightness=30 + complement.brightness;
 		supportingComplement.saturation=10 + complement.saturation * 0.3;

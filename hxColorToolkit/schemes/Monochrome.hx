@@ -53,21 +53,21 @@ class Monochrome<C:Color<Dynamic>> extends ColorWheelScheme<C, Monochrome<C>> {
 			_primaryHSB.setColor(primaryColor.getColor());
 		}
 		
-		var c1:HSB = untyped _primaryHSB.clone();
+		var c1:HSB = _primaryHSB.clone();
 		c1.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
 		c1.saturation=wrap(_primaryHSB.saturation, 30, 10, 20);
 		_colors.push(mutateFromPrimary(c1));
 		
-		var c2:HSB = untyped _primaryHSB.clone();
+		var c2:HSB = _primaryHSB.clone();
 		c2.brightness=wrap(_primaryHSB.brightness, 20, 20, 60);
 		_colors.push(mutateFromPrimary(c2));
 
-		var c3:HSB = untyped _primaryHSB.clone();
+		var c3:HSB = _primaryHSB.clone();
 		c3.brightness=Math.max(20, _primaryHSB.brightness + (100 - _primaryHSB.brightness ) * 0.2);
 		c3.saturation=wrap(_primaryHSB.saturation, 30, 10, 30);
 		_colors.push(mutateFromPrimary(c3));
 
-		var c4:HSB = untyped _primaryHSB.clone();
+		var c4:HSB = _primaryHSB.clone();
 		c4.brightness=wrap(_primaryHSB.brightness, 50, 20, 30);
 		_colors.push(mutateFromPrimary(c4));
 
