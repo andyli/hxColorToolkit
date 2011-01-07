@@ -38,7 +38,6 @@ public var numOfChannels(default,null):Int;
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -54,7 +53,7 @@ public var numOfChannels(default,null):Int;
 	inline public var a(getA, setA) : Float;
 	inline public var b(getB, setB) : Float;
 	
-	public function getColor():Int{
+	public function toRGB():RGB {
 		var REF_X:Float = 95.047; // Observer= 2°, Illuminant= D65
 		var REF_Y:Float = 100.000; 
 		var REF_Z:Float = 108.883; 
@@ -72,12 +71,18 @@ public var numOfChannels(default,null):Int;
 		 
 		var xyz:XYZ = new XYZ(REF_X * x, REF_Y * y, REF_Z * z);
 		
-		return xyz.getColor();
+		var rgb = new RGB();
+		rgb.setColor(xyz.getColor());
+		return rgb;
 	}
 	
-	public function setColor(value:Int):Void{
+	public function getColor():Int{
+		return toRGB().getColor();
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
 		var xyz:XYZ = new XYZ();
-		xyz.setColor(value);
+		xyz.setColor(rgb.getColor());
 		
 		var REF_X:Float = 95.047; // Observer= 2°, Illuminant= D65
 		var REF_Y:Float = 100.000; 
@@ -96,6 +101,10 @@ public var numOfChannels(default,null):Int;
 		this.lightness = ( 116 * y ) - 16;
 		this.a = 500 * ( x - y );
 		this.b = 200 * ( y - z );
+	}
+	
+	public function setColor(value:Int):Void{
+		fromRGB(new RGB(value >> 16 & 0xFF, value >> 8 & 0xFF, value & 0xFF));
 	}
 	
 	private function getLightness():Float{

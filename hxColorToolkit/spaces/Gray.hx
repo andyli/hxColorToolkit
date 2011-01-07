@@ -35,7 +35,6 @@ class Gray implements Color<Gray> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -62,21 +61,26 @@ class Gray implements Color<Gray> {
 		return setValue(0,value);
 	}
 	
+	public function toRGB():RGB {
+		var g = Math.round(gray);
+		return new RGB(g, g, g);
+	}
+	
 	/**
 	 * Grayscale color value
 	 * @return Hexidecimal grayscale color
 	 * 
 	 */	
 	public function getColor():Int {
-		var g = Math.round(gray);
-		return ( g << 16 ^ g << 8 ^ g);
+		return toRGB().getColor();
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		this.gray = 0.3*rgb.red + 0.59*rgb.green + 0.11*rgb.blue;
 	}
 
 	public function setColor(color:Int):Void {
-		var r = color >> 16 & 0xFF;
-		var g = color >> 8 & 0xFF;
-		var b = color & 0xFF;
-		this.gray = 0.3*r + 0.59*g + 0.11*b;
+		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

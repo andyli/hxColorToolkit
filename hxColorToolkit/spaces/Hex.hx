@@ -13,7 +13,6 @@ class Hex implements Color<Hex> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -25,8 +24,17 @@ class Hex implements Color<Hex> {
 		return 0xFFFFFF;
 	}
 	
+	public function toRGB():RGB {
+		var color = getColor();
+		return new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
+	}
+	
 	public function getColor():Int {
 		return cast getValue(0);
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		setValue(0,rgb.getColor());
 	}
 
 	public function setColor(color:Int):Void {

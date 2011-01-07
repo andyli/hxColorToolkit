@@ -35,7 +35,6 @@ class HSB implements Color<HSB> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -90,12 +89,7 @@ class HSB implements Color<HSB> {
 		return setValue(2,value);
 	}
 	
-	/**
-	 * Hexidecimal RGB translation of HSB color
-	 * @return Hexidecimal color value
-	 * 
-	 */	
-	public function getColor():Int {
+	public function toRGB():RGB {
 		var hue = hue; 
 		var saturation = saturation;
 		var brightness = brightness;
@@ -103,7 +97,7 @@ class HSB implements Color<HSB> {
 		hue%=360;
 		if(brightness==0) 
 		{
-			return 0;
+			return new RGB();
 		}
 		saturation/=100;
 		brightness/=100;
@@ -120,7 +114,72 @@ class HSB implements Color<HSB> {
 		else if (i==4) {r=t; g=p; b=brightness;}
 		else if (i==5) {r=brightness; g=p; b=q;}
 
-		return (Math.round(r*255) << 16 ^ Math.round(g*255) << 8 ^ Math.round(b*255));
+		return new RGB(r * 255, g * 255, b * 255);
+	}
+	
+	/**
+	 * Hexidecimal RGB translation of HSB color
+	 * @return Hexidecimal color value
+	 * 
+	 */	
+	public function getColor():Int {
+		return toRGB().getColor();
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		var r:Float = rgb.red;
+		var g:Float = rgb.green;
+		var b:Float = rgb.blue;
+		
+		r/=255;
+		g/=255;
+		b/=255;
+		
+		var h:Float, s:Float, v:Float;
+		var min:Float, max:Float, delta:Float;
+
+		min = Math.min( r, Math.min(g, b) );
+		max = Math.max( r, Math.max(g, b) );
+		
+		v = max*100;
+
+		delta = max - min;
+
+		if( max != 0 )
+		{
+			s = (delta / max)*100;
+		} else {
+			s = 0;
+			h = -1;
+			
+			this.hue = h;
+			this.saturation = s;
+			this.brightness = v;
+			return;
+		}
+
+		if (delta == 0) {
+			this.hue = 0;
+			this.saturation = s;
+			this.brightness = v;
+			return;
+		}
+
+		if( r == max )
+		{
+			h = ( g - b ) / delta;
+		} else if( g == max ) {
+			h = 2 + ( b - r ) / delta;
+		} else {
+			h = 4 + ( r - g ) / delta;
+		}
+
+		h *= 60;
+		if( h < 0 ) h += 360;
+		
+		this.hue = h;
+		this.saturation = s;
+		this.brightness = v;
 	}
 	
 	/**
@@ -129,10 +188,7 @@ class HSB implements Color<HSB> {
 	 * 
 	 */		
 	public function setColor(color:Int):Void{
-		var tmp = generateColorFromHex(color);
-		this.hue = tmp.hue;
-		this.saturation = tmp.saturation;
-		this.brightness = tmp.brightness;
+		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**
@@ -151,55 +207,4 @@ class HSB implements Color<HSB> {
 	public function clone() { return new HSB(hue, saturation, brightness); }
 
 	private var data:Array<Float>;
-
-
-	private function generateColorFromHex(color:Int):HSB
-		{
-			var r:Float = color >> 16 & 0xFF;
-			var g:Float = color >> 8 & 0xFF;
-			var b:Float = color & 0xFF; 
-			
-			r/=255;
-			g/=255;
-			b/=255;
-			
-			var h:Float, s:Float, v:Float;
-    		var min:Float, max:Float, delta:Float;
-
-			min = Math.min( r, Math.min(g, b) );
-			max = Math.max( r, Math.max(g, b) );
-			
-			v = max*100;
-
-			delta = max - min;
-
-			if( max != 0 )
-			{
-				s = (delta / max)*100;
-			} else {
-				s = 0;
-				h = -1;
-				
-				return new HSB(h, s, v);
-			}
-
-			if(delta == 0) {
-				return new HSB(0, s, v);
-			}
-
-			if( r == max )
-			{
-				h = ( g - b ) / delta;
-			} else if( g == max ) {
-				h = 2 + ( b - r ) / delta;
-			} else {
-				h = 4 + ( r - g ) / delta;
-			}
-
-			h *= 60;
-			if( h < 0 ) h += 360;
-			
-			
-			return new HSB(h, s, v);
-		}
 }

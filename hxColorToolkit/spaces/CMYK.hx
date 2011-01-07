@@ -35,7 +35,6 @@ class CMYK implements Color<CMYK> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -124,7 +123,6 @@ class CMYK implements Color<CMYK> {
 		var r = rgb.red;
 		var g = rgb.green;
 		var b = rgb.blue;
-		
 		
 		var c:Float = 1 - ( r / 255 );
 		var m:Float = 1 - ( g / 255 );

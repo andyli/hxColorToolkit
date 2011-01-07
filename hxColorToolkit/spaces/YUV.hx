@@ -38,7 +38,6 @@ class YUV implements Color<YUV> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -78,21 +77,29 @@ class YUV implements Color<YUV> {
 		return setValue(2,value);
 	}
 	
-	public function getColor():Int{
-		var r = Math.max(0, Math.min(y+1.402*(v-128), 255));
-		var g = Math.max(0, Math.min(y-0.344*(u-128)-0.714*(v-128), 255));
-		var b = Math.max(0, Math.min(y+1.772*(u-128), 255));
-		
-		return Math.round(r) << 16 | Math.round(g) << 8 | Math.round(b);
+	public function toRGB():RGB {
+		return new RGB(
+			Math.max(0, Math.min(y + 1.402 * (v - 128), 255)),
+			Math.max(0, Math.min(y - 0.344 * (u - 128) - 0.714 * (v - 128), 255)),
+			Math.max(0, Math.min(y + 1.772 * (u - 128), 255))
+		);
 	}
 	
-	public function setColor(color:Int):Void{
-		var r:Float = (color >> 16 & 0xFF);
-		var g:Float = (color >> 8 & 0xFF);
-		var b:Float = (color & 0xFF);
+	public function getColor():Int{
+		return toRGB().getColor();
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		var r = rgb.red;
+		var g = rgb.green;
+		var b = rgb.blue;
 		this.y = 0.299*r + 0.587*g + 0.114*b;
 		this.u = r*-0.169 + g*-0.331 + b*0.499 + 128;
 		this.v = r*0.499 + g*-0.418 + b*-0.0813 + 128;
+	}
+	
+	public function setColor(color:Int):Void{
+		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	

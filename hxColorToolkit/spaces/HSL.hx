@@ -35,7 +35,6 @@ class HSL implements Color<HSL> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -90,12 +89,7 @@ class HSL implements Color<HSL> {
 		return setValue(2,value);
 	}
 	
-	/**
-	 * Hexidecimal RGB translation of HSB color
-	 * @return Hexidecimal color value
-	 * 
-	 */	
-	public function getColor():Int{
+	public function toRGB():RGB {
 		var hue = hue/360; 
 		var saturation = saturation/100;
 		var lightness = lightness/100;
@@ -112,18 +106,22 @@ class HSL implements Color<HSL> {
 	        b = hue2rgb(p, q, hue - 1/3);
 	    }
 		
-		return (Math.round(r*255) << 16 ^ Math.round(g*255) << 8 ^ Math.round(b*255));
+		return new RGB(r * 255, g * 255, b * 255);
 	}
 	
 	/**
 	 * Hexidecimal RGB translation of HSB color
-	 * @param value Hexidecimal color value
+	 * @return Hexidecimal color value
 	 * 
-	 */		
-	public function setColor(color:Int):Void{
-		var r:Float = color >> 16 & 0xFF;
-		var g:Float = color >> 8 & 0xFF;
-		var b:Float = color & 0xFF; 	
+	 */	
+	public function getColor():Int{
+		return toRGB().getColor();
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		var r = rgb.red;
+		var g = rgb.green;
+		var b = rgb.blue;
 		
 		r /= 255;
 		g /= 255;
@@ -150,6 +148,15 @@ class HSL implements Color<HSL> {
 		this.hue = Math.round(h*360);
 		this.saturation = Math.round(s*100);
 		this.lightness = Math.round(l*100);
+	}
+	
+	/**
+	 * Hexidecimal RGB translation of HSB color
+	 * @param value Hexidecimal color value
+	 * 
+	 */		
+	public function setColor(color:Int):Void{
+		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

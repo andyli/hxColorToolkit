@@ -35,7 +35,6 @@ class RGB implements Color<RGB> {
 		return data[channel];
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		if (channel < 0 || channel >= numOfChannels) return Math.NaN;
 		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -89,6 +88,9 @@ class RGB implements Color<RGB> {
 		return setValue(2,value);
 	}
 	
+	public function toRGB():RGB {
+		return clone();
+	}
 	
 	/**
 	 * Hexidecimal RGB translation of color
@@ -97,6 +99,12 @@ class RGB implements Color<RGB> {
 	 */
 	public function getColor():Int{
 		return (Math.round(red) << 16) | (Math.round(green) << 8) | Math.round(blue);
+	}
+	
+	public function fromRGB(rgb:RGB):Void {
+		this.red = rgb.red;
+		this.green = rgb.green;
+		this.blue = rgb.blue;
 	}
 	
 	/**
