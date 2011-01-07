@@ -29,11 +29,11 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 
-class Complementary<C:IColor> extends ColorWheelScheme<C> {
+class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<C>> {
 
-	override public function clone():IColorScheme<C> {
+	override public function clone() {
 		return new Complementary<C>(primaryColor);
 	}
 	

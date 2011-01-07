@@ -11,7 +11,7 @@ import feffects.Tween;
 import feffects.easing.Bounce;
 
 import hxColorToolkit.ColorToolkit;
-import hxColorToolkit.schemes.IColorScheme;
+import hxColorToolkit.schemes.ColorScheme;
 import hxColorToolkit.schemes.ColorWheelScheme;
 import hxColorToolkit.schemes.Analogous;
 import hxColorToolkit.schemes.Complementary;
@@ -21,7 +21,7 @@ import hxColorToolkit.schemes.Monochrome;
 import hxColorToolkit.schemes.SplitComplementary;
 import hxColorToolkit.schemes.Tetrad;
 import hxColorToolkit.schemes.Triad;
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 import hxColorToolkit.spaces.CMYK;
 import hxColorToolkit.spaces.Gray;
 import hxColorToolkit.spaces.Hex;

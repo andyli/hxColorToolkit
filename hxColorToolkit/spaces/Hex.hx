@@ -5,7 +5,7 @@ Based on colortoolkit (http://code.google.com/p/colortoolkit/)
  
 package hxColorToolkit.spaces;
 
-class Hex implements IColor {
+class Hex implements Color<Hex> {
 	
 	public var numOfChannels(default,null):Int;
 
@@ -39,7 +39,7 @@ class Hex implements IColor {
 		this.setColor(color);
 	}
 	
-	public function clone():IColor { return new Hex(getColor()); }
+	public function clone() { return new Hex(getColor()); }
 
 	private var data:Array<Float>;
 }

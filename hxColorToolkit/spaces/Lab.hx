@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class Lab implements IColor {
+class Lab implements Color<Lab> {
 
 public var numOfChannels(default,null):Int;
 
@@ -133,7 +133,7 @@ public var numOfChannels(default,null):Int;
 		this.b=b;
 	}
 	
-	public function clone():IColor { return new Lab(lightness, a, b); }
+	public function clone() { return new Lab(lightness, a, b); }
 
 	private var data:Array<Float>;
 

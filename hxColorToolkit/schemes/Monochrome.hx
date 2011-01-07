@@ -28,11 +28,11 @@ THE SOFTWARE.
 package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.HSB;
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 
-class Monochrome<C:IColor> extends ColorWheelScheme<C> {
+class Monochrome<C:Color<Dynamic>> extends ColorWheelScheme<C, Monochrome<C>> {
 
-	override public function clone():IColorScheme<C> {
+	override public function clone() {
 		return new Monochrome<C>(primaryColor);
 	}
 	

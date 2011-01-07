@@ -27,11 +27,11 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 
-class ColorWheelScheme<C:IColor> implements IColorScheme<C> {
-	public function clone():IColorScheme<C> {
-		return new ColorWheelScheme<C>(primaryColor);
+class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements ColorScheme<C, This> {
+	public function clone():This {
+		return throw "need to be overrided";
 	}
 
 	public var numOfColors(default,null):Int;
@@ -73,11 +73,11 @@ class ColorWheelScheme<C:IColor> implements IColorScheme<C> {
 		return ( x - min < threshold) ? x + plus : x - min;
 	}
 
-	private function mutateFromPrimary(newColor:IColor):C {
+	private function mutateFromPrimary(newColor:Color<Dynamic>):C {
 		if (Std.is(newColor,_class)) {
-			return untyped newColor.clone();
+			return newColor.clone();
 		} else {
-			var r:C = untyped primaryColor.clone();
+			var r:C = primaryColor.clone();
 			r.setColor(newColor.getColor());
 			return r;
 		}

@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class YUV implements IColor {
+class YUV implements Color<YUV> {
 
 	public var numOfChannels(default,null):Int;
 
@@ -107,7 +107,7 @@ class YUV implements IColor {
 		this.v=v;
 	}
 	
-	public function clone():IColor { return new YUV(y, u, v); }
+	public function clone() { return new YUV(y, u, v); }
 
 	private var data:Array<Float>;
 

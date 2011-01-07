@@ -27,7 +27,7 @@ THE SOFTWARE.
  
 package hxColorToolkit.spaces;
 
-class CMYK implements IColor {
+class CMYK implements Color<CMYK> {
 
 	public var numOfChannels(default,null):Int;
 
@@ -173,7 +173,7 @@ class CMYK implements IColor {
 		this.black = black;
 	}
 	
-	public function clone():IColor { return new CMYK(cyan, magenta, yellow, black); }
+	public function clone() { return new CMYK(cyan, magenta, yellow, black); }
 
 	private var data:Array<Float>;
 }

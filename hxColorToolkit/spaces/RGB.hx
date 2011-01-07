@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class RGB implements IColor {
+class RGB implements Color<RGB> {
 
 	public var numOfChannels(default,null):Int;
 
@@ -127,7 +127,7 @@ class RGB implements IColor {
 		this.blue = b;
 	}
 	
-	public function clone():IColor { return new RGB(red, green, blue); }
+	public function clone() { return new RGB(red, green, blue); }
 
 	private var data:Array<Float>;
 }

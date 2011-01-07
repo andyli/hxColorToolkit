@@ -1,4 +1,4 @@
- /*
+/*
 Author: Andy Li (andy@onthewings.net)
 Based on colortoolkit (http://code.google.com/p/colortoolkit/)
  
@@ -27,53 +27,14 @@ THE SOFTWARE.
 
 package hxColorToolkit.schemes;
 
-import hxColorToolkit.ColorToolkit;
-import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Triad<C:Color<Dynamic>> extends ColorWheelScheme<C, Triad<C>> {
+interface ColorScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> {
+	#if !php
+	public function clone():This;
+	#end
 
-	override public function clone() {
-		return new Triad<C>(primaryColor,angle);
-	}
-	
-	public var angle(getAngle, setAngle) : Float;
-	var _angle:Float;
-	
-	public function getAngle():Float{
-		return _angle;
-	}
-	public function setAngle(value:Float):Float{
-		_angle=value;
-		generate();	
-		return angle;
-	}
-	
-	public function new(primaryColor:C, ?angle:Float=120)
-	{
-		super(primaryColor);
-		_angle=angle;
-		generate();
-	}
-	
-	override function generate():Void
-	{
-		_colors = [primaryColor];
-		var _primary = _primaryColor.getColor();
-		
-		var c1:HSB = new HSB();
-		c1.setColor(ColorToolkit.rybRotate(_primary, _angle));
-
-		c1.brightness+=10;
-		_colors.push(mutateFromPrimary(c1));	
-
-		var c2:HSB = new HSB();
-		c2.setColor(ColorToolkit.rybRotate(_primary, -_angle));
-		
-		c2.brightness+=10;
-		_colors.push(mutateFromPrimary(c2));	
-
-		numOfColors = _colors.length;
-	}
-
+	public var numOfColors(default,null):Int;
+	public function getColor(index:Int):C;
+	public function iterator():Iterator<C>;
 }

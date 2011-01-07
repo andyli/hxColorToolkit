@@ -27,7 +27,7 @@ THE SOFTWARE.
  
 package hxColorToolkit.spaces;
 
-class Gray implements IColor {
+class Gray implements Color<Gray> {
 	
 	public var numOfChannels(default,null):Int;
 
@@ -91,7 +91,7 @@ class Gray implements IColor {
 		this.gray=gray;
 	}
 	
-	public function clone():IColor { return new Gray(gray); }
+	public function clone() { return new Gray(gray); }
 
 	private var data:Array<Float>;
 }

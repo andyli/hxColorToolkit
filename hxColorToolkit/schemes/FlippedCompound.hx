@@ -29,11 +29,11 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 
-class FlippedCompound<C:IColor> extends ColorWheelScheme<C> {
+class FlippedCompound<C:Color<Dynamic>> extends ColorWheelScheme<C, FlippedCompound<C>> {
 
-	override public function clone():IColorScheme<C> {
+	override public function clone() {
 		return new FlippedCompound<C>(primaryColor);
 	}
 	

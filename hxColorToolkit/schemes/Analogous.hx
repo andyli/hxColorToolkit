@@ -30,9 +30,9 @@ package hxColorToolkit.schemes;
 import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 
-class Analogous<C:hxColorToolkit.spaces.IColor> extends ColorWheelScheme<C> {
+class Analogous<C:hxColorToolkit.spaces.Color<Dynamic>> extends ColorWheelScheme<C,Analogous<C>> {
 
-	override public function clone():IColorScheme<C> {
+	override public function clone() {
 		return new Analogous<C>(primaryColor, angle, contrast);
 	}
 

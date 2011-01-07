@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class HSL implements IColor {
+class HSL implements Color<HSL> {
 
 	public var numOfChannels(default,null):Int;
 
@@ -169,7 +169,7 @@ class HSL implements IColor {
 		this.lightness = lightness;
 	}
 	
-	public function clone():IColor { return new HSL(hue, saturation, lightness); }
+	public function clone() { return new HSL(hue, saturation, lightness); }
 
 	private var data:Array<Float>;
 

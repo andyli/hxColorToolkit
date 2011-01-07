@@ -29,11 +29,11 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
-import hxColorToolkit.spaces.IColor;
+import hxColorToolkit.spaces.Color;
 
-class Tetrad<C:IColor> extends ColorWheelScheme<C> {
+class Tetrad<C:Color<Dynamic>> extends ColorWheelScheme<C, Tetrad<C>> {
 
-	override public function clone():IColorScheme<C> {
+	override public function clone() {
 		return new Tetrad<C>(primaryColor,angle,alt);
 	}
 	
