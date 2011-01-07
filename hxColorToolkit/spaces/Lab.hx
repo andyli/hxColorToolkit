@@ -59,8 +59,8 @@ public var numOfChannels(default,null):Int;
 		var REF_Z:Float = 108.883; 
 		
 		var y:Float = (lightness + 16) / 116;
-		var x:Float = a / 500 + y;
-		var z:Float = y - b / 200;
+		var x:Float = a * 0.002 + y;
+		var z:Float = y - b * 0.005;
 		 
 		if ( Math.pow( y , 3 ) > 0.008856 ) { y = Math.pow( y , 3 ); }
 		else { y = ( y - 16 / 116 ) / 7.787; }
@@ -71,9 +71,7 @@ public var numOfChannels(default,null):Int;
 		 
 		var xyz:XYZ = new XYZ(REF_X * x, REF_Y * y, REF_Z * z);
 		
-		var rgb = new RGB();
-		rgb.setColor(xyz.getColor());
-		return rgb;
+		return xyz.toRGB();
 	}
 	
 	public function getColor():Int{
@@ -82,7 +80,7 @@ public var numOfChannels(default,null):Int;
 	
 	public function fromRGB(rgb:RGB):Void {
 		var xyz:XYZ = new XYZ();
-		xyz.setColor(rgb.getColor());
+		xyz.fromRGB(rgb);
 		
 		var REF_X:Float = 95.047; // Observer= 2°, Illuminant= D65
 		var REF_Y:Float = 100.000; 

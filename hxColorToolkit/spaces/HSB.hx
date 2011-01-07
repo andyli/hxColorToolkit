@@ -99,8 +99,8 @@ class HSB implements Color<HSB> {
 		{
 			return new RGB();
 		}
-		saturation/=100;
-		brightness/=100;
+		saturation*=0.01;
+		brightness*=0.01;
 		hue/=60;
 		i = Math.floor(hue);
 		f = hue-i;

@@ -120,6 +120,11 @@ class ColorToolkit {
 		yuv.setColor(color);
 		return yuv;
 	}
+	
+	inline static public function toHex(color:Int):Hex
+	{
+		return new Hex(color);
+	}
 
 	inline static public function getAnalogousScheme(color:Int, ?angle:Float=10, ?contrast:Float=25):Analogous<Hex> {
 		return new Analogous<Hex>(new Hex(color),angle,contrast);
@@ -203,5 +208,61 @@ class ColorToolkit {
 			a.push(c.getColor());
 		}
 		return a;
+	}
+}
+
+class ColorSpaceToolkit {
+	inline static public function toLab(color:Color<Dynamic>):Lab
+	{
+		var lab:Lab = new Lab();
+		lab.fromRGB(color.toRGB());
+		return lab;
+	}
+	
+	inline static public function toGray(color:Color<Dynamic>):Gray
+	{
+		var g:Gray = new Gray();
+		g.fromRGB(color.toRGB());
+		return g;
+	}
+	
+	inline static public function toHSB(color:Color<Dynamic>):HSB
+	{
+		var hsb:HSB = new HSB();
+		hsb.fromRGB(color.toRGB());
+		return hsb;
+	}
+	
+	inline static public function toHSL(color:Color<Dynamic>):HSL
+	{
+		var h:HSL = new HSL();
+		h.fromRGB(color.toRGB());
+		return h;
+	}
+	
+	inline static public function toCMYK(color:Color<Dynamic>):CMYK
+	{
+		var cmyk:CMYK = new CMYK();
+		cmyk.fromRGB(color.toRGB());
+		return cmyk;
+	}
+	
+	inline static public function toXYZ(color:Color<Dynamic>):XYZ
+	{
+		var xyz:XYZ = new XYZ();
+		xyz.fromRGB(color.toRGB());
+		return xyz;
+	}
+	
+	inline static public function toYUV(color:Color<Dynamic>):YUV
+	{
+		var yuv:YUV = new YUV();
+		yuv.fromRGB(color.toRGB());
+		return yuv;
+	}
+	
+	inline static public function toHex(color:Color<Dynamic>):Hex
+	{
+		return new Hex(color.getColor());
 	}
 }

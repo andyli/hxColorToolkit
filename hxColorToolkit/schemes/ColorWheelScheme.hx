@@ -56,7 +56,7 @@ class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements C
 		return primaryColor;
 	}
 	
-	public function new(primaryColor:C) {
+	private function new(primaryColor:C) {
 		_colors = [];
 		_primaryColor = primaryColor;
 		numOfColors = 1;
@@ -78,7 +78,7 @@ class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements C
 			return newColor.clone();
 		} else {
 			var r:C = primaryColor.clone();
-			r.setColor(newColor.getColor());
+			r.fromRGB(newColor.toRGB());
 			return r;
 		}
 	}

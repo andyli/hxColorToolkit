@@ -91,8 +91,8 @@ class HSL implements Color<HSL> {
 	
 	public function toRGB():RGB {
 		var hue = hue/360; 
-		var saturation = saturation/100;
-		var lightness = lightness/100;
+		var saturation = saturation*0.01;
+		var lightness = lightness*0.01;
 		
 		var r:Float, g:Float, b:Float;
 
