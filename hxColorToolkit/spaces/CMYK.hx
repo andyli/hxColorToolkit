@@ -104,30 +104,26 @@ class CMYK implements Color<CMYK> {
 		return setValue(3,value);
 	}
 	
+	public function toRGB():RGB {
+		var cyan = Math.min(100, cyan + black);
+		var magenta = Math.min(100, magenta + black);
+		var yellow = Math.min(100, yellow + black);
+		
+		return new RGB((100 - cyan) * 2.55, (100 - magenta) * 2.55, (100 - yellow) * 2.55);
+	}
+	
 	/**
 	 * Hexidecimal RGB translation of CMYK color
 	 * @return Hexidecimal color value
 	 */		
 	public function getColor():Int {
-		var cyan = Math.min(100, cyan + black);
-		var magenta = Math.min(100, magenta + black);
-		var yellow = Math.min(100, yellow + black);
-		
-		var r:Int = Math.round((100-cyan)*(255/100));
-		var g:Int = Math.round((100-magenta)*(255/100));
-		var b:Int = Math.round((100-yellow)*(255/100));
-		
-		return (r << 16 ^ g << 8 ^ b);
+		return toRGB().getColor();
 	}
 	
-	/**
-	 * Hexidecimal RGB translation of CMYK color
-	 * @param value Hexidecimal color value
-	 */		
-	public function setColor(color:Int):Int{
-		var r:Int = color >> 16 & 0xFF;
-		var g:Int = color >> 8 & 0xFF;
-		var b:Int = color & 0xFF; 
+	public function fromRGB(rgb:RGB):Void {
+		var r = rgb.red;
+		var g = rgb.green;
+		var b = rgb.blue;
 		
 		
 		var c:Float = 1 - ( r / 255 );
@@ -153,6 +149,14 @@ class CMYK implements Color<CMYK> {
 		this.magenta = m;
 		this.yellow = y;
 		this.black = k;
+	}
+	
+	/**
+	 * Hexidecimal RGB translation of CMYK color
+	 * @param value Hexidecimal color value
+	 */		
+	public function setColor(color:Int):Int{
+		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 		
 		return getColor();
 	}
