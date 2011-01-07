@@ -104,11 +104,10 @@ class RGB implements Color<RGB> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */	
-	public function setColor(color:Int):Int{
+	public function setColor(color:Int):Void{
 		this.red = color >> 16 & 0xFF;
 		this.green = color >> 8 & 0xFF;
 		this.blue = color & 0xFF;
-		return getColor();
 	}
 	
 	/**

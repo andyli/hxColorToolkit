@@ -75,7 +75,7 @@ public var numOfChannels(default,null):Int;
 		return xyz.getColor();
 	}
 	
-	public function setColor(value:Int):Int{
+	public function setColor(value:Int):Void{
 		var xyz:XYZ = new XYZ();
 		xyz.setColor(value);
 		
@@ -96,8 +96,6 @@ public var numOfChannels(default,null):Int;
 		this.lightness = ( 116 * y ) - 16;
 		this.a = 500 * ( x - y );
 		this.b = 200 * ( y - z );
-		
-		return getColor();
 	}
 	
 	private function getLightness():Float{

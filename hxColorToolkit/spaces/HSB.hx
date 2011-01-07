@@ -128,12 +128,11 @@ class HSB implements Color<HSB> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */		
-	public function setColor(color:Int):Int{
+	public function setColor(color:Int):Void{
 		var tmp = generateColorFromHex(color);
 		this.hue = tmp.hue;
 		this.saturation = tmp.saturation;
 		this.brightness = tmp.brightness;
-		return getColor();
 	}
 	
 	/**

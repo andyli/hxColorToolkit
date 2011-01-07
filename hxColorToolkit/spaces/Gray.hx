@@ -72,12 +72,11 @@ class Gray implements Color<Gray> {
 		return ( g << 16 ^ g << 8 ^ g);
 	}
 
-	public function setColor(color:Int):Int {
+	public function setColor(color:Int):Void {
 		var r = color >> 16 & 0xFF;
 		var g = color >> 8 & 0xFF;
 		var b = color & 0xFF;
 		this.gray = 0.3*r + 0.59*g + 0.11*b;
-		return getColor();
 	}
 	
 	/**

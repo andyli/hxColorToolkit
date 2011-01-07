@@ -86,15 +86,13 @@ class YUV implements Color<YUV> {
 		return Math.round(r) << 16 | Math.round(g) << 8 | Math.round(b);
 	}
 	
-	public function setColor(color:Int):Int{
+	public function setColor(color:Int):Void{
 		var r:Float = (color >> 16 & 0xFF);
 		var g:Float = (color >> 8 & 0xFF);
 		var b:Float = (color & 0xFF);
 		this.y = 0.299*r + 0.587*g + 0.114*b;
 		this.u = r*-0.169 + g*-0.331 + b*0.499 + 128;
 		this.v = r*0.499 + g*-0.418 + b*-0.0813 + 128;
-		
-		return getColor();
 	}
 	
 	

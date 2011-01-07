@@ -29,8 +29,8 @@ class Hex implements Color<Hex> {
 		return cast getValue(0);
 	}
 
-	public function setColor(color:Int):Int {
-		return cast setValue(0,color);
+	public function setColor(color:Int):Void {
+		setValue(0,color);
 	}
 	
 	public function new(?color:Int = 0):Void {

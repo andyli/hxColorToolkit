@@ -120,7 +120,7 @@ class HSL implements Color<HSL> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */		
-	public function setColor(color:Int):Int{
+	public function setColor(color:Int):Void{
 		var r:Float = color >> 16 & 0xFF;
 		var g:Float = color >> 8 & 0xFF;
 		var b:Float = color & 0xFF; 	
@@ -150,7 +150,6 @@ class HSL implements Color<HSL> {
 		this.hue = Math.round(h*360);
 		this.saturation = Math.round(s*100);
 		this.lightness = Math.round(l*100);
-		return getColor();
 	}
 	
 	/**

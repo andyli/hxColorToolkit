@@ -155,10 +155,8 @@ class CMYK implements Color<CMYK> {
 	 * Hexidecimal RGB translation of CMYK color
 	 * @param value Hexidecimal color value
 	 */		
-	public function setColor(color:Int):Int{
+	public function setColor(color:Int):Void{
 		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
-		
-		return getColor();
 	}
 	
 	/**
