@@ -9,10 +9,10 @@ class Hex implements Color<Hex> {
 	
 	public var numOfChannels(default,null):Int;
 
-	public function getValue(channel:Int):Float {
+	inline public function getValue(channel:Int):Float {
 		return data;
 	}
-	public function setValue(channel:Int,val:Float):Float {
+	inline public function setValue(channel:Int,val:Float):Float {
 		data = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
@@ -24,12 +24,12 @@ class Hex implements Color<Hex> {
 		return 0xFFFFFF;
 	}
 	
-	public function toRGB():RGB {
+	inline public function toRGB():RGB {
 		var color = getColor();
 		return new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
 	}
 	
-	public function getColor():Int {
+	inline public function getColor():Int {
 		return cast getValue(0);
 	}
 	
@@ -38,7 +38,7 @@ class Hex implements Color<Hex> {
 		return this;
 	}
 
-	public function setColor(color:Int):Hex {
+	inline public function setColor(color:Int):Hex {
 		setValue(0, color);
 		return this;
 	}

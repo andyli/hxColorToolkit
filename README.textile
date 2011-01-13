@@ -10,3 +10,32 @@ Install it from haxelib: @haxelib install hxColorToolkit@
 
 Most of the time you need to use the @ColorToolkit@ class only, so look at there first.
 You can use it with @using hxColorToolkit.ColorToolkit;@, and then code something like @var rgb = 0x112233.toRGB();@.
+
+h2. Color spaces
+
+They can be found inside the package @hxColorToolkit.spaces@. All of them implement the interface @hxColorToolkit.spaces.Color@.
+
+* @CMYK@
+* @Gray@ a single channel gray-scale color.
+* @Hex@ a simple wrapper of color value in hex(eg. 0xFFCCCC).
+* @HSB@
+* @HSL@
+* @Lab@
+* @RGB@
+* @XYZ@
+* @YUV@
+
+h3. Color schemes
+
+Color scheme is basically a set of colors.
+
+The classes can be found inside the package @hxColorToolkit.schemes@. All of them implement the interface @hxColorToolkit.schemes.ColorScheme@.
+
+* @Analogous@
+* @Complementary@
+* @Compound@
+* @FlippedCompound@
+* @Monochrome@
+* @SplitComplementary@
+* @Tetrad@
+* @Triad@

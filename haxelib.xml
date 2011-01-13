@@ -3,5 +3,5 @@
     <tag v="cross"/>
     <tag v="graphics"/>
     <description>Color conversion and color scheme generation.</description>
-    <version name="1.0">First release.</version>
+    <version name="1.5">API and performance improvement.</version>
 </project>

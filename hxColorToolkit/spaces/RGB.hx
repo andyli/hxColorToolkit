@@ -88,7 +88,7 @@ class RGB implements Color<RGB> {
 		return setValue(2,value);
 	}
 	
-	public function toRGB():RGB {
+	inline public function toRGB():RGB {
 		return clone();
 	}
 	
@@ -97,7 +97,7 @@ class RGB implements Color<RGB> {
 	 * @return Hexidecimal color value
 	 * 
 	 */
-	public function getColor():Int{
+	inline public function getColor():Int{
 		return (Math.round(red) << 16) | (Math.round(green) << 8) | Math.round(blue);
 	}
 	
