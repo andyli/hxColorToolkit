@@ -17,7 +17,7 @@ They can be found inside the package @hxColorToolkit.spaces@. All of them implem
 
 * @CMYK@
 * @Gray@ a single channel gray-scale color.
-* @Hex@ a simple wrapper of color value in hex(eg. 0xFFCCCC).
+* @Hex@ a simple wrapper of color value in hex(eg. @0xFFCCCC@).
 * @HSB@
 * @HSL@
 * @Lab@
@@ -25,7 +25,7 @@ They can be found inside the package @hxColorToolkit.spaces@. All of them implem
 * @XYZ@
 * @YUV@
 
-h3. Color schemes
+h2. Color schemes
 
 Color scheme is basically a set of colors.
 
