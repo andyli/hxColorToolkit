@@ -77,9 +77,7 @@ class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements C
 		if (Std.is(newColor,_class)) {
 			return newColor.clone();
 		} else {
-			var r:C = primaryColor.clone();
-			r.fromRGB(newColor.toRGB());
-			return r;
+			return primaryColor.clone().fromRGB(newColor.toRGB());
 		}
 	}
 

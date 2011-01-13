@@ -10,10 +10,10 @@ class Hex implements Color<Hex> {
 	public var numOfChannels(default,null):Int;
 
 	public function getValue(channel:Int):Float {
-		return data[channel];
+		return data;
 	}
 	public function setValue(channel:Int,val:Float):Float {
-		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+		data = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
 		return val;
 	}
 
@@ -33,21 +33,22 @@ class Hex implements Color<Hex> {
 		return cast getValue(0);
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
-		setValue(0,rgb.getColor());
+	public function fromRGB(rgb:RGB):Hex {
+		setValue(0, rgb.getColor());
+		return this;
 	}
 
-	public function setColor(color:Int):Void {
-		setValue(0,color);
+	public function setColor(color:Int):Hex {
+		setValue(0, color);
+		return this;
 	}
 	
 	public function new(?color:Int = 0):Void {
 		numOfChannels = 1;
-		data = [];
-		this.setColor(color);
+		setColor(color);
 	}
 	
 	public function clone() { return new Hex(getColor()); }
 
-	private var data:Array<Float>;
+	private var data:Float;
 }

@@ -37,8 +37,7 @@ class ColorToolkit {
 	
 	public static function shiftBrighteness(color:Int, degree:Float):Int 
 	{
-		var col:HSB = new HSB();
-		col.setColor(color);
+		var col:HSB = new HSB().setColor(color);
 		
 		col.brightness+=degree;
 		
@@ -47,8 +46,7 @@ class ColorToolkit {
 	
 	public static function shiftSaturation(color:Int, degree:Float):Int
 	{
-		var col:HSB = new HSB();
-		col.setColor(color);
+		var col:HSB = new HSB().setColor(color);
 		
 		col.saturation+=degree;
 		
@@ -57,8 +55,7 @@ class ColorToolkit {
 	
 	public static function shiftHue(color:Int, degree:Float):Int
 	{
-		var col:HSB = new HSB();
-		col.setColor(color);
+		var col:HSB = new HSB().setColor(color);
 		
 		col.hue+=degree;
 		
@@ -67,58 +64,42 @@ class ColorToolkit {
 	
 	inline static public function toLab(color:Int):Lab
 	{
-		var lab:Lab = new Lab();
-		lab.setColor(color);
-		return lab;
+		return new Lab().setColor(color);
 	}
 	
 	inline static public function toGray(color:Int):Gray
 	{
-		var g:Gray = new Gray();
-		g.setColor(color);
-		return g;
+		return new Gray().setColor(color);
 	}
 	
 	inline static public function toRGB(color:Int):RGB
 	{
-		var rgb:RGB = new RGB();
-		rgb.setColor(color);
-		return rgb;
+		return new RGB().setColor(color);
 	}
 	
 	inline static public function toHSB(color:Int):HSB
 	{
-		var hsb:HSB = new HSB();
-		hsb.setColor(color);
-		return hsb;
+		return new HSB().setColor(color);
 	}
 	
 	inline static public function toHSL(color:Int):HSL
 	{
-		var h:HSL = new HSL();
-		h.setColor(color);
-		return h;
+		return new HSL().setColor(color);
 	}
 	
 	inline static public function toCMYK(color:Int):CMYK
 	{
-		var cmyk:CMYK = new CMYK();
-		cmyk.setColor(color);
-		return cmyk;
+		return new CMYK().setColor(color);
 	}
 	
 	inline static public function toXYZ(color:Int):XYZ
 	{
-		var xyz:XYZ = new XYZ();
-		xyz.setColor(color);
-		return xyz;
+		return new XYZ().setColor(color);
 	}
 	
 	inline static public function toYUV(color:Int):YUV
 	{
-		var yuv:YUV = new YUV();
-		yuv.setColor(color);
-		return yuv;
+		return new YUV().setColor(color);
 	}
 	
 	inline static public function toHex(color:Int):Hex
@@ -161,8 +142,7 @@ class ColorToolkit {
 	
 	public static function rybRotate(color:Int, angle:Float):Int 
 	{			
-		var hsb:HSB = new HSB();
-		hsb.setColor(color);
+		var hsb:HSB = new HSB().setColor(color);
 		
 		var a: Float = 0;
 		for (i in 0...rybWheel.length) {
@@ -214,51 +194,37 @@ class ColorToolkit {
 class ColorSpaceToolkit {
 	inline static public function toLab(color:Color<Dynamic>):Lab
 	{
-		var lab:Lab = new Lab();
-		lab.fromRGB(color.toRGB());
-		return lab;
+		return new Lab().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toGray(color:Color<Dynamic>):Gray
 	{
-		var g:Gray = new Gray();
-		g.fromRGB(color.toRGB());
-		return g;
+		return new Gray().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toHSB(color:Color<Dynamic>):HSB
 	{
-		var hsb:HSB = new HSB();
-		hsb.fromRGB(color.toRGB());
-		return hsb;
+		return new HSB().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toHSL(color:Color<Dynamic>):HSL
 	{
-		var h:HSL = new HSL();
-		h.fromRGB(color.toRGB());
-		return h;
+		return new HSL().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toCMYK(color:Color<Dynamic>):CMYK
 	{
-		var cmyk:CMYK = new CMYK();
-		cmyk.fromRGB(color.toRGB());
-		return cmyk;
+		return new CMYK().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toXYZ(color:Color<Dynamic>):XYZ
 	{
-		var xyz:XYZ = new XYZ();
-		xyz.fromRGB(color.toRGB());
-		return xyz;
+		return new XYZ().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toYUV(color:Color<Dynamic>):YUV
 	{
-		var yuv:YUV = new YUV();
-		yuv.fromRGB(color.toRGB());
-		return yuv;
+		return new YUV().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toHex(color:Color<Dynamic>):Hex

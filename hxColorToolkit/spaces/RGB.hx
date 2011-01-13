@@ -101,10 +101,11 @@ class RGB implements Color<RGB> {
 		return (Math.round(red) << 16) | (Math.round(green) << 8) | Math.round(blue);
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):RGB {
 		this.red = rgb.red;
 		this.green = rgb.green;
 		this.blue = rgb.blue;
+		return this;
 	}
 	
 	/**
@@ -112,10 +113,11 @@ class RGB implements Color<RGB> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */	
-	public function setColor(color:Int):Void{
+	public function setColor(color:Int):RGB{
 		this.red = color >> 16 & 0xFF;
 		this.green = color >> 8 & 0xFF;
 		this.blue = color & 0xFF;
+		return this;
 	}
 	
 	/**

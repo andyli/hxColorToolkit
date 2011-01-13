@@ -78,7 +78,7 @@ public var numOfChannels(default,null):Int;
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):Lab {
 		var xyz:XYZ = new XYZ();
 		xyz.fromRGB(rgb);
 		
@@ -99,10 +99,12 @@ public var numOfChannels(default,null):Int;
 		this.lightness = ( 116 * y ) - 16;
 		this.a = 500 * ( x - y );
 		this.b = 200 * ( y - z );
+		
+		return this;
 	}
 	
-	public function setColor(value:Int):Void{
-		fromRGB(new RGB(value >> 16 & 0xFF, value >> 8 & 0xFF, value & 0xFF));
+	public function setColor(value:Int):Lab{
+		return fromRGB(new RGB(value >> 16 & 0xFF, value >> 8 & 0xFF, value & 0xFF));
 	}
 	
 	private function getLightness():Float{

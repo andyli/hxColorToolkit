@@ -118,7 +118,7 @@ class HSL implements Color<HSL> {
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):HSL {
 		var r = rgb.red;
 		var g = rgb.green;
 		var b = rgb.blue;
@@ -148,6 +148,7 @@ class HSL implements Color<HSL> {
 		this.hue = Math.round(h*360);
 		this.saturation = Math.round(s*100);
 		this.lightness = Math.round(l*100);
+		return this;
 	}
 	
 	/**
@@ -155,8 +156,8 @@ class HSL implements Color<HSL> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */		
-	public function setColor(color:Int):Void{
-		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
+	public function setColor(color:Int):HSL{
+		return fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

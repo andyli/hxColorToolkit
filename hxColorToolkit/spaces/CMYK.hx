@@ -119,7 +119,7 @@ class CMYK implements Color<CMYK> {
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):CMYK {
 		var r = rgb.red;
 		var g = rgb.green;
 		var b = rgb.blue;
@@ -147,14 +147,15 @@ class CMYK implements Color<CMYK> {
 		this.magenta = m;
 		this.yellow = y;
 		this.black = k;
+		return this;
 	}
 	
 	/**
 	 * Hexidecimal RGB translation of CMYK color
 	 * @param value Hexidecimal color value
 	 */		
-	public function setColor(color:Int):Void{
-		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
+	public function setColor(color:Int):CMYK{
+		return fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

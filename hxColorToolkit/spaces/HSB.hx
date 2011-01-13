@@ -126,7 +126,7 @@ class HSB implements Color<HSB> {
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):HSB {
 		var r:Float = rgb.red;
 		var g:Float = rgb.green;
 		var b:Float = rgb.blue;
@@ -155,14 +155,14 @@ class HSB implements Color<HSB> {
 			this.hue = h;
 			this.saturation = s;
 			this.brightness = v;
-			return;
+			return this;
 		}
 
 		if (delta == 0) {
 			this.hue = 0;
 			this.saturation = s;
 			this.brightness = v;
-			return;
+			return this;
 		}
 
 		if( r == max )
@@ -180,6 +180,8 @@ class HSB implements Color<HSB> {
 		this.hue = h;
 		this.saturation = s;
 		this.brightness = v;
+		
+		return this;
 	}
 	
 	/**
@@ -187,8 +189,8 @@ class HSB implements Color<HSB> {
 	 * @param value Hexidecimal color value
 	 * 
 	 */		
-	public function setColor(color:Int):Void{
-		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
+	public function setColor(color:Int):HSB{
+		return fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

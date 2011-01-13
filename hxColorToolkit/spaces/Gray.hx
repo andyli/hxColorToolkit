@@ -75,12 +75,13 @@ class Gray implements Color<Gray> {
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
-		this.gray = 0.3*rgb.red + 0.59*rgb.green + 0.11*rgb.blue;
+	public function fromRGB(rgb:RGB):Gray {
+		this.gray = 0.3 * rgb.red + 0.59 * rgb.green + 0.11 * rgb.blue;
+		return this;
 	}
 
-	public function setColor(color:Int):Void {
-		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
+	public function setColor(color:Int):Gray {
+		return fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	/**

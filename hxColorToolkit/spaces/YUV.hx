@@ -89,17 +89,18 @@ class YUV implements Color<YUV> {
 		return toRGB().getColor();
 	}
 	
-	public function fromRGB(rgb:RGB):Void {
+	public function fromRGB(rgb:RGB):YUV {
 		var r = rgb.red;
 		var g = rgb.green;
 		var b = rgb.blue;
 		this.y = 0.299*r + 0.587*g + 0.114*b;
 		this.u = r*-0.169 + g*-0.331 + b*0.499 + 128;
 		this.v = r*0.499 + g*-0.418 + b*-0.0813 + 128;
+		return this;
 	}
 	
-	public function setColor(color:Int):Void{
-		fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
+	public function setColor(color:Int):YUV{
+		return fromRGB(new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF));
 	}
 	
 	
