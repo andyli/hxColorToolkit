@@ -74,8 +74,7 @@ class Analogous<C:hxColorToolkit.spaces.Color<Dynamic>> extends ColorWheelScheme
 		if (Std.is(primaryColor,HSB)){
 			_primaryHSB = untyped primaryColor;
 		} else {
-			_primaryHSB = new HSB();
-			_primaryHSB.setColor(primaryColor.getColor());
+			_primaryHSB = new HSB().fromRGB(primaryColor.toRGB());
 		}
 		var newHSB:HSB = new HSB();
 		var array: Array<Array<Float>> = [[1.0, 2.2], [2.0, 1.0], [-1.0, -0.5], [-2.0, 1.0]];

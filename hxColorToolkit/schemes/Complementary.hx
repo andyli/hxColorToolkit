@@ -50,8 +50,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 		if (Std.is(primaryColor,HSB)){
 			_primaryHSB = untyped primaryColor;
 		} else {
-			_primaryHSB = new HSB();
-			_primaryHSB.setColor(primaryColor.getColor());
+			_primaryHSB = new HSB().fromRGB(primaryColor.toRGB());
 		}
 		
 		var contrasting: HSB = _primaryHSB.clone();
@@ -70,8 +69,7 @@ class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<
 		_colors.push(mutateFromPrimary(supporting));
 		
 		//complement
-		var complement:HSB = new HSB();
-		complement.setColor(ColorToolkit.rybRotate(_primaryColor.getColor(), 180));
+		var complement:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primaryColor.getColor(), 180));
 		_colors.push(mutateFromPrimary(complement));
 		
 		var contrastingComplement:HSB = complement.clone();

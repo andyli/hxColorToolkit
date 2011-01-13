@@ -74,13 +74,11 @@ class Tetrad<C:Color<Dynamic>> extends ColorWheelScheme<C, Tetrad<C>> {
 		if (Std.is(primaryColor,HSB)){
 			_primaryHSB = untyped primaryColor;
 		} else {
-			_primaryHSB = new HSB();
-			_primaryHSB.setColor(primaryColor.getColor());
+			_primaryHSB = new HSB().fromRGB(primaryColor.toRGB());
 		}
 		var _primary = _primaryColor.getColor();
 		
-		var c1:HSB = new HSB();
-		c1.setColor(ColorToolkit.rybRotate(_primary, _angle));
+		var c1:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, _angle));
 		var multiplier;
 		if(!alt)
 		{
@@ -96,8 +94,7 @@ class Tetrad<C:Color<Dynamic>> extends ColorWheelScheme<C, Tetrad<C>> {
 						   
 		_colors.push(mutateFromPrimary(c1));
 		
-		var c2:HSB = new HSB();
-		c2.setColor(ColorToolkit.rybRotate(_primary, _angle * 2));
+		var c2:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, _angle * 2));
 		if(!alt)
 		{
 			if(_primaryHSB.brightness > 50) {
@@ -112,8 +109,7 @@ class Tetrad<C:Color<Dynamic>> extends ColorWheelScheme<C, Tetrad<C>> {
 		
 		_colors.push(mutateFromPrimary(c2));
 		
-		var c3:HSB = new HSB();
-		c3.setColor(ColorToolkit.rybRotate(_primary, _angle * 3));
+		var c3:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, _angle * 3));
 		c3.brightness+=10;
 		_colors.push(mutateFromPrimary(c3));
 

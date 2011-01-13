@@ -61,14 +61,12 @@ class Triad<C:Color<Dynamic>> extends ColorWheelScheme<C, Triad<C>> {
 		_colors = [primaryColor];
 		var _primary = _primaryColor.getColor();
 		
-		var c1:HSB = new HSB();
-		c1.setColor(ColorToolkit.rybRotate(_primary, _angle));
+		var c1:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, _angle));
 
 		c1.brightness+=10;
 		_colors.push(mutateFromPrimary(c1));	
 
-		var c2:HSB = new HSB();
-		c2.setColor(ColorToolkit.rybRotate(_primary, -_angle));
+		var c2:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, -_angle));
 		
 		c2.brightness+=10;
 		_colors.push(mutateFromPrimary(c2));	

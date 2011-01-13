@@ -49,8 +49,7 @@ class Monochrome<C:Color<Dynamic>> extends ColorWheelScheme<C, Monochrome<C>> {
 		if (Std.is(primaryColor,HSB)){
 			_primaryHSB = untyped primaryColor;
 		} else {
-			_primaryHSB = new HSB();
-			_primaryHSB.setColor(primaryColor.getColor());
+			_primaryHSB = new HSB().fromRGB(primaryColor.toRGB());
 		}
 		
 		var c1:HSB = _primaryHSB.clone();

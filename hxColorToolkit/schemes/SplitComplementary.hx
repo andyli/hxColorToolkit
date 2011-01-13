@@ -47,11 +47,8 @@ class SplitComplementary<C:Color<Dynamic>> extends ColorWheelScheme<C, SplitComp
 	{
 		_colors = [primaryColor];
 		var _primary = _primaryColor.getColor();
-		var c1:HSB = new HSB();
-		var c2:HSB = new HSB();
-		
-		c1.setColor(ColorToolkit.rybRotate(_primary, 150));
-		c2.setColor(ColorToolkit.rybRotate(_primary, 210));
+		var c1:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 150));
+		var c2:HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 210));
 		
 		c1.brightness+=10;
 		c2.brightness+=10;

@@ -50,37 +50,31 @@ class FlippedCompound<C:Color<Dynamic>> extends ColorWheelScheme<C, FlippedCompo
 		if (Std.is(primaryColor,HSB)){
 			_primaryHSB = untyped primaryColor;
 		} else {
-			_primaryHSB = new HSB();
-			_primaryHSB.setColor(primaryColor.getColor());
+			_primaryHSB = new HSB().fromRGB(primaryColor.toRGB());
 		}
 		var _primary = _primaryColor.getColor();
 		var d: Int = 1;
 		
-		var c1: HSB = new HSB();
-		c1.setColor(ColorToolkit.rybRotate(_primary, 30 * -1));
+		var c1: HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 30 * -1));
 		c1.brightness=wrap(_primaryHSB.brightness, 25, 60, 25);
 		_colors.push(mutateFromPrimary(c1));
 
-		var c2: HSB = new HSB();
-		c2.setColor(ColorToolkit.rybRotate(_primary, 30 * -1));
+		var c2: HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 30 * -1));
 		c2.brightness=wrap(_primaryHSB.brightness, 40, 10, 40);
 		c2.saturation=wrap(_primaryHSB.saturation, 40, 20, 40);
 		_colors.push(mutateFromPrimary(c2));
 		
-		var c3: HSB = new HSB();
-		c3.setColor(ColorToolkit.rybRotate(_primary, 160 * -1));
+		var c3: HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 160 * -1));
 		c3.brightness=Math.max(20, _primaryHSB.brightness);
 		c3.saturation=wrap(_primaryHSB.saturation, 25, 10, 25);
 		_colors.push(mutateFromPrimary(c3));
 	
-		var c4: HSB = new HSB();
-		c4.setColor(ColorToolkit.rybRotate(_primary, 150 * -1));
+		var c4: HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 150 * -1));
 		c4.brightness=wrap(_primaryHSB.brightness, 30, 60, 30);
 		c4.saturation=wrap(_primaryHSB.saturation, 10, 80, 10);
 		_colors.push(mutateFromPrimary(c4));
 
-		var c5: HSB = new HSB();
-		c5.setColor(ColorToolkit.rybRotate(_primary, 150 * -1));
+		var c5: HSB = new HSB().setColor(ColorToolkit.rybRotate(_primary, 150 * -1));
 		c5.brightness=wrap(_primaryHSB.brightness, 40, 20, 40);
 		c5.saturation=wrap(_primaryHSB.saturation, 10, 80, 10);
 		_colors.push(mutateFromPrimary(c5));
