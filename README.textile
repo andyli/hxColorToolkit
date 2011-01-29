@@ -25,6 +25,8 @@ They can be found inside the package @hxColorToolkit.spaces@. All of them implem
 * @XYZ@
 * @YUV@
 
+All channel values are clamped to their possible min/max, except hue values of @HSB@ and @HSL@ are looped inside 0-360 (@color.hue = -10; trace(color.hue); //350@).
+
 h2. Color schemes
 
 Color scheme is basically a set of colors.

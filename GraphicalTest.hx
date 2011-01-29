@@ -40,7 +40,7 @@ class GraphicalTest extends Sprite{
 	public var primaryColorBlock:MutableBlock;
 	public var fxLayer:Sprite;
 	public var color:Int;
-	public var scheme:ColorWheelScheme<Hex>;
+	public var scheme:ColorWheelScheme<Hex, Dynamic>;
 	public var colors:Array<Int>;
 	public var palette:Sprite;
 

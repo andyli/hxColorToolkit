@@ -34,8 +34,14 @@ class HSL implements Color<HSL> {
 	public function getValue(channel:Int):Float {
 		return data[channel];
 	}
-	public function setValue(channel:Int,val:Float):Float {
-		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+	public function setValue(channel:Int, val:Float):Float {
+		data[channel] = 
+			if (channel == 0) {
+				loop(val, 360);
+			} else {
+				Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+			}
+		
 		return val;
 	}
 
@@ -69,24 +75,27 @@ class HSL implements Color<HSL> {
 		return getValue(0);
 	}
 
-	private function setHue(value:Float):Float{
-		return setValue(0,value);
+	private function setHue(val:Float):Float{
+		data[0] = loop(val, 360);
+		return val;
 	}
 	
 	private function getSaturation():Float{
 		return getValue(1);
 	}
 	
-	private function setSaturation(value:Float):Float{
-		return setValue(1,value);
+	private function setSaturation(val:Float):Float{
+		data[1] = Math.min(100, Math.max(val, 0));
+		return val;
 	}
 	
 	private function getLightness():Float{
 		return getValue(2);
 	}
 	
-	private function setLightness(value:Float):Float{
-		return setValue(2,value);
+	private function setLightness(val:Float):Float{
+		data[2] = Math.min(100, Math.max(val, 0));
+		return val;
 	}
 	
 	public function toRGB():RGB {
@@ -189,4 +198,14 @@ class HSL implements Color<HSL> {
        
         return p;
     }
+	
+	static function loop(index:Float, length:Float):Float {
+		if (index < 0)
+			index = length + index % length;
+		
+		if (index >= length)
+			index %= length;
+		
+		return index;
+	}
 }
