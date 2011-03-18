@@ -1,5 +1,8 @@
 package hxColorToolkit;
 
+/*
+ * http://www.w3schools.com/css/css_colornames.asp
+ */
 class CssName 
 {
 	inline static public var AliceBlue = 0xF0F8FF;
