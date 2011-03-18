@@ -7,6 +7,7 @@ import hxColorToolkit.spaces.Lab;
 import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
+import hxColorToolkit.CssName;
 
 class Test extends haxe.unit.TestCase{
 	public function testCMYK():Void {
