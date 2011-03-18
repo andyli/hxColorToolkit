@@ -159,11 +159,11 @@ class ColorToolkit {
 		}
 		
 		a = (a + (angle % 360));
-		if(a < 0)  a = 360 + a;
+		if (a < 0)  a = 360 + a;
 		if (a > 360)  a = a - 360;
 		a = a % 360;
 		
-		var newHue: Float = 0;
+		var newHue:Float = 0;
 		for (k in 0...rybWheel.length) {
 			var xx0: Int = rybWheel[k][0];
 			var yy0: Int = rybWheel[k][1];
@@ -172,12 +172,11 @@ class ColorToolkit {
 			var yy1: Int = rybWheel[k + 1][1];
 			if (yy1 < yy0) yy1 += 360;
 			if (xx0 <= a && a <= xx1) {
-				newHue = 1.0 * yy0 + (yy1 - yy0) * (a - xx0) / (xx1 - xx0);
+				newHue = yy0 + (yy1 - yy0) * (a - xx0) / (xx1 - xx0);
 				break;
 			}
 		}
-		newHue = newHue % 360;
-		hsb.hue=newHue;
+		hsb.hue = newHue;
 		
 		return hsb.getColor();
 	}

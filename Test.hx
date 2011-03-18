@@ -111,6 +111,22 @@ class Test extends haxe.unit.TestCase{
 
 		this.assertEquals(0xFF112233,ColorToolkit.setColorOpaque(0x112233));
 	}
+	
+	public function testInterpolate():Void {
+		var c0 = new RGB(0, 0, 0);
+		var c1 = new RGB(10, 20, 30);
+		var ci = c0.interpolate(c1, 0.5);
+		
+		this.assertEquals(5.0, ci.red);
+		this.assertEquals(10.0, ci.green);
+		this.assertEquals(15.0, ci.blue);
+		
+		ci = c1.interpolate(c0, 0.5);
+		
+		this.assertEquals(5.0, ci.red);
+		this.assertEquals(10.0, ci.green);
+		this.assertEquals(15.0, ci.blue);
+	}
 
 	static function main():Void {
 		var runner = new haxe.unit.TestRunner();

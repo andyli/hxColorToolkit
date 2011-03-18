@@ -175,6 +175,16 @@ class CMYK implements Color<CMYK> {
 	}
 	
 	public function clone() { return new CMYK(cyan, magenta, yellow, black); }
+	
+	public function interpolate(target:CMYK, ratio:Float = 0.5):CMYK {
+		return new CMYK
+			(
+				cyan + (target.cyan - cyan) * ratio, 
+				magenta + (target.magenta - magenta) * ratio, 
+				yellow + (target.yellow - yellow) * ratio, 
+				black + (target.black - black) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 }

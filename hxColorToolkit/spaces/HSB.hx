@@ -216,6 +216,15 @@ class HSB implements Color<HSB> {
 	}
 
 	public function clone() { return new HSB(hue, saturation, brightness); }
+	
+	public function interpolate(target:HSB, ratio:Float = 0.5):HSB {
+		return new HSB
+			(
+				hue + (target.hue - hue) * ratio, 
+				saturation + (target.saturation - saturation) * ratio, 
+				brightness + (target.brightness - brightness) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 	

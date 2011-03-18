@@ -137,6 +137,15 @@ class RGB implements Color<RGB> {
 	}
 	
 	public function clone() { return new RGB(red, green, blue); }
+	
+	public function interpolate(target:RGB, ratio:Float = 0.5):RGB {
+		return new RGB
+			(
+				red + (target.red - red) * ratio, 
+				green + (target.green - green) * ratio, 
+				blue + (target.blue - blue) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 }

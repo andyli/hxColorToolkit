@@ -96,6 +96,13 @@ class Gray implements Color<Gray> {
 	}
 	
 	public function clone() { return new Gray(gray); }
+	
+	public function interpolate(target:Gray, ratio:Float = 0.5):Gray {
+		return new Gray
+			(
+				gray + (target.gray - gray) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 }

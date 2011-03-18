@@ -186,6 +186,15 @@ class HSL implements Color<HSL> {
 	}
 	
 	public function clone() { return new HSL(hue, saturation, lightness); }
+	
+	public function interpolate(target:HSL, ratio:Float = 0.5):HSL {
+		return new HSL
+			(
+				hue + (target.hue - hue) * ratio, 
+				saturation + (target.saturation - saturation) * ratio, 
+				lightness + (target.lightness - lightness) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 

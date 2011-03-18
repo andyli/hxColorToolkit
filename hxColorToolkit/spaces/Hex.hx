@@ -13,7 +13,7 @@ class Hex implements Color<Hex> {
 		return data;
 	}
 	inline public function setValue(channel:Int,val:Float):Float {
-		data = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
+		data = Math.round(Math.min(maxValue(channel), Math.max(val, minValue(channel))));
 		return val;
 	}
 
@@ -25,30 +25,33 @@ class Hex implements Color<Hex> {
 	}
 	
 	inline public function toRGB():RGB {
-		var color = getColor();
-		return new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
+		return new RGB(data >> 16 & 0xFF, data >> 8 & 0xFF, data & 0xFF);
 	}
 	
 	inline public function getColor():Int {
-		return cast getValue(0);
+		return data;
 	}
 	
 	public function fromRGB(rgb:RGB):Hex {
-		setValue(0, rgb.getColor());
+		data = rgb.getColor();
 		return this;
 	}
 
 	inline public function setColor(color:Int):Hex {
-		setValue(0, color);
+		data = color;
 		return this;
 	}
 	
 	public function new(?color:Int = 0):Void {
 		numOfChannels = 1;
-		setColor(color);
+		data = color;
 	}
 	
-	public function clone() { return new Hex(getColor()); }
+	public function clone() { return new Hex(data); }
+	
+	public function interpolate(target:Hex, ratio:Float = 0.5):Hex {
+		return new Hex(toRGB().interpolate(target.toRGB(), ratio).getColor());
+	}
 
-	private var data:Float;
+	private var data:Int;
 }

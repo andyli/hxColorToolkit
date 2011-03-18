@@ -114,6 +114,15 @@ class YUV implements Color<YUV> {
 	}
 	
 	public function clone() { return new YUV(y, u, v); }
+	
+	public function interpolate(target:YUV, ratio:Float = 0.5):YUV {
+		return new YUV
+			(
+				y + (target.y - y) * ratio, 
+				u + (target.u - u) * ratio, 
+				v + (target.v - v) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 

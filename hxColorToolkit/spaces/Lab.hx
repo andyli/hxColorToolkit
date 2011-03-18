@@ -141,6 +141,15 @@ public var numOfChannels(default,null):Int;
 	}
 	
 	public function clone() { return new Lab(lightness, a, b); }
+	
+	public function interpolate(target:Lab, ratio:Float = 0.5):Lab {
+		return new Lab
+			(
+				lightness + (target.lightness - lightness) * ratio, 
+				a + (target.a - a) * ratio, 
+				b + (target.b - b) * ratio
+			);
+	}
 
 	private var data:Array<Float>;
 
