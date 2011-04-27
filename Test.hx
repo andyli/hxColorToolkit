@@ -7,7 +7,7 @@ import hxColorToolkit.spaces.Lab;
 import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
-import hxColorToolkit.CssName;
+import hxColorToolkit.CssColor;
 
 using hxColorToolkit.ColorToolkit;
 
@@ -142,7 +142,7 @@ class Test extends haxe.unit.TestCase{
 		this.assertEquals(new RGB().toHex().getTriadScheme().intArray().join(","), 0x000000.getTriadScheme().intArray().join(","));
 	}
 
-	static function main():Void {	
+	static function main():Void {
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new Test());
 		runner.run();
