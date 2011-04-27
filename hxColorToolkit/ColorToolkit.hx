@@ -26,12 +26,15 @@ import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
 
+import haxe.macro.Expr;
+import haxe.macro.Context;
+
 class ColorToolkit {	
 	static private var rybWheel: Array<Array<Int>> = [[0, 0], [15, 8], [30, 17], [45, 26], [60, 34], [75, 41], [90, 48], [105, 54], [120, 60], [135, 81], [150, 103], [165, 123], [180, 138], [195, 155], [210, 171], [225, 187], [240, 204], [255, 219], [270, 234], [285, 251], [300, 267], [315, 282], [330, 298], [345, 329], [360, 0]];
 	
 	inline public static function setColorOpaque(color:Int, ?opaqueValue:Int = 0xff):Int { return (opaqueValue << 24) | (color & 0xffffff); }
 	
-	inline public static function desaturate(color:Int):Int { return toGray(color).getColor(); }
+	inline public static function desaturate(color:Int):Int { return new Gray().setColor(color).getColor(); }
 
 	inline public static function getComplement(color:Int):Int { return rybRotate(color, 180); }
 	
@@ -229,5 +232,77 @@ class ColorSpaceToolkit {
 	inline static public function toHex(color:Color<Dynamic>):Hex
 	{
 		return new Hex(color.getColor());
+	}
+	
+	@:macro static public function getAnalogousScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>, ?contrast:ExprRequire<Float>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Analogous", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,contrast]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getComplementaryScheme(color:ExprRequire<Color<Dynamic>>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Complementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getCompoundScheme(color:ExprRequire<Color<Dynamic>>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Compound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getFlippedCompoundScheme(color:ExprRequire<Color<Dynamic>>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"FlippedCompound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getMonochromeScheme(color:ExprRequire<Color<Dynamic>>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Monochrome", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getSplitComplementaryScheme(color:ExprRequire<Color<Dynamic>>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"SplitComplementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getTetradScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>, ?alt:ExprRequire<Bool>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Tetrad", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,alt]), pos:Context.currentPos() };
+	}
+	
+	@:macro static public function getTriadScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>) {
+		var colorType = switch (Context.typeof(color)){
+			case TInst(t,p): t.get();
+			default:
+		}
+		
+		return { expr:ENew({ sub:null, name:"Triad", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle]), pos:Context.currentPos() };
 	}
 }

@@ -9,6 +9,8 @@ import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
 import hxColorToolkit.CssName;
 
+using hxColorToolkit.ColorToolkit;
+
 class Test extends haxe.unit.TestCase{
 	public function testCMYK():Void {
 		var cmyk = ColorToolkit.toCMYK(0xFFCC33);
@@ -129,7 +131,18 @@ class Test extends haxe.unit.TestCase{
 		this.assertEquals(15.0, ci.blue);
 	}
 
-	static function main():Void {
+	public function testSchemeShortCut():Void {	
+		this.assertEquals(new RGB().toHex().getAnalogousScheme().intArray().join(","), 0x000000.getAnalogousScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getComplementaryScheme().intArray().join(","), 0x000000.getComplementaryScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getCompoundScheme().intArray().join(","), 0x000000.getCompoundScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getFlippedCompoundScheme().intArray().join(","), 0x000000.getFlippedCompoundScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getMonochromeScheme().intArray().join(","), 0x000000.getMonochromeScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getSplitComplementaryScheme().intArray().join(","), 0x000000.getSplitComplementaryScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getTetradScheme().intArray().join(","), 0x000000.getTetradScheme().intArray().join(","));
+		this.assertEquals(new RGB().toHex().getTriadScheme().intArray().join(","), 0x000000.getTriadScheme().intArray().join(","));
+	}
+
+	static function main():Void {	
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new Test());
 		runner.run();
