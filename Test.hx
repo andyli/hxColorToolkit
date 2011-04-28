@@ -7,6 +7,7 @@ import hxColorToolkit.spaces.Lab;
 import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
+import hxColorToolkit.spaces.Hex;
 import hxColorToolkit.CssColor;
 
 using hxColorToolkit.ColorToolkit;
@@ -140,6 +141,37 @@ class Test extends haxe.unit.TestCase{
 		this.assertEquals(new RGB().toHex().getSplitComplementaryScheme().intArray().join(","), 0x000000.getSplitComplementaryScheme().intArray().join(","));
 		this.assertEquals(new RGB().toHex().getTetradScheme().intArray().join(","), 0x000000.getTetradScheme().intArray().join(","));
 		this.assertEquals(new RGB().toHex().getTriadScheme().intArray().join(","), 0x000000.getTriadScheme().intArray().join(","));
+	}
+
+	public function testHex():Void {
+		var hex = new Hex(0x112233);
+		this.assertEquals(0x112233, hex.getColor());
+		this.assertEquals(0x11, hex.red);
+		this.assertEquals(0x22, hex.green);
+		this.assertEquals(0x33, hex.blue);
+
+		hex.red = 1000;
+		this.assertEquals(0xFF, hex.red);
+		this.assertEquals(0xFF2233, hex.getColor());
+		hex.red = -1000;
+		this.assertEquals(0x00, hex.red);
+		this.assertEquals(0x002233, hex.getColor());
+		hex.red = 0x11;
+
+		hex.green = 1000;
+		this.assertEquals(0xFF, hex.green);
+		this.assertEquals(0x11FF33, hex.getColor());
+		hex.green = -1000;
+		this.assertEquals(0x00, hex.green);
+		this.assertEquals(0x110033, hex.getColor());
+		hex.green = 0x22;
+
+		hex.blue = 1000;
+		this.assertEquals(0xFF, hex.blue);
+		this.assertEquals(0x1122FF, hex.getColor());
+		hex.blue = -1000;
+		this.assertEquals(0x00, hex.blue);
+		this.assertEquals(0x112200, hex.getColor());
 	}
 
 	static function main():Void {

@@ -62,8 +62,7 @@ class Gray implements Color<Gray> {
 	}
 	
 	public function toRGB():RGB {
-		var g = Math.round(gray);
-		return new RGB(g, g, g);
+		return new RGB(gray, gray, gray);
 	}
 	
 	/**

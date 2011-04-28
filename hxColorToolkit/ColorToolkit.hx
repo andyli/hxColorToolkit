@@ -77,7 +77,7 @@ class ColorToolkit {
 	
 	inline static public function toRGB(color:Int):RGB
 	{
-		return new RGB().setColor(color);
+		return new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
 	}
 	
 	inline static public function toHSB(color:Int):HSB

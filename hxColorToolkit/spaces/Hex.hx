@@ -25,7 +25,7 @@ class Hex implements Color<Hex> {
 	}
 	
 	inline public function toRGB():RGB {
-		return new RGB(data >> 16 & 0xFF, data >> 8 & 0xFF, data & 0xFF);
+		return new RGB(data >> 16, data >> 8 & 0xFF, data & 0xFF);
 	}
 	
 	inline public function getColor():Int {
@@ -40,6 +40,55 @@ class Hex implements Color<Hex> {
 	inline public function setColor(color:Int):Hex {
 		data = color;
 		return this;
+	}
+
+	public var red(getRed,setRed):Int;
+	public var green(getGreen,setGreen):Int;
+	public var blue(getBlue,setBlue):Int;
+
+	inline private function getRed():Int {
+		return data >> 16;
+	}
+
+	inline private function getGreen():Int {
+		return data >> 8 & 0xFF;
+	}
+
+	inline private function getBlue():Int {
+		return data & 0xFF;
+	}
+
+	private function setRed(v:Int):Int {
+		data = 
+			if (v <= 0) 
+				data & 0x00FFFF;
+			else if (v >= 255) 
+				data | 0xFF0000;
+			else 
+				(data & 0x00FFFF) | (v << 16);
+		return v;
+	}
+
+	private function setGreen(v:Int):Int {
+		data = 
+			if (v <= 0)
+				data & 0xFF00FF;
+			else if (v >= 255)
+				data | 0x00FF00;
+			else
+				(data & 0xFF00FF) | (v << 8);
+		return v;
+	}
+
+	private function setBlue(v:Int):Int {
+		data = 
+			if (v <= 0)
+				data & 0xFFFF00;
+			else if (v >= 255)
+				data | 0x0000FF;
+			else
+				(data & 0xFFFF00) | v;
+		return v;
 	}
 	
 	public function new(?color:Int = 0):Void {
