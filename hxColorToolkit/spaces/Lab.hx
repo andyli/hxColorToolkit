@@ -54,10 +54,10 @@ public var numOfChannels(default,null):Int;
 	inline public var b(getB, setB) : Float;
 	
 	public function toRGB():RGB {
-		var REF_X:Float = 95.047; // Observer= 2°, Illuminant= D65
-		var REF_Y:Float = 100.000; 
-		var REF_Z:Float = 108.883; 
-		
+		return toXYZ().toRGB();
+	}
+
+	public function toXYZ():XYZ {
 		var y:Float = (lightness + 16) / 116;
 		var x:Float = a * 0.002 + y;
 		var z:Float = y - b * 0.005;
@@ -68,43 +68,22 @@ public var numOfChannels(default,null):Int;
 		else { x = ( x - 16 / 116 ) / 7.787; }
 		if ( Math.pow( z , 3 ) > 0.008856 ) { z = Math.pow( z , 3 ); }
 		else { z = ( z - 16 / 116 ) / 7.787; }
-		 
-		var xyz:XYZ = new XYZ(REF_X * x, REF_Y * y, REF_Z * z);
-		
-		return xyz.toRGB();
+
+		return new XYZ(95.047 * x, 100.000 * y, 108.883 * z); // Observer= 2°, Illuminant= D65
 	}
 	
 	public function getColor():Int{
-		return toRGB().getColor();
+		return toXYZ().getColor();
 	}
 	
 	public function fromRGB(rgb:RGB):Lab {
-		var xyz:XYZ = new XYZ();
-		xyz.fromRGB(rgb);
-		
-		var REF_X:Float = 95.047; // Observer= 2°, Illuminant= D65
-		var REF_Y:Float = 100.000; 
-		var REF_Z:Float = 108.883; 
-		var x:Float = xyz.x / REF_X;   
-		var y:Float = xyz.y / REF_Y;  
-		var z:Float = xyz.z / REF_Z;  
-		 
-		if ( x > 0.008856 ) { x = Math.pow( x , 1/3 ); }
-		else { x = ( 7.787 * x ) + ( 16/116 ); }
-		if ( y > 0.008856 ) { y = Math.pow( y , 1/3 ); }
-		else { y = ( 7.787 * y ) + ( 16/116 ); }
-		if ( z > 0.008856 ) { z = Math.pow( z , 1/3 ); }
-		else { z = ( 7.787 * z ) + ( 16/116 ); }			
-		
-		this.lightness = ( 116 * y ) - 16;
-		this.a = 500 * ( x - y );
-		this.b = 200 * ( y - z );
-		
+		data = new XYZ().fromRGB(rgb).toLab().data;
 		return this;
 	}
 	
 	public function setColor(value:Int):Lab{
-		return fromRGB(new RGB(value >> 16 & 0xFF, value >> 8 & 0xFF, value & 0xFF));
+		data = new XYZ().setColor(value).toLab().data;
+		return this;
 	}
 	
 	private function getLightness():Float{
