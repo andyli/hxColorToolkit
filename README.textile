@@ -8,28 +8,34 @@ h2. Usage
 
 Install it from haxelib: @haxelib install hxColorToolkit@
 
-Most of the time you need to use the @ColorToolkit@ class only, so look at there first.
-You can use it with @using hxColorToolkit.ColorToolkit;@, and then code something like @var rgb = 0x112233.toRGB();@.
+bc.. 
+//using hxColorToolkit.ColorToolkit;
+
+var hexColor = 0x112233.toHex();
+trace(hexColor.red); //0x11
+
+var hslColor = new hxColorToolkit.spaces.HSL(0, 100, 50); //construct a color in HSL space
+trace(hslColor.getColor()); //0xFF0000 the hex color value
 
 h2. Color spaces
 
 They can be found inside the package @hxColorToolkit.spaces@. All of them implement the interface @hxColorToolkit.spaces.Color@.
 
-* @CMYK@
-* @Gray@ a single channel gray-scale color.
-* @Hex@ a simple wrapper of color value in hex(eg. @0xFFCCCC@).
-* @HSB@
-* @HSL@
-* @Lab@
-* @RGB@
-* @XYZ@
-* @YUV@
+* @CMYK@ 4-channel "CMYK":http://en.wikipedia.org/wiki/CMYK_color_model color space with each channel in [0,100].
+* @Gray@ A single channel gray-scale color in [0,255]. Any color given will be converted to gray-scale.
+* @Hex@ A simple wrapper of color value in hex(eg. @0xFFCCCC@). Its @red@, @green@, @blue@ extract the corresponding value to @Int@.
+* @HSB@ 3-channel "HSB":http://en.wikipedia.org/wiki/HSL_and_HSV color space with ranges [0,360), [0,100], [0,100].
+* @HSL@ 3-channel "HSL":http://en.wikipedia.org/wiki/HSL_and_HSV color space with ranges [0,360), [0,100], [0,100].
+* @Lab@ 3-channel "Lab":http://en.wikipedia.org/wiki/Lab_color_space color space with ranges [0,100], [-128,127], [-128,127].
+* @RGB@ Normal 3-channel "RGB":http://en.wikipedia.org/wiki/RGB_color_space color space with each channel in [0,255]. Unlike @Hex@, its properties(@red@, @green@, @blue@) are stored as @Float@ for precise calculation.
+* @XYZ@ 3-channel "XYZ":http://en.wikipedia.org/wiki/CIE_1931_color_space color space with ranges [0,95.047], [0,100], [0,108.883].
+* @YUV@ 3-channel "YUV":http://en.wikipedia.org/wiki/YUV color space with each channel in [0,255].
 
 All channel values are clamped to their possible min/max, except hue values of @HSB@ and @HSL@ are looped inside 0-360 (@color.hue = -10; trace(color.hue); //350@).
 
 h2. Color schemes
 
-Color scheme is basically a set of colors.
+Color scheme is basically a set of colors, constructed according to "color theory":http://en.wikipedia.org/wiki/Color_theory.
 
 The classes can be found inside the package @hxColorToolkit.schemes@. All of them implement the interface @hxColorToolkit.schemes.ColorScheme@.
 
