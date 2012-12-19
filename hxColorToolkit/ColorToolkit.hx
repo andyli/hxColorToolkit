@@ -236,73 +236,73 @@ class ColorSpaceToolkit {
 		return new Hex(color.getColor());
 	}
 	
-	@:macro static public function getAnalogousScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>, ?contrast:ExprRequire<Float>) {
+	@:macro static public function getAnalogousScheme(color:ExprOf<Color<Dynamic>>, ?angle:ExprOf<Float>, ?contrast:ExprOf<Float>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Analogous", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,contrast]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getComplementaryScheme(color:ExprRequire<Color<Dynamic>>) {
+	@:macro static public function getComplementaryScheme(color:ExprOf<Color<Dynamic>>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Complementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getCompoundScheme(color:ExprRequire<Color<Dynamic>>) {
+	@:macro static public function getCompoundScheme(color:ExprOf<Color<Dynamic>>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Compound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getFlippedCompoundScheme(color:ExprRequire<Color<Dynamic>>) {
+	@:macro static public function getFlippedCompoundScheme(color:ExprOf<Color<Dynamic>>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"FlippedCompound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getMonochromeScheme(color:ExprRequire<Color<Dynamic>>) {
+	@:macro static public function getMonochromeScheme(color:ExprOf<Color<Dynamic>>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Monochrome", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getSplitComplementaryScheme(color:ExprRequire<Color<Dynamic>>) {
+	@:macro static public function getSplitComplementaryScheme(color:ExprOf<Color<Dynamic>>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"SplitComplementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getTetradScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>, ?alt:ExprRequire<Bool>) {
+	@:macro static public function getTetradScheme(color:ExprOf<Color<Dynamic>>, ?angle:ExprOf<Float>, ?alt:ExprOf<Bool>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Tetrad", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,alt]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getTriadScheme(color:ExprRequire<Color<Dynamic>>, ?angle:ExprRequire<Float>) {
+	@:macro static public function getTriadScheme(color:ExprOf<Color<Dynamic>>, ?angle:ExprOf<Float>) {
 		var colorType = switch (Context.typeof(color)){
-			case TInst(t,p): t.get();
-			default:
+			case TInst(t,_): t.get();
+			default: throw color + "should be a Color class";
 		}
 		
 		return { expr:ENew({ sub:null, name:"Triad", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle]), pos:Context.currentPos() };

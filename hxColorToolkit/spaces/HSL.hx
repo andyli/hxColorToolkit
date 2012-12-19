@@ -146,11 +146,12 @@ class HSL implements Color<HSL> {
 	    }else{
 	        var d:Float = max - min;
 	        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-	        switch(max){
-	            case r: h = (g - b) / d + (g < b ? 6 : 0);
-	            case g: h = (b - r) / d + 2;
-	            case b: h = (r - g) / d + 4;
-	        }
+	        h = if (max == r)
+				(g - b) / d + (g < b ? 6 : 0);
+			else if (max == g)
+				(b - r) / d + 2;
+			else //if (maxe == b)
+				(r - g) / d + 4;
 	        h /= 6;
 	    }			
 		
