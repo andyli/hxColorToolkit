@@ -31,9 +31,9 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Tetrad<C:Color<Dynamic>> extends ColorWheelScheme<C, Tetrad<C>> {
+class Tetrad<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():Tetrad<C> {
 		return new Tetrad<C>(primaryColor,angle,alt);
 	}
 	

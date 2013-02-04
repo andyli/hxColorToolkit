@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class YUV implements Color<YUV> {
+class YUV implements Color {
 
 	public var numOfChannels(default,null):Int;
 
@@ -115,7 +115,8 @@ class YUV implements Color<YUV> {
 	
 	public function clone() { return new YUV(y, u, v); }
 	
-	public function interpolate(target:YUV, ratio:Float = 0.5):YUV {
+	public function interpolate(target:Color, ratio:Float = 0.5):YUV {
+		var target:YUV = Std.is(target,YUV) ? cast target : new YUV().fromRGB(target.toRGB());
 		return new YUV
 			(
 				y + (target.y - y) * ratio, 

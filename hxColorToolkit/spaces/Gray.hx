@@ -27,7 +27,7 @@ THE SOFTWARE.
  
 package hxColorToolkit.spaces;
 
-class Gray implements Color<Gray> {
+class Gray implements Color {
 	
 	public var numOfChannels(default,null):Int;
 
@@ -51,7 +51,7 @@ class Gray implements Color<Gray> {
 	 * @return Number (between 0 and 255)
 	 * 
 	 */	
-	inline public var gray(getGray, setGray) : Float;
+	public var gray(getGray, setGray) : Float;
 	
 	private function getGray():Float{ 
 		return getValue(0);
@@ -96,7 +96,8 @@ class Gray implements Color<Gray> {
 	
 	public function clone() { return new Gray(gray); }
 	
-	public function interpolate(target:Gray, ratio:Float = 0.5):Gray {
+	public function interpolate(target:Color, ratio:Float = 0.5):Gray {
+		var target:Gray = Std.is(target,Gray) ? cast target : new Gray().fromRGB(target.toRGB());
 		return new Gray
 			(
 				gray + (target.gray - gray) * ratio

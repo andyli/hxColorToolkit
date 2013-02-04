@@ -29,11 +29,8 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.Color;
 
-interface ColorScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> {
-	#if !php
-	public function clone():This;
-	#end
-
+interface ColorScheme<C:Color> {
+	public function clone():ColorScheme<C>;
 	public var numOfColors(default,null):Int;
 	public function getColor(index:Int):C;
 	public function iterator():Iterator<C>;

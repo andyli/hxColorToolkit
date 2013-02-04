@@ -29,8 +29,8 @@ package hxColorToolkit.schemes;
 
 import hxColorToolkit.spaces.Color;
 
-class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements ColorScheme<C, This> {
-	public function clone():This {
+class ColorWheelScheme<C:Color> implements ColorScheme<C> {
+	public function clone():ColorWheelScheme<C> {
 		return throw "need to be overrided";
 	}
 
@@ -73,11 +73,11 @@ class ColorWheelScheme<C:Color<Dynamic>, This:ColorScheme<C, This>> implements C
 		return ( x - min < threshold) ? x + plus : x - min;
 	}
 
-	private function mutateFromPrimary(newColor:Color<Dynamic>):C {
+	private function mutateFromPrimary(newColor:Color):C {
 		if (Std.is(newColor,_class)) {
-			return newColor.clone();
+			return cast newColor.clone();
 		} else {
-			return primaryColor.clone().fromRGB(newColor.toRGB());
+			return cast primaryColor.clone().fromRGB(newColor.toRGB());
 		}
 	}
 

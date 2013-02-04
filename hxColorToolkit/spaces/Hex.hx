@@ -5,7 +5,7 @@ Based on colortoolkit (http://code.google.com/p/colortoolkit/)
  
 package hxColorToolkit.spaces;
 
-class Hex implements Color<Hex> {
+class Hex implements Color {
 	
 	public var numOfChannels(default,null):Int;
 
@@ -98,7 +98,8 @@ class Hex implements Color<Hex> {
 	
 	public function clone() { return new Hex(data); }
 	
-	public function interpolate(target:Hex, ratio:Float = 0.5):Hex {
+	public function interpolate(target:Color, ratio:Float = 0.5):Hex {
+		var target:Hex = Std.is(target,Hex) ? cast target : new Hex().fromRGB(target.toRGB());
 		return new Hex(toRGB().interpolate(target.toRGB(), ratio).getColor());
 	}
 

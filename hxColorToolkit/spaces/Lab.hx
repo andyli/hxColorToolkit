@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class Lab implements Color<Lab> {
+class Lab implements Color {
 
 public var numOfChannels(default,null):Int;
 
@@ -49,9 +49,9 @@ public var numOfChannels(default,null):Int;
 		return channel == 0 ? 100 : 127;
 	}
 
-	inline public var lightness(getLightness, setLightness) : Float;
-	inline public var a(getA, setA) : Float;
-	inline public var b(getB, setB) : Float;
+	public var lightness(getLightness, setLightness) : Float;
+	public var a(getA, setA) : Float;
+	public var b(getB, setB) : Float;
 	
 	public function toRGB():RGB {
 		return toXYZ().toRGB();
@@ -121,7 +121,8 @@ public var numOfChannels(default,null):Int;
 	
 	public function clone() { return new Lab(lightness, a, b); }
 	
-	public function interpolate(target:Lab, ratio:Float = 0.5):Lab {
+	public function interpolate(target:Color, ratio:Float = 0.5):Lab {
+		var target:Lab = Std.is(target,Lab) ? cast target : new Lab().fromRGB(target.toRGB());
 		return new Lab
 			(
 				lightness + (target.lightness - lightness) * ratio, 

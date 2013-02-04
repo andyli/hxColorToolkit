@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class RGB implements Color<RGB> {
+class RGB implements Color {
 
 	public var numOfChannels(default,null):Int;
 
@@ -138,7 +138,8 @@ class RGB implements Color<RGB> {
 	
 	public function clone() { return new RGB(red, green, blue); }
 	
-	public function interpolate(target:RGB, ratio:Float = 0.5):RGB {
+	public function interpolate(target:Color, ratio:Float = 0.5):RGB {
+		var target:RGB = Std.is(target,RGB) ? cast target : new RGB().fromRGB(target.toRGB());
 		return new RGB
 			(
 				red + (target.red - red) * ratio, 

@@ -30,14 +30,14 @@ package hxColorToolkit.schemes;
 import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 
-class Analogous<C:hxColorToolkit.spaces.Color<Dynamic>> extends ColorWheelScheme<C,Analogous<C>> {
+class Analogous<C:hxColorToolkit.spaces.Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():Analogous<C> {
 		return new Analogous<C>(primaryColor, angle, contrast);
 	}
 
-	inline public var angle(getAngle,setAngle): Float;	
-	inline public var contrast(getContrast,setContrast): Float;
+	public var angle(getAngle,setAngle): Float;	
+	public var contrast(getContrast,setContrast): Float;
 
 	private var _angle:Float;
 	private function getAngle():Float {

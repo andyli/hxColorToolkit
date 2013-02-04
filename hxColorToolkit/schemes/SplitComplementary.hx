@@ -31,9 +31,9 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class SplitComplementary<C:Color<Dynamic>> extends ColorWheelScheme<C, SplitComplementary<C>> {
+class SplitComplementary<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():SplitComplementary<C> {
 		return new SplitComplementary<C>(primaryColor);
 	}
 	

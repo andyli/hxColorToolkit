@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class HSL implements Color<HSL> {
+class HSL implements Color {
 
 	public var numOfChannels(default,null):Int;
 
@@ -188,7 +188,8 @@ class HSL implements Color<HSL> {
 	
 	public function clone() { return new HSL(hue, saturation, lightness); }
 	
-	public function interpolate(target:HSL, ratio:Float = 0.5):HSL {
+	public function interpolate(target:Color, ratio:Float = 0.5):HSL {
+		var target:HSL = Std.is(target,HSL) ? cast target : new HSL().fromRGB(target.toRGB());
 		return new HSL
 			(
 				hue + (target.hue - hue) * ratio, 

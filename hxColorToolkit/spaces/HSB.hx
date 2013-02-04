@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class HSB implements Color<HSB> {
+class HSB implements Color {
 
 	public var numOfChannels(default,null):Int;
 
@@ -56,19 +56,19 @@ class HSB implements Color<HSB> {
 	 * Hue color value
 	 * @return Number (between 0 and 360)
 	 */	
-	inline public var hue(getHue, setHue) : Float;
+	public var hue(getHue, setHue) : Float;
 
 	/**
 	 * Saturation color value
 	 * @return Number (between 0 and 100)
 	 */	
-	inline public var saturation(getSaturation, setSaturation) : Float;
+	public var saturation(getSaturation, setSaturation) : Float;
 
 	/**
 	 * Black color value
 	 * @param value Number (between 0 and 100)
 	 */	
-	inline public var brightness(getBrightness, setBrightness) : Float;
+	public var brightness(getBrightness, setBrightness) : Float;
 	
 	
 	private function getHue():Float{
@@ -217,7 +217,8 @@ class HSB implements Color<HSB> {
 
 	public function clone() { return new HSB(hue, saturation, brightness); }
 	
-	public function interpolate(target:HSB, ratio:Float = 0.5):HSB {
+	public function interpolate(target:Color, ratio:Float = 0.5):HSB {
+		var target:HSB = Std.is(target,HSB) ? cast target : new HSB().fromRGB(target.toRGB());
 		return new HSB
 			(
 				hue + (target.hue - hue) * ratio, 

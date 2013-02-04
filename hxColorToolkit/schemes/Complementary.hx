@@ -31,9 +31,9 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Complementary<C:Color<Dynamic>> extends ColorWheelScheme<C, Complementary<C>> {
+class Complementary<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():Complementary<C> {
 		return new Complementary<C>(primaryColor);
 	}
 	

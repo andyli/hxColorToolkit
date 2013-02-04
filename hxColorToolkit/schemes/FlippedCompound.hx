@@ -31,9 +31,9 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class FlippedCompound<C:Color<Dynamic>> extends ColorWheelScheme<C, FlippedCompound<C>> {
+class FlippedCompound<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():FlippedCompound<C> {
 		return new FlippedCompound<C>(primaryColor);
 	}
 	

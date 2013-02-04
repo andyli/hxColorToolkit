@@ -27,7 +27,7 @@ THE SOFTWARE.
  
 package hxColorToolkit.spaces;
 
-class CMYK implements Color<CMYK> {
+class CMYK implements Color {
 
 	public var numOfChannels(default,null):Int;
 
@@ -50,25 +50,25 @@ class CMYK implements Color<CMYK> {
 	 * Black color channel
 	 * @return Number (between 0 and 100)
 	 */
-	inline public var black(getBlack, setBlack) : Float;
+	public var black(getBlack, setBlack) : Float;
 
 	/**
 	 * Cyan color channel
 	 * @return Number (between 0 and 100)
 	 */
-	inline public var cyan(getCyan, setCyan) : Float;
+	public var cyan(getCyan, setCyan) : Float;
 
 	/**
 	 * Magenta color channel
 	 * @return Number (between 0 and 100)
 	 */
-	inline public var magenta(getMagenta, setMagenta) : Float;
+	public var magenta(getMagenta, setMagenta) : Float;
 
 	/**
 	 * Yellow color channel
 	 * @return Number (between 0 and 100)
 	 */
-	inline public var yellow(getYellow, setYellow) : Float;
+	public var yellow(getYellow, setYellow) : Float;
 	
 	
 	private function getCyan():Float {
@@ -176,7 +176,8 @@ class CMYK implements Color<CMYK> {
 	
 	public function clone() { return new CMYK(cyan, magenta, yellow, black); }
 	
-	public function interpolate(target:CMYK, ratio:Float = 0.5):CMYK {
+	public function interpolate(target:Color, ratio:Float = 0.5):CMYK {
+		var target:CMYK = Std.is(target,CMYK) ? cast target : new CMYK().fromRGB(target.toRGB());
 		return new CMYK
 			(
 				cyan + (target.cyan - cyan) * ratio, 

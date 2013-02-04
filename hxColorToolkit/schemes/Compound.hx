@@ -31,9 +31,9 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Compound<C:Color<Dynamic>> extends ColorWheelScheme<C, Compound<C>> {
+class Compound<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():Compound<C> {
 		return new Compound<C>(primaryColor);
 	}
 	

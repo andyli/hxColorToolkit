@@ -31,7 +31,7 @@ import hxColorToolkit.ColorToolkit;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Triad<C:Color<Dynamic>> extends ColorWheelScheme<C, Triad<C>> {
+class Triad<C:Color> extends ColorWheelScheme<C> {
 
 	override public function clone() {
 		return new Triad<C>(primaryColor,angle);

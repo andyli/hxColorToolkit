@@ -30,9 +30,9 @@ package hxColorToolkit.schemes;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.Color;
 
-class Monochrome<C:Color<Dynamic>> extends ColorWheelScheme<C, Monochrome<C>> {
+class Monochrome<C:Color> extends ColorWheelScheme<C> {
 
-	override public function clone() {
+	override public function clone():Monochrome<C> {
 		return new Monochrome<C>(primaryColor);
 	}
 	
