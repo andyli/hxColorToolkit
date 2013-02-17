@@ -1,0 +1,12 @@
+language: python
+python:
+    - 3.2
+
+# Install Haxe
+before_script:
+    - sudo apt-get install libgc1c2
+    - curl http://haxe.org/file/hxinst-linux.tgz | tar zxf -
+    - echo y | sudo ./hxinst-linux > /dev/null
+    - echo | haxelib setup
+
+script: haxe test.hxml
