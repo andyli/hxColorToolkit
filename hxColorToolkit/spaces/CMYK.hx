@@ -50,56 +50,56 @@ class CMYK implements Color {
 	 * Black color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var black(getBlack, setBlack) : Float;
+	public var black(get_black, set_black) : Float;
 
 	/**
 	 * Cyan color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var cyan(getCyan, setCyan) : Float;
+	public var cyan(get_cyan, set_cyan) : Float;
 
 	/**
 	 * Magenta color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var magenta(getMagenta, setMagenta) : Float;
+	public var magenta(get_magenta, set_magenta) : Float;
 
 	/**
 	 * Yellow color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var yellow(getYellow, setYellow) : Float;
+	public var yellow(get_yellow, set_yellow) : Float;
 	
 	
-	private function getCyan():Float {
+	private function get_cyan():Float {
 		return getValue(0);
 	}
 	
-	private function setCyan(value:Float):Float {
+	private function set_cyan(value:Float):Float {
 		return setValue(0,value);
 	}
 	
-	private function getMagenta():Float {
+	private function get_magenta():Float {
 		return getValue(1);
 	}
 	
-	private function setMagenta(value:Float):Float {
+	private function set_magenta(value:Float):Float {
 		return setValue(1,value);
 	}
 	
-	private function getYellow():Float {
+	private function get_yellow():Float {
 		return getValue(2);
 	}
 	
-	private function setYellow(value:Float):Float {
+	private function set_yellow(value:Float):Float {
 		return setValue(2,value);
 	}
 	
-	private function getBlack():Float {
+	private function get_black():Float {
 		return getValue(3);
 	}
 	
-	private function setBlack(value:Float):Float {
+	private function set_black(value:Float):Float {
 		return setValue(3,value);
 	}
 	

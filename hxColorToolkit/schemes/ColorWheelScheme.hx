@@ -44,13 +44,13 @@ class ColorWheelScheme<C:Color> implements ColorScheme<C> {
 		return _colors.iterator();
 	}
 
-	public var primaryColor(getPrimaryColor,setPrimaryColor):C;
+	public var primaryColor(get_primaryColor,set_primaryColor):C;
 
 	private var _primaryColor:C;
-	private function getPrimaryColor():C {
+	private function get_primaryColor():C {
 		return _primaryColor;
 	}
-	private function setPrimaryColor(val:C):C {
+	private function set_primaryColor(val:C):C {
 		_primaryColor = val;
 		generate();
 		return primaryColor;

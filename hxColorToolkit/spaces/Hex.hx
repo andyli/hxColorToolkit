@@ -42,23 +42,23 @@ class Hex implements Color {
 		return this;
 	}
 
-	public var red(getRed,setRed):Int;
-	public var green(getGreen,setGreen):Int;
-	public var blue(getBlue,setBlue):Int;
+	public var red(get_red,set_red):Int;
+	public var green(get_green,set_green):Int;
+	public var blue(get_blue,set_blue):Int;
 
-	inline private function getRed():Int {
+	inline private function get_red():Int {
 		return data >> 16;
 	}
 
-	inline private function getGreen():Int {
+	inline private function get_green():Int {
 		return data >> 8 & 0xFF;
 	}
 
-	inline private function getBlue():Int {
+	inline private function get_blue():Int {
 		return data & 0xFF;
 	}
 
-	private function setRed(v:Int):Int {
+	private function set_red(v:Int):Int {
 		data = 
 			if (v <= 0) 
 				data & 0x00FFFF;
@@ -69,7 +69,7 @@ class Hex implements Color {
 		return v;
 	}
 
-	private function setGreen(v:Int):Int {
+	private function set_green(v:Int):Int {
 		data = 
 			if (v <= 0)
 				data & 0xFF00FF;
@@ -80,7 +80,7 @@ class Hex implements Color {
 		return v;
 	}
 
-	private function setBlue(v:Int):Int {
+	private function set_blue(v:Int):Int {
 		data = 
 			if (v <= 0)
 				data & 0xFFFF00;

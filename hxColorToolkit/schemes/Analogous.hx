@@ -36,24 +36,24 @@ class Analogous<C:hxColorToolkit.spaces.Color> extends ColorWheelScheme<C> {
 		return new Analogous<C>(primaryColor, angle, contrast);
 	}
 
-	public var angle(getAngle,setAngle): Float;	
-	public var contrast(getContrast,setContrast): Float;
+	public var angle(get_angle,set_angle): Float;	
+	public var contrast(get_contrast,set_contrast): Float;
 
 	private var _angle:Float;
-	private function getAngle():Float {
+	private function get_angle():Float {
 		return _angle;
 	}
-	private function setAngle(val:Float):Float {
+	private function set_angle(val:Float):Float {
 		_angle = val;
 		generate();
 		return angle;
 	}
 
 	private var _contrast:Float;
-	private function getContrast():Float {
+	private function get_contrast():Float {
 		return _contrast;
 	}
-	private function setContrast(val:Float):Float {
+	private function set_contrast(val:Float):Float {
 		_contrast = val;
 		generate();
 		return _contrast;

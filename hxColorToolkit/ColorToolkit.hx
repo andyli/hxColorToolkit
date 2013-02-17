@@ -236,7 +236,7 @@ class ColorSpaceToolkit {
 		return new Hex(color.getColor());
 	}
 	
-	@:macro static public function getAnalogousScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>, ?contrast:ExprOf<Float>) {
+	macro static public function getAnalogousScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>, ?contrast:ExprOf<Float>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -245,7 +245,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"Analogous", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,contrast]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getComplementaryScheme(color:ExprOf<Color>) {
+	macro static public function getComplementaryScheme(color:ExprOf<Color>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -254,7 +254,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"Complementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getCompoundScheme(color:ExprOf<Color>) {
+	macro static public function getCompoundScheme(color:ExprOf<Color>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -263,7 +263,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"Compound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getFlippedCompoundScheme(color:ExprOf<Color>) {
+	macro static public function getFlippedCompoundScheme(color:ExprOf<Color>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -272,7 +272,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"FlippedCompound", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getMonochromeScheme(color:ExprOf<Color>) {
+	macro static public function getMonochromeScheme(color:ExprOf<Color>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -281,7 +281,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"Monochrome", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getSplitComplementaryScheme(color:ExprOf<Color>) {
+	macro static public function getSplitComplementaryScheme(color:ExprOf<Color>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -290,7 +290,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"SplitComplementary", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getTetradScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>, ?alt:ExprOf<Bool>) {
+	macro static public function getTetradScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>, ?alt:ExprOf<Bool>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";
@@ -299,7 +299,7 @@ class ColorSpaceToolkit {
 		return { expr:ENew({ sub:null, name:"Tetrad", pack:["hxColorToolkit","schemes"], params:[TPType(TPath({ sub:null, name:colorType.name, pack:colorType.pack, params:[] }))] },[color,angle,alt]), pos:Context.currentPos() };
 	}
 	
-	@:macro static public function getTriadScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>) {
+	macro static public function getTriadScheme(color:ExprOf<Color>, ?angle:ExprOf<Float>) {
 		var colorType = switch (Context.typeof(color)){
 			case TInst(t,_): t.get();
 			default: throw color + "should be a Color class";

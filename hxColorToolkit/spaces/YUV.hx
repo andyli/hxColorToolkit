@@ -49,31 +49,31 @@ class YUV implements Color {
 		return 255;
 	}
 	
-	public var u(getU, setU) : Float;
-	public var v(getV, setV) : Float;
-	public var y(getY, setY) : Float;
+	public var u(get_u, set_u) : Float;
+	public var v(get_v, set_v) : Float;
+	public var y(get_y, set_y) : Float;
 
-	private function getY():Float{
+	private function get_y():Float{
 		return getValue(0);
 	}
 
-	private function setY(value:Float):Float{
+	private function set_y(value:Float):Float{
 		return setValue(0,value);
 	}
 	
-	private function getU():Float{
+	private function get_u():Float{
 		return getValue(1);
 	}
 	
-	private function setU(value:Float):Float{
+	private function set_u(value:Float):Float{
 		return setValue(1,value);
 	}
 	
-	private function getV():Float{
+	private function get_v():Float{
 		return getValue(2);
 	}
 	
-	private function setV(value:Float):Float{
+	private function set_v(value:Float):Float{
 		return setValue(2,value);
 	}
 	

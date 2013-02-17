@@ -56,44 +56,44 @@ class HSB implements Color {
 	 * Hue color value
 	 * @return Number (between 0 and 360)
 	 */	
-	public var hue(getHue, setHue) : Float;
+	public var hue(get_hue, set_hue) : Float;
 
 	/**
 	 * Saturation color value
 	 * @return Number (between 0 and 100)
 	 */	
-	public var saturation(getSaturation, setSaturation) : Float;
+	public var saturation(get_saturation, set_saturation) : Float;
 
 	/**
 	 * Black color value
 	 * @param value Number (between 0 and 100)
 	 */	
-	public var brightness(getBrightness, setBrightness) : Float;
+	public var brightness(get_brightness, set_brightness) : Float;
 	
 	
-	private function getHue():Float{
+	private function get_hue():Float{
 		return getValue(0);
 	}
 
-	private function setHue(val:Float):Float{
+	private function set_hue(val:Float):Float{
 		data[0] = loop(val, 360);
 		return val;
 	}
 	
-	private function getSaturation():Float{
+	private function get_saturation():Float{
 		return getValue(1);
 	}
 	
-	private function setSaturation(val:Float):Float{
+	private function set_saturation(val:Float):Float{
 		data[1] = Math.min(100, Math.max(val, 0));
 		return val;
 	}
 	
-	private function getBrightness():Float{
+	private function get_brightness():Float{
 		return getValue(2);
 	}
 	
-	private function setBrightness(val:Float):Float{
+	private function set_brightness(val:Float):Float{
 		data[2] = Math.min(100, Math.max(val, 0));
 		return val;
 	}

@@ -49,9 +49,9 @@ public var numOfChannels(default,null):Int;
 		return channel == 0 ? 100 : 127;
 	}
 
-	public var lightness(getLightness, setLightness) : Float;
-	public var a(getA, setA) : Float;
-	public var b(getB, setB) : Float;
+	public var lightness(get_lightness, set_lightness) : Float;
+	public var a(get_a, set_a) : Float;
+	public var b(get_b, set_b) : Float;
 	
 	public function toRGB():RGB {
 		return toXYZ().toRGB();
@@ -86,27 +86,27 @@ public var numOfChannels(default,null):Int;
 		return this;
 	}
 	
-	private function getLightness():Float{
+	private function get_lightness():Float{
 		return getValue(0);
 	}
 	
-	private function setLightness(value:Float):Float{
+	private function set_lightness(value:Float):Float{
 		return setValue(0,value);
 	}
 
-	private function getA():Float{
+	private function get_a():Float{
 		return getValue(1);
 	}
 
-	private function setA(value:Float):Float{
+	private function set_a(value:Float):Float{
 		return setValue(1,value);
 	}
 	
-	private function getB():Float{
+	private function get_b():Float{
 		return getValue(2);
 	}
 	
-	private function setB(value:Float):Float{
+	private function set_b(value:Float):Float{
 		return setValue(2,value);
 	}
 

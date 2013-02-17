@@ -37,23 +37,23 @@ class Tetrad<C:Color> extends ColorWheelScheme<C> {
 		return new Tetrad<C>(primaryColor,angle,alt);
 	}
 	
-	public var angle(getAngle, setAngle) : Float;
+	public var angle(get_angle, set_angle) : Float;
 	private var _angle:Float;
-	private function getAngle():Float{
+	private function get_angle():Float{
 		return _angle;
 	}
-	private function setAngle(value:Float):Float{
+	private function set_angle(value:Float):Float{
 		_angle=value;
 		generate();	
 		return value;
 	}
 	
-	public var alt(getAlt,setAlt):Bool;
+	public var alt(get_alt,set_alt):Bool;
 	private var _alt:Bool;
-	private function getAlt():Bool {
+	private function get_alt():Bool {
 		return _alt;
 	}
-	private function setAlt(val:Bool):Bool {
+	private function set_alt(val:Bool):Bool {
 		_alt = val;
 		generate();
 		return alt;
