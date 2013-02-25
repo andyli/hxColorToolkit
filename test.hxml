@@ -19,12 +19,12 @@
 
 --next
 -main Test
--php /Library/WebServer/Documents/TestPHP
+-php bin
 
--cmd open http://localhost/TestPHP
+-cmd php bin/index.php
 
 --next
 -main Test
--js /Library/WebServer/Documents/TestJS/Test.js
+-js bin/Test.js
 
--cmd open http://localhost/TestJS
+#-cmd open http://localhost/TestJS

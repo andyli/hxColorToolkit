@@ -5,26 +5,8 @@ Based on colortoolkit (http://code.google.com/p/colortoolkit/)
 
 package hxColorToolkit;
 
-import hxColorToolkit.schemes.ColorScheme;
-import hxColorToolkit.schemes.Analogous;
-import hxColorToolkit.schemes.Complementary;
-import hxColorToolkit.schemes.Compound;
-import hxColorToolkit.schemes.FlippedCompound;
-import hxColorToolkit.schemes.Monochrome;
-import hxColorToolkit.schemes.SplitComplementary;
-import hxColorToolkit.schemes.Tetrad;
-import hxColorToolkit.schemes.Triad;
-
-import hxColorToolkit.spaces.Color;
-import hxColorToolkit.spaces.CMYK;
-import hxColorToolkit.spaces.Gray;
-import hxColorToolkit.spaces.Hex;
-import hxColorToolkit.spaces.HSB;
-import hxColorToolkit.spaces.HSL;
-import hxColorToolkit.spaces.Lab;
-import hxColorToolkit.spaces.RGB;
-import hxColorToolkit.spaces.XYZ;
-import hxColorToolkit.spaces.YUV;
+import hxColorToolkit.schemes.*;
+import hxColorToolkit.spaces.*;
 
 #if macro
 import haxe.macro.Expr;
