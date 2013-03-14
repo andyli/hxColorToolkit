@@ -1,30 +1,25 @@
--main Test
--cpp bin
-
--cmd ./bin/Test
-
---next
+# -main Test
+# -cpp bin
+# -cmd ./bin/Test
+# 
+# --next
 -main Test
 -neko bin/Test.n
-
 -cmd neko bin/Test.n
 
---next
-
--main Test
--swf bin/Test.swf
--swf-version 10
-
--cmd open bin/Test.swf
+# --next
+# -main Test
+# -swf bin/Test.swf
+# -swf-version 10
+# -cmd open bin/Test.swf
 
 --next
 -main Test
 -php bin
-
 -cmd php bin/index.php
 
---next
--main Test
--js bin/Test.js
-
+# --next
+# -main Test
+# -js bin/Test.js
+#-cmd phantomjs bin/Test.js
 #-cmd open http://localhost/TestJS
