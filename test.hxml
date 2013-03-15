@@ -1,17 +1,17 @@
-# -main Test
-# -cpp bin
-# -cmd ./bin/Test
-# 
-# --next
+-main Test
+-cpp bin
+-cmd ./bin/Test
+
+--next
 -main Test
 -neko bin/Test.n
 -cmd neko bin/Test.n
 
-# --next
-# -main Test
-# -swf bin/Test.swf
-# -swf-version 10
-# -cmd open bin/Test.swf
+--next
+-main Test
+-swf bin/Test.swf
+-swf-version 10
+-cmd open bin/Test.swf
 
 --next
 -main Test
@@ -21,5 +21,4 @@
 # --next
 # -main Test
 # -js bin/Test.js
-#-cmd phantomjs bin/Test.js
-#-cmd open http://localhost/TestJS
+# -cmd phantomjs bin/Test.js
