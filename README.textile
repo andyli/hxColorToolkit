@@ -1,5 +1,7 @@
 h1. hxColorToolkit
 
+!https://travis-ci.org/andyli/hxColorToolkit.png?branch=master!:https://travis-ci.org/andyli/hxColorToolkit
+
 A Haxe library for color conversion and color scheme generation. 
 
 It is based on "colortoolkit":http://code.google.com/p/colortoolkit/ with lots of bug fixs and enhancements.
