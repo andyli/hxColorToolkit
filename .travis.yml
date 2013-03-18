@@ -2,15 +2,15 @@ language: php
 
 # Install Haxe
 before_script:
-  - sudo apt-get install python-software-properties -y #for the next command
+  - sudo apt-get install python-software-properties -y # for the next command
   - sudo add-apt-repository ppa:eyecreate/haxe -y
   - sudo apt-get update
   - sudo apt-get install haxe -y
-  - sudo apt-get install gcc-multilib g++-multilib -y #for hxcpp
+  - sudo apt-get install gcc-multilib g++-multilib -y  # for hxcpp
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
-  - haxelib install hxcpp || true
+  - haxelib install hxcpp
+  - mkdir bin                                          # compilation output folder
 
 script:
-  - mkdir bin
   - haxe travis.hxml
