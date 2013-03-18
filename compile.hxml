@@ -1,10 +1,4 @@
 -main Test
--cpp bin
-
--cmd bin\Test.exe
-
---next
--main Test
 -neko bin/Test.n
-
--cmd neko Test.n
+-lib utest
+-cmd neko bin/Test.n
