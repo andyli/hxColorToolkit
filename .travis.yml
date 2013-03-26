@@ -10,7 +10,6 @@ before_script:
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib install hxcpp
-  - haxelib install utest
   - mkdir bin                                          # compilation output folder
 
 script:
