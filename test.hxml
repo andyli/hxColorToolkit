@@ -1,29 +1,24 @@
 -main Test
 -cpp bin
--lib utest
 -cmd ./bin/Test
 
 --next
 -main Test
 -neko bin/Test.n
--lib utest
 -cmd neko bin/Test.n
 
 --next
 -main Test
 -swf bin/Test.swf
 -swf-version 10
--lib utest
 -cmd open bin/Test.swf
 
 --next
 -main Test
 -php bin
--lib utest
 -cmd php bin/index.php
 
 # --next
 # -main Test
 # -js bin/Test.js
-# -lib utest
 # -cmd phantomjs bin/Test.js

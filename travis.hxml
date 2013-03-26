@@ -1,13 +1,13 @@
 -main Test
 -cpp bin
--lib utest
+-cmd ./bin/Test
 
 --next
 -main Test
 -neko bin/Test.n
--lib utest
+-cmd neko bin/Test.n
 
 --next
 -main Test
 -php bin
--lib utest
+-cmd php bin/index.php

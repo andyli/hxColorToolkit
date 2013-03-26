@@ -15,6 +15,3 @@ before_script:
 
 script:
   - haxe travis.hxml
-  - ./bin/Test
-  - neko bin/Test.n
-  - php bin/index.php
