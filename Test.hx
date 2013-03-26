@@ -12,7 +12,9 @@ import hxColorToolkit.CssColor;
 
 using hxColorToolkit.ColorToolkit;
 
-class Test extends haxe.unit.TestCase{
+import haxe.unit.*;
+
+class Test extends TestCase{
 	public function testCMYK():Void {
 		var cmyk = ColorToolkit.toCMYK(0xFFCC33);
 		this.assertEquals(0, Math.round(cmyk.cyan));
@@ -175,8 +177,14 @@ class Test extends haxe.unit.TestCase{
 	}
 
 	static function main():Void {
-		var runner = new haxe.unit.TestRunner();
-		runner.add(new Test());
+		var test = new Test();
+		var runner = new TestRunner();
+		runner.add(test);
 		runner.run();
+		var result:TestResult = untyped runner.result;
+		
+		#if sys
+		Sys.exit(result.success ? 0 : 1);
+		#end
 	}
 }
