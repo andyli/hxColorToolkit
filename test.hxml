@@ -18,7 +18,8 @@
 -php bin
 -cmd php bin/index.php
 
-# --next
-# -main Test
-# -js bin/Test.js
-# -cmd phantomjs bin/Test.js
+--next
+-main Test
+-js bin/Test.js
+-lib phantomjs
+-cmd phantomjs bin/Test.js

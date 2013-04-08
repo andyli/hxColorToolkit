@@ -180,11 +180,19 @@ class Test extends TestCase{
 		var test = new Test();
 		var runner = new TestRunner();
 		runner.add(test);
-		runner.run();
-		var result:TestResult = untyped runner.result;
+		
+		#if js
+		var printBuf = new StringBuf();
+		TestRunner.print = printBuf.add;
+		#end
+		
+		var success = runner.run();
 		
 		#if sys
-		Sys.exit(result.success ? 0 : 1);
+		Sys.exit(success ? 0 : 1);
+		#elseif js
+		js.Browser.window.console.log(printBuf.toString());
+		js.phantomjs.Phantom.exit(success ? 0 : 1);
 		#end
 	}
 }
