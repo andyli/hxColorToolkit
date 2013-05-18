@@ -1,0 +1,10 @@
+{
+  "name": "hxColorToolkit",
+  "url": "http://github.com/andyli/hxColorToolkit",
+  "license": "MIT",
+  "tags": ["cross","graphics","color"],
+  "description": "Color conversion and color scheme generation.",
+  "version": "1.5.2",
+  "releasenote": "Release for new haxelib.",
+  "contributors": ["andyli"]
+}

@@ -1,8 +1,0 @@
-<project name="hxColorToolkit" url="http://github.com/andyli/hxColorToolkit" license="BSD">
-    <user name="andyli"/>
-    <tag v="cross"/>
-    <tag v="graphics"/>
-    <tag v="color"/>
-    <description>Color conversion and color scheme generation.</description>
-    <version name="1.5.2">Haxe 3.0 support. Not compatable with Haxe 2.x.</version>
-</project>
