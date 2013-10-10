@@ -64,6 +64,11 @@ class ColorToolkit {
 		return new RGB(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
 	}
 	
+	inline static public function toARGB(color:Int):RGB
+	{
+		return new ARGB(color >> 24 & 0xFF, color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
+	}
+	
 	inline static public function toHSB(color:Int):HSB
 	{
 		return new HSB().setColor(color);
@@ -211,6 +216,11 @@ class ColorSpaceToolkit {
 	inline static public function toYUV(color:Color):YUV
 	{
 		return new YUV().fromRGB(color.toRGB());
+	}
+	
+	inline static public function toARGB(color:Color):ARGB
+	{
+		return new ARGB().fromRGB(color.toRGB());
 	}
 	
 	inline static public function toHex(color:Color):Hex

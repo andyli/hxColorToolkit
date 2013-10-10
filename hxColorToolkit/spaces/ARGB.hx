@@ -27,68 +27,50 @@ THE SOFTWARE.
 
 package hxColorToolkit.spaces;
 
-class RGB implements Color {
-
-	public var numOfChannels(default,null):Int;
-
-	public function getValue(channel:Int):Float {
-		return data[channel];
-	}
-	public function setValue(channel:Int,val:Float):Float {
-		data[channel] = Math.min(maxValue(channel), Math.max(val, minValue(channel)));
-		return val;
-	}
-
-	inline public function minValue(channel:Int):Float {
-		return 0;
-	}
-	inline public function maxValue(channel:Int):Float {
-		return 255;
-	}
-
+class ARGB extends RGB {
 	/**
-	 * Red color channel
+	 * Alpha color channel
 	 * @return Number (between 0 and 255)
 	 */	
-	public var red(get_red, set_red) : Float;
-	
-	/**
-	 * Green color channel
-	 * @return Number (between 0 and 255)
-	 */	
-	public var green(get_green, set_green) : Float;
+	public var alpha(get_alpha, set_alpha) : Float;
 
-	/**
-	 * Blue color channel
-	 * @return Number (between 0 and 255)
-	 */	
-	public var blue(get_blue, set_blue) : Float;
-
-	private function get_red():Float{
+	private function get_alpha():Float{
 		return getValue(0);
 	}
 
-	private function set_red(value:Float):Float{
+	private function set_alpha(value:Float):Float{
 		return setValue(0,value);
 	}
-	
-	private function get_green():Float{
+
+	override private function get_red():Float{
 		return getValue(1);
 	}
-	
-	private function set_green(value:Float):Float{
+
+	override private function set_red(value:Float):Float{
 		return setValue(1,value);
 	}
 	
-	private function get_blue():Float{
+	override private function get_green():Float{
 		return getValue(2);
 	}
 	
-	private function set_blue(value:Float):Float{
+	override private function set_green(value:Float):Float{
 		return setValue(2,value);
 	}
 	
-	public function toRGB():RGB {
+	override private function get_blue():Float{
+		return getValue(3);
+	}
+	
+	override private function set_blue(value:Float):Float{
+		return setValue(3,value);
+	}
+	
+	override public function toRGB():RGB {
+		return new RGB(red, green, blue);
+	}
+	
+	inline public function toARGB():ARGB {
 		return clone();
 	}
 	
@@ -97,11 +79,12 @@ class RGB implements Color {
 	 * @return Hexidecimal color value
 	 * 
 	 */
-	public function getColor():Int{
-		return (Math.round(red) << 16) | (Math.round(green) << 8) | Math.round(blue);
+	override public function getColor():Int{
+		return (Math.round(alpha) << 24) | (Math.round(red) << 16) | (Math.round(green) << 8) | Math.round(blue);
 	}
 	
-	public function fromRGB(rgb:RGB):RGB {
+	override public function fromRGB(rgb:RGB):ARGB {
+		this.alpha = 0xFF;
 		this.red = rgb.red;
 		this.green = rgb.green;
 		this.blue = rgb.blue;
@@ -113,7 +96,8 @@ class RGB implements Color {
 	 * @param value Hexidecimal color value
 	 * 
 	 */	
-	public function setColor(color:Int):RGB{
+	override public function setColor(color:Int):ARGB{
+		this.alpha = color >> 24 & 0xFF;
 		this.red = color >> 16 & 0xFF;
 		this.green = color >> 8 & 0xFF;
 		this.blue = color & 0xFF;
@@ -122,31 +106,29 @@ class RGB implements Color {
 	
 	/**
 	 * 
+	 * @param a Number (between 0 and 255)
 	 * @param r Number (between 0 and 255)
 	 * @param g Number (between 0 and 255)
 	 * @param b Number (between 0 and 255)
 	 * 
 	 */		
-	public function new(?r:Float=0, ?g:Float=0, ?b:Float=0)
+	public function new(?a:Float=0xFF, ?r:Float=0, ?g:Float=0, ?b:Float=0)
 	{
-		numOfChannels = 3;
-		data = [];
-		this.red = r;
-		this.green = g;
-		this.blue = b;
+		super(r, g, b);
+		numOfChannels = 4;
+		this.alpha = a;
 	}
 	
-	public function clone() { return new RGB(red, green, blue); }
+	override public function clone() { return new ARGB(alpha, red, green, blue); }
 	
-	public function interpolate(target:Color, ratio:Float = 0.5):RGB {
-		var target:RGB = Std.is(target,RGB) ? cast target : new RGB().fromRGB(target.toRGB());
-		return new RGB
+	override public function interpolate(target:Color, ratio:Float = 0.5):RGB {
+		var target:ARGB = Std.is(target,ARGB) ? cast target : new ARGB().fromRGB(target.toRGB());
+		return new ARGB
 			(
+				alpha + (target.alpha - alpha) * ratio, 
 				red + (target.red - red) * ratio, 
 				green + (target.green - green) * ratio, 
 				blue + (target.blue - blue) * ratio
 			);
 	}
-
-	private var data:Array<Float>;
 }

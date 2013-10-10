@@ -4,6 +4,7 @@ import hxColorToolkit.spaces.Gray;
 import hxColorToolkit.spaces.HSB;
 import hxColorToolkit.spaces.HSL;
 import hxColorToolkit.spaces.Lab;
+import hxColorToolkit.spaces.ARGB;
 import hxColorToolkit.spaces.RGB;
 import hxColorToolkit.spaces.XYZ;
 import hxColorToolkit.spaces.YUV;
@@ -86,11 +87,38 @@ class Test extends TestCase{
 		this.assertEquals(0x33,cast rgb.blue);
 		this.assertEquals(0xFFCC33,rgb.getColor());
 
+		rgb = ColorToolkit.toRGB(0xCCFFCC33);
+		this.assertEquals(0xFF,cast rgb.red);
+		this.assertEquals(0xCC,cast rgb.green);
+		this.assertEquals(0x33,cast rgb.blue);
+		this.assertEquals(0xFFCC33,rgb.getColor());
+
 		rgb = new RGB(0x11,0x22,0x33);
 		this.assertEquals(0x11,cast rgb.red);
 		this.assertEquals(0x22,cast rgb.green);
 		this.assertEquals(0x33,cast rgb.blue);
 		this.assertEquals(0x112233,rgb.getColor());
+	}
+
+	public function testARGB():Void {
+		var argb = new ARGB(0xCC,0x11,0x22,0x33);
+		this.assertEquals(0xCC,cast argb.alpha);
+		this.assertEquals(0x11,cast argb.red);
+		this.assertEquals(0x22,cast argb.green);
+		this.assertEquals(0x33,cast argb.blue);
+		this.assertEquals(0xCC112233,argb.getColor());
+
+		argb = new ARGB().setColor(0xCC112233);
+		this.assertEquals(0xCC,cast argb.alpha);
+		this.assertEquals(0x11,cast argb.red);
+		this.assertEquals(0x22,cast argb.green);
+		this.assertEquals(0x33,cast argb.blue);
+
+		argb = new ARGB().setColor(0x112233);
+		this.assertEquals(0x00,cast argb.alpha);
+		this.assertEquals(0x11,cast argb.red);
+		this.assertEquals(0x22,cast argb.green);
+		this.assertEquals(0x33,cast argb.blue);
 	}
 
 	public function testYUV():Void {
@@ -148,9 +176,18 @@ class Test extends TestCase{
 	public function testHex():Void {
 		var hex = new Hex(0x112233);
 		this.assertEquals(0x112233, hex.getColor());
+		this.assertEquals(0x00, hex.alpha);
 		this.assertEquals(0x11, hex.red);
 		this.assertEquals(0x22, hex.green);
 		this.assertEquals(0x33, hex.blue);
+
+		hex.alpha = 1000;
+		this.assertEquals(0xFF, hex.alpha);
+		this.assertEquals(0xFF112233, hex.getColor());
+		hex.alpha = -1000;
+		this.assertEquals(0x00, hex.alpha);
+		this.assertEquals(0x00112233, hex.getColor());
+		hex.alpha = 0x00;
 
 		hex.red = 1000;
 		this.assertEquals(0xFF, hex.red);
@@ -174,6 +211,13 @@ class Test extends TestCase{
 		hex.blue = -1000;
 		this.assertEquals(0x00, hex.blue);
 		this.assertEquals(0x112200, hex.getColor());
+
+		var hex = new Hex(0xFF112233);
+		this.assertEquals(0xFF112233, hex.getColor());
+		this.assertEquals(0xFF, hex.alpha);
+		this.assertEquals(0x11, hex.red);
+		this.assertEquals(0x22, hex.green);
+		this.assertEquals(0x33, hex.blue);
 	}
 
 	static function main():Void {
