@@ -4,7 +4,7 @@
   "license": "MIT",
   "tags": ["cross","graphics","color"],
   "description": "Color conversion and color scheme generation.",
-  "version": "1.5.2",
-  "releasenote": "Release for new haxelib.",
+  "version": "1.6.0",
+  "releasenote": "Added ARGB. Hex now able to contain alpha value (in 0xaarrggbb format).",
   "contributors": ["andyli"]
 }
