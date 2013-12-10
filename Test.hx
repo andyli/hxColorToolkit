@@ -14,6 +14,7 @@ import hxColorToolkit.CssColor;
 using hxColorToolkit.ColorToolkit;
 
 import haxe.unit.*;
+using StringTools;
 
 class Test extends TestCase{
 	public function testCMYK():Void {
@@ -106,7 +107,7 @@ class Test extends TestCase{
 		this.assertEquals(0x11,cast argb.red);
 		this.assertEquals(0x22,cast argb.green);
 		this.assertEquals(0x33,cast argb.blue);
-		this.assertEquals(0xCC112233,argb.getColor());
+		this.assertEquals(0xCC112233.hex(), argb.getColor().hex());
 
 		argb = new ARGB().setColor(0xCC112233);
 		this.assertEquals(0xCC,cast argb.alpha);
