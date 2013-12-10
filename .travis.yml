@@ -14,7 +14,8 @@ before_script:
   - mkdir bin                                          # compilation output folder
 
 script:
-  - haxe -main Test -cpp bin                       && ./bin/Test
-  - haxe -main Test -neko bin/Test.n               && neko bin/Test.n
-  - haxe -main Test -php bin                       && php bin/index.php
-  - haxe -main Test -js bin/Test.js -lib phantomjs && phantomjs bin/Test.js
+  - haxe -main Test -debug --interp
+  - haxe -main Test -debug -cpp bin                       && ./bin/Test-debug
+  - haxe -main Test -debug -neko bin/Test.n               && neko bin/Test.n
+  - haxe -main Test -debug -php bin                       && php bin/index.php
+  - haxe -main Test -debug -js bin/Test.js -lib phantomjs && phantomjs bin/Test.js
