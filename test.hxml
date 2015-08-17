@@ -10,7 +10,6 @@
 --next
 -main Test
 -swf bin/Test.swf
--swf-version 10
 -cmd open bin/Test.swf
 
 --next
@@ -21,5 +20,20 @@
 --next
 -main Test
 -js bin/Test.js
--lib phantomjs
--cmd phantomjs bin/Test.js
+-cmd node bin/Test.js
+
+--next
+-main Test
+-java bin
+-cmd java -jar bin/Test.jar
+
+# --next
+# -main Test
+# -cs bin
+# -cmd mono bin/bin/Test.exe
+
+# --next
+# -main Test
+# -python bin/Test.py
+# --macro keep('HxOverrides')
+# -cmd python3 bin/Test.py

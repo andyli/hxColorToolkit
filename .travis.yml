@@ -1,21 +1,48 @@
-language: node_js
+language: haxe
 
-before_script:
-  - sudo apt-get install python-software-properties -y # for the next command
-  - sudo add-apt-repository ppa:eyecreate/haxe -y
-  - sudo apt-get update
-  - sudo apt-get install php5 -y
-  - sudo apt-get install haxe -y
-  - sudo apt-get install gcc-multilib g++-multilib -y  # for hxcpp
-  - mkdir ~/haxelib
-  - haxelib setup ~/haxelib
-  - haxelib install hxcpp
-  - haxelib install phantomjs
-  - mkdir bin                                          # compilation output folder
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - php5-cli
+      - mono-devel
+      - mono-mcs
+
+matrix:
+  include:
+    - haxe: "3.2.0"
+      install:
+        - yes | haxelib install hxcpp
+        - yes | haxelib install hxjava
+        - yes | haxelib install hxcs
+        - haxelib list
+
+    - haxe: "3.1.3"
+      install:
+        - yes | haxelib install hxcpp
+        - yes | haxelib install hxjava
+        - yes | haxelib install hxcs
+        - haxelib list
+
+    - haxe: "development"
+      install:
+        # install and rebuild hxcpp
+        - haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git
+        - cd $(haxelib path hxcpp | head -1)tools/hxcpp && haxe compile.hxml
+        - cd $(haxelib path hxcpp | head -1)project && neko build.n linux-m64
+        - cd $TRAVIS_BUILD_DIR
+
+        # install hxjava and hxcs
+        - haxelib git hxjava https://github.com/HaxeFoundation/hxjava.git
+        - haxelib git hxcs https://github.com/HaxeFoundation/hxcs.git
+
+        - haxelib list
 
 script:
   - haxe -main Test -debug --interp
-  - haxe -main Test -debug -cpp bin                       && ./bin/Test-debug
-  - haxe -main Test -debug -neko bin/Test.n               && neko bin/Test.n
-  - haxe -main Test -debug -php bin                       && php bin/index.php
-  - haxe -main Test -debug -js bin/Test.js -lib phantomjs && phantomjs bin/Test.js
+  - haxe -main Test -debug -cpp bin          && ./bin/Test-debug
+  - haxe -main Test -debug -neko bin/Test.n  && neko bin/Test.n
+  - haxe -main Test -debug -php bin          && php bin/index.php
+  - haxe -main Test -debug -js bin/Test.js   && node bin/Test.js
+  - haxe -main Test -debug -java bin         && java bin/Test.jar
