@@ -40,9 +40,9 @@ matrix:
         - haxelib list
 
 script:
-  - haxe -main Test -debug --interp
-  - haxe -main Test -debug -cpp bin          && ./bin/Test-debug
-  - haxe -main Test -debug -neko bin/Test.n  && neko bin/Test.n
-  - haxe -main Test -debug -php bin          && php bin/index.php
-  - haxe -main Test -debug -js bin/Test.js   && node bin/Test.js
-  - haxe -main Test -debug -java bin         && java -jar bin/Test.jar
+  - haxe -main Test --interp
+  - haxe -main Test -cpp bin          && ./bin/Test
+  - haxe -main Test -neko bin/Test.n  && neko bin/Test.n
+  - haxe -main Test -php bin          && php bin/index.php
+  - haxe -main Test -js bin/Test.js   && node bin/Test.js
+  - haxe -main Test -java bin         && java -jar bin/Test.jar
