@@ -46,10 +46,10 @@ class Hex implements Color {
 		return this;
 	}
 
-	public var alpha(get_alpha,set_alpha):Int;
-	public var red(get_red,set_red):Int;
-	public var green(get_green,set_green):Int;
-	public var blue(get_blue,set_blue):Int;
+	public var alpha(get,set):Int;
+	public var red(get,set):Int;
+	public var green(get,set):Int;
+	public var blue(get,set):Int;
 
 	inline private function get_alpha():Int {
 		return data >> 24 & 0xFF;

@@ -57,9 +57,9 @@ class XYZ implements Color {
 		}
 	}
 
-	public var x(get_x, set_x) : Float;
-	public var y(get_y, set_y) : Float;
-	public var z(get_z, set_z) : Float;
+	public var x(get,set) : Float;
+	public var y(get,set) : Float;
+	public var z(get,set) : Float;
 
 	private function get_x():Float{
 		return getValue(0);
