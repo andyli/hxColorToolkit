@@ -74,7 +74,7 @@ class ColorWheelScheme<C:Color> implements ColorScheme<C> {
 	}
 
 	private function mutateFromPrimary(newColor:Color):C {
-		if (Std.is(newColor,_class)) {
+		if (Std.isOfType(newColor,_class)) {
 			return cast newColor.clone();
 		} else {
 			return cast primaryColor.clone().fromRGB(newColor.toRGB());
