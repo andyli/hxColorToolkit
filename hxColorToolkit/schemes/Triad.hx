@@ -37,7 +37,7 @@ class Triad<C:Color> extends ColorWheelScheme<C> {
 		return new Triad<C>(primaryColor,angle);
 	}
 	
-	public var angle(get_angle, set_angle) : Float;
+	public var angle(get, set) : Float;
 	var _angle:Float;
 	
 	public function get_angle():Float{

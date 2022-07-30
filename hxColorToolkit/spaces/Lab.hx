@@ -49,9 +49,9 @@ public var numOfChannels(default,null):Int;
 		return channel == 0 ? 100 : 127;
 	}
 
-	public var lightness(get_lightness, set_lightness) : Float;
-	public var a(get_a, set_a) : Float;
-	public var b(get_b, set_b) : Float;
+	public var lightness(get,set) : Float;
+	public var a(get,set) : Float;
+	public var b(get,set) : Float;
 	
 	public function toRGB():RGB {
 		return toXYZ().toRGB();

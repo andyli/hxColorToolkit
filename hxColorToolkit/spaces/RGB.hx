@@ -50,19 +50,19 @@ class RGB implements Color {
 	 * Red color channel
 	 * @return Number (between 0 and 255)
 	 */	
-	public var red(get_red, set_red) : Float;
+	public var red(get, set) : Float;
 	
 	/**
 	 * Green color channel
 	 * @return Number (between 0 and 255)
 	 */	
-	public var green(get_green, set_green) : Float;
+	public var green(get, set) : Float;
 
 	/**
 	 * Blue color channel
 	 * @return Number (between 0 and 255)
 	 */	
-	public var blue(get_blue, set_blue) : Float;
+	public var blue(get, set) : Float;
 
 	private function get_red():Float{
 		return getValue(0);

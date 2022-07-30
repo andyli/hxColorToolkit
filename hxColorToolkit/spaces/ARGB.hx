@@ -32,7 +32,7 @@ class ARGB extends RGB {
 	 * Alpha color channel
 	 * @return Number (between 0 and 255)
 	 */	
-	public var alpha(get_alpha, set_alpha) : Float;
+	public var alpha(get, set) : Float;
 
 	private function get_alpha():Float{
 		return getValue(0);

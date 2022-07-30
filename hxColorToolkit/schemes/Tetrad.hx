@@ -37,7 +37,7 @@ class Tetrad<C:Color> extends ColorWheelScheme<C> {
 		return new Tetrad<C>(primaryColor,angle,alt);
 	}
 	
-	public var angle(get_angle, set_angle) : Float;
+	public var angle(get, set) : Float;
 	private var _angle:Float;
 	private function get_angle():Float{
 		return _angle;
@@ -48,7 +48,7 @@ class Tetrad<C:Color> extends ColorWheelScheme<C> {
 		return value;
 	}
 	
-	public var alt(get_alt,set_alt):Bool;
+	public var alt(get,set):Bool;
 	private var _alt:Bool;
 	private function get_alt():Bool {
 		return _alt;

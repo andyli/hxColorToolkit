@@ -49,9 +49,9 @@ class YUV implements Color {
 		return 255;
 	}
 	
-	public var u(get_u, set_u) : Float;
-	public var v(get_v, set_v) : Float;
-	public var y(get_y, set_y) : Float;
+	public var u(get,set) : Float;
+	public var v(get,set) : Float;
+	public var y(get,set) : Float;
 
 	private function get_y():Float{
 		return getValue(0);

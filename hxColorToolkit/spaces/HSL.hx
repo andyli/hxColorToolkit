@@ -56,19 +56,19 @@ class HSL implements Color {
 	 * Hue color value
 	 * @return Number (between 0 and 360)
 	 */	
-	public var hue(get_hue, set_hue) : Float;
+	public var hue(get,set) : Float;
 	
 	/**
 	 * Saturation color value
 	 * @return Number (between 0 and 100)
 	 */		
-	public var saturation(get_saturation, set_saturation) : Float;
+	public var saturation(get,set) : Float;
 
 	/**
 	 * Black color value
 	 * @return Number (between 0 and 100)
 	 */	
-	public var lightness(get_lightness, set_lightness) : Float;
+	public var lightness(get,set) : Float;
 	
 	
 	private function get_hue():Float{

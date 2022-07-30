@@ -51,7 +51,7 @@ class Gray implements Color {
 	 * @return Number (between 0 and 255)
 	 * 
 	 */	
-	public var gray(get_gray, set_gray) : Float;
+	public var gray(get, set) : Float;
 	
 	private function get_gray():Float{ 
 		return getValue(0);

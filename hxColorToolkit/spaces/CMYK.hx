@@ -50,25 +50,25 @@ class CMYK implements Color {
 	 * Black color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var black(get_black, set_black) : Float;
+	public var black(get, set) : Float;
 
 	/**
 	 * Cyan color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var cyan(get_cyan, set_cyan) : Float;
+	public var cyan(get, set) : Float;
 
 	/**
 	 * Magenta color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var magenta(get_magenta, set_magenta) : Float;
+	public var magenta(get, set) : Float;
 
 	/**
 	 * Yellow color channel
 	 * @return Number (between 0 and 100)
 	 */
-	public var yellow(get_yellow, set_yellow) : Float;
+	public var yellow(get, set) : Float;
 	
 	
 	private function get_cyan():Float {
